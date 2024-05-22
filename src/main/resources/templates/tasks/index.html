@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <th:block th:replace="~{partials/partials :: head(title= 'TaskLister Home Page')}"></th:block>
     </head>
     <body>
+      <nav th:insert="~{partials/partials :: navbar}"></nav>
+      <header th:insert="~{partials/partials :: header}"></header>
         <h1>Home Page!</h1>
         <h4>Added this feature</h4>
         <h4>again</h4>
+
+        <div th:each="tasky : ${tasking}">
+          <h2 th:text="${tasky.title}"></h2>
+          <p th:text="${tasky.description}"></p>
+          <a th:href="@{|/tasks/${tasky.id}|}">View Task</a>
+        </div>
     </body>
 </html>
