@@ -75,4 +75,17 @@ public class TaskController {
     return "redirect:/tasks";
   }
 
+  @GetMapping("/tasks/{id}/edit")
+  public String editTask(@PathVariable long id, Model model) {
+    Task task;
+    if(taskDao.findById(id).isPresent()){
+      task = taskDao.findById(id).get();
+    }else{
+      task = null;
+    }
+    model.addAttribute("task", task);
+    return "/tasks/edit";
+  }
+
+
 }
