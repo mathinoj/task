@@ -8,11 +8,24 @@
         <th:block
             th:replace="~{partials/partials :: head (title='Task Lister')}"
         ></th:block>
-        <!-- <link rel="stylesheet" th:href="@{/css/main.css}" /> -->
     </head>
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
         <header th:insert="~{partials/partials :: header}"></header>
+
+        <form action="/tasks/search" method="GET">
+            <label for="search">Find Task</label>
+            <input type="text" name="search" id="search" />
+            <button>Search</button>
+        </form>
+        <div th:if="${results}">
+            <ul>
+                <li th:each="task : ${results}">
+                    <h2 th:text="${task.title}"></h2>
+                    <p th:text="${task.description}"></p>
+                </li>
+            </ul>
+        </div>
 
         <div th:each="tasky : ${tasking}">
             <h2 th:text="${tasky.title}"></h2>
