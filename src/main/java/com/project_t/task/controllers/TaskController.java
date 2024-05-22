@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 public class TaskController {
   Task task1 = new Task("task 1", "doing task 1");
@@ -23,27 +22,27 @@ public class TaskController {
   List<Task> tasks = new ArrayList<>(List.of(task1, task2, task3));
 
   private final TaskRepository taskDao;
-  public TaskController(TaskRepository taskDao){
+
+  public TaskController(TaskRepository taskDao) {
     this.taskDao = taskDao;
   }
 
   @GetMapping("/tasks")
   public String getAllTasks(Model model) {
-      model.addAttribute("tasking", tasks);
-      return "/tasks/index";
+    model.addAttribute("tasking", tasks);
+    return "/tasks/index";
   }
 
   @GetMapping("/tasks/{id}")
   public String showOneTask(@PathVariable long id, Model model) {
     Task task;
-    if(taskDao.findById(id).isPresent()){
+    if (taskDao.findById(id).isPresent()) {
       task = taskDao.findById(id).get();
-    }else{
+    } else {
       task = new Task("Task no find!", "");
     }
     model.addAttribute(task);
-      return "/tasks/show";
+    return "/tasks/show";
   }
-
 
 }
