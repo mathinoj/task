@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.project_t.task.models.Task;
+import com.project_t.task.repositories.TaskRepository;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +20,11 @@ public class TaskController {
   Task task3 = new Task("task 3", "doing task 3");
 
   List<Task> tasks = new ArrayList<>(List.of(task1, task2, task3));
+
+  private final TaskRepository taskDao;
+  public TaskController(TaskRepository taskDao){
+    this.taskDao = taskDao;
+  }
 
   @GetMapping("/tasks")
   public String getAllTasks(Model model) {
