@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-  <head>
-    <th:block th:fragment="head (title = 'Task Editor')">
-      <meta charset="UTF-8">
-      <title th:text="${title}"></title>
-    </th:block>
-    <!-- <link rel="stylesheet" th:href="@{/css/main.css}"> -->
-  </head>
+    <head>
+        <th:block th:fragment="head (title='Task Editor')">
+            <meta charset="UTF-8">
+            <!-- <title th:text="${title}"></title> -->
+        </th:block>
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    </head>
 <body>
-  <nav insert="~{partiasl/partiasl :: navbar}"></nav>
+  <nav insert="~{partials/partials :: navbar}"></nav>
   <h2 th:if="${task == null}">No ticky, No tasky!</h2>
   <div th:if="${task != null}">
-    <form th:action="@{|/tasks/${task.id}/edit|}" th:method="POST" th:object="${task}">
+    <form
+    th:action="@{|/tasks/${task.id}/edit|}"
+    th:method="POST"
+    th:object="${task}"
+    >
       <label for="title">Title</label>
       <input type="text" name="title" id="title" th:value="${task.title}">
       <br>
       <label for="description">Title</label>
       <textarea cols="30" rows="10" name="description" id="description" th:text="${task.description}"></textarea>
-      <input type="hidden" name="userId" th:value="${tak.userId}">
+      <input type="hidden" name="userId" th:value="${task.user.id}">
       <button>Edit</button>
     </form>
   </div>

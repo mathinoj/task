@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project_t.task.models.Task;
 import com.project_t.task.repositories.TaskRepository;
 import com.project_t.task.repositories.UserRepository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class TaskController {
@@ -76,16 +77,22 @@ public class TaskController {
   }
 
   @GetMapping("/tasks/{id}/edit")
-  public String editTask(@PathVariable long id, Model model) {
+  public String getEditTask(@PathVariable long id, Model model) {
     Task task;
-    if(taskDao.findById(id).isPresent()){
+    if (taskDao.findById(id).isPresent()) {
       task = taskDao.findById(id).get();
-    }else{
+    } else {
       task = null;
     }
     model.addAttribute("task", task);
     return "/tasks/edit";
   }
-  
+
+  @PostMapping("/tasks/{id}/edit")
+  public String doEditTask(@ModelAttribute Task task, @RequestParam long userId) {
+    task.setUser(userDao.findUserById(userId));
+    taskDao.save(task);
+    return "redirect:/tasks";
+  }
 
 }
