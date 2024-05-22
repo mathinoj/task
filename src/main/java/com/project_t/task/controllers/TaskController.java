@@ -6,12 +6,14 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.project_t.task.models.Task;
 import com.project_t.task.repositories.TaskRepository;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TaskController {
@@ -27,9 +29,15 @@ public class TaskController {
     this.taskDao = taskDao;
   }
 
+  // @GetMapping("/tasks")
+  // public String getAllTasks(Model model) {
+  // model.addAttribute("tasking", tasks);
+  // return "/tasks/index";
+  // }
+
   @GetMapping("/tasks")
   public String getAllTasks(Model model) {
-    model.addAttribute("tasking", tasks);
+    model.addAttribute("tasking", taskDao.findAll());
     return "/tasks/index";
   }
 
@@ -49,6 +57,18 @@ public class TaskController {
     }
     model.addAttribute(task);
     return "/tasks/show";
+  }
+
+  @GetMapping("/tasks/create")
+  public String showCreateForm(Model model) {
+    model.addAttribute("tasker", new Task());
+    return "/tasks/create";
+  }
+
+  @PostMapping("/tasks/create")
+  public String postTask(@ModelAttribute Task tasker) {
+    taskDao.save(tasker);
+    return "redirect:/tasks";
   }
 
 }
