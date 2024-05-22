@@ -14,19 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project_t.task.models.Task;
 import com.project_t.task.repositories.TaskRepository;
+import com.project_t.task.repositories.UserRepository;
 
 @Controller
 public class TaskController {
-  Task task1 = new Task("task 1", "doing task 1");
-  Task task2 = new Task("task 2", "doing task 2");
-  Task task3 = new Task("task 3", "doing task 3");
+  // Task task1 = new Task("task 1", "doing task 1");
+  // Task task2 = new Task("task 2", "doing task 2");
+  // Task task3 = new Task("task 3", "doing task 3");
 
-  List<Task> tasks = new ArrayList<>(List.of(task1, task2, task3));
+  // List<Task> tasks = new ArrayList<>(List.of(task1, task2, task3));
 
   private final TaskRepository taskDao;
+  private final UserRepository userDao;
 
-  public TaskController(TaskRepository taskDao) {
+  public TaskController(TaskRepository taskDao, UserRepository userDao) {
     this.taskDao = taskDao;
+    this.userDao = userDao;
   }
 
   // @GetMapping("/tasks")

@@ -1,10 +1,14 @@
 package com.project_t.task.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +23,18 @@ public class Task {
 
   @Column(nullable=false)
   private String description;
+
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "user_id")
+
+  private User user;
+  public User getUser(){
+    return user;
+  }
+
+  public void setUser(User user){
+    this.user = user;
+  }
 
   public long getId() {
     return id;
@@ -52,10 +68,10 @@ public class Task {
     this.description = description;
   }
 
-  // public Task(long id, String title, String description) {
-  // this.id = id;
-  // this.title = title;
-  // this.description = description;
-  // }
+  public Task(String title, String description, User user) {
+  this.title = title;
+  this.description = description;
+  this.user = user;
+  }
 
 }
