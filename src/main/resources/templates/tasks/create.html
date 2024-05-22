@@ -13,7 +13,8 @@
         <input th:field="*{title}">
         <br>
         <label for="description">Description</label>
-        <input th:field="*{description}">
+        <!-- <input th:field="*{description}"> -->
+        <textarea cols="30" rows="10" th:field="*{description}"></textarea>
         <br>
         <input type="submit">
       </form>
