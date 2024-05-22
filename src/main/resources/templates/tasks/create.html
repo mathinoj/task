@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <th:block th:replace="~{partials/partials :: head(title= 'Submit A Task')}">
+          <link rel="stylesheet" th:href="@{/css/createTasks.css}">
+        </th:block>
+    </head>
+    <body>
+      <nav th:insert="~{partials/partials :: navbar}"></nav>
+      <form th:action="@{/tasks/create}" th:method="POST" th:object="${tasker}">
+        <label for="title">Title</label>
+        <input th:field="*{title}">
+        <br>
+        <label for="description">Description</label>
+        <input th:field="*{description}">
+        <br>
+        <input type="submit">
+      </form>
+
+    </body>
+</html>
