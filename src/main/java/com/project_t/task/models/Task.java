@@ -1,10 +1,23 @@
 package com.project_t.task.models;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="tasks")
 public class Task {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @Column(nullable=false, length=100)
   private String title;
 
+  @Column(nullable=false)
   private String description;
 
   public long getId() {
