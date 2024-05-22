@@ -10,6 +10,7 @@ import com.project_t.task.models.Task;
 import com.project_t.task.repositories.TaskRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -31,5 +32,18 @@ public class TaskController {
       model.addAttribute("tasking", tasks);
       return "/tasks/index";
   }
+
+  @GetMapping("/tasks/{id}")
+  public String showOneTask(@PathVariable long id, Model model) {
+    Task task;
+    if(taskDao.findById(id).isPresent()){
+      task = taskDao.findById(id).get();
+    }else{
+      task = new Task("Task no find!", "");
+    }
+    model.addAttribute(task);
+      return "/tasks/show";
+  }
+
 
 }
