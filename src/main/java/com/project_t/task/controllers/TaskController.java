@@ -70,6 +70,7 @@ public class TaskController {
 
   @PostMapping("/tasks/create")
   public String postTask(@ModelAttribute Task tasker) {
+    tasker.setUser(userDao.findUserById(1L));
     taskDao.save(tasker);
     return "redirect:/tasks";
   }
