@@ -33,6 +33,12 @@ public class TaskController {
     return "/tasks/index";
   }
 
+  @GetMapping("/tasks/search")
+  public String searchTaskByTitle(@RequestParam(name = "search") String title, Model model) {
+    model.addAttribute("results", taskDao.findByTitle(title));
+    return "/tasks/index";
+  }
+
   @GetMapping("/tasks/{id}")
   public String showOneTask(@PathVariable long id, Model model) {
     Task task;
