@@ -27,15 +27,18 @@
             </ul>
         </div>
 
-        <div th:each="tasky : ${tasking}">
+        <div th:each="listingAll : ${listAllTasks}">
             <h2>
                 <a
-                    th:text="${tasky.title}"
-                    th:href="@{|/tasks/${tasky.id}|}"
+                    th:text="${listingAll.title}"
+                    th:href="@{|/tasks/${listingAll.id}|}"
                 ></a>
             </h2>
-            <p th:text="${tasky.description}"></p>
-            <!-- <a th:href="@{|/tasks/${tasky.id}|}">View Task</a> -->
+            <p th:text="${listingAll.description}"></p>
+
+            <div th:each="findCategoryName : ${listingAll.categories}">
+                <h4 th:text="${findCategoryName.name}"></h4>
+            </div>
         </div>
     </body>
 </html>

@@ -44,12 +44,12 @@ public class Task {
   @JoinTable(name = "tasks_categories", joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
   private List<Category> categories;
 
-  // private List<Category> categories;
-
-
-
   public List<Category> getCategories() {
     return categories;
+  }
+
+  public void setCategories(List<Category> categories) {
+    this.categories = categories;
   }
 
   public long getId() {
@@ -88,10 +88,6 @@ public class Task {
     this.title = title;
     this.description = description;
     this.user = user;
-  }
-
-  public void setCategories(List<Category> categories) {
-    this.categories = categories;
   }
 
 }

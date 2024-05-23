@@ -46,7 +46,7 @@ public class TaskController {
 
   @GetMapping("/tasks")
   public String getAllTasks(Model model) {
-    model.addAttribute("tasking", taskDao.findAll());
+    model.addAttribute("listAllTasks", taskDao.findAll());
     return "/tasks/index";
   }
 
@@ -78,10 +78,10 @@ public class TaskController {
   }
 
   @PostMapping("/tasks/create")
-  public String postTask(@ModelAttribute Task tasker, @RequestParam(name="cater") List<String> categories) {
+  public String postTask(@ModelAttribute Task tasker, @RequestParam(name = "cater") List<String> categories) {
     tasker.setUser(userDao.findUserById(1L));
     List<Category> categoryList = new ArrayList<>();
-    for(String category : categories){
+    for (String category : categories) {
       Category categoryFromDB = categoryDao.findCategoryByName(category);
       categoryList.add(categoryFromDB);
     }
