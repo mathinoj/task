@@ -45,6 +45,9 @@ public class Task {
   private List<Category> categories;
 
   // private List<Category> categories;
+
+
+
   public List<Category> getCategories() {
     return categories;
   }
@@ -85,6 +88,10 @@ public class Task {
     this.title = title;
     this.description = description;
     this.user = user;
+  }
+
+  public void setCategories(List<Category> categories) {
+    this.categories = categories;
   }
 
 }

@@ -78,8 +78,14 @@ public class TaskController {
   }
 
   @PostMapping("/tasks/create")
-  public String postTask(@ModelAttribute Task tasker) {
+  public String postTask(@ModelAttribute Task tasker, @RequestParam(name="cater") List<String> categories) {
     tasker.setUser(userDao.findUserById(1L));
+    List<Category> categoryList = new ArrayList<>();
+    for(String category : categories){
+      Category categoryFromDB = categoryDao.findCategoryByName(category);
+      categoryList.add(categoryFromDB);
+    }
+    tasker.setCategories(categoryList);
     taskDao.save(tasker);
     return "redirect:/tasks";
   }

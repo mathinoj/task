@@ -20,9 +20,9 @@
         <br>
         <fieldset>
           <legend>Categories:</legend>
-          <div th:each="category : ${cat}">
-            <label th:for="${category.name}">[[${category.name}]]</label>
-            <input type="checkbox" name="category" th:id="${category.name}" th:value="${category.getName()}">
+          <div th:each="c : ${cat}">
+            <label th:for="${c.name}">[[${c.name}]]</label>
+            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}">
           </div>
         </fieldset>
         <input type="submit">
