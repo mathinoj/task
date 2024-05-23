@@ -12,12 +12,24 @@
         <label for="title">Title</label>
         <input th:field="*{title}">
         <br>
+        <br>
         <label for="description">Description</label>
         <!-- <input th:field="*{description}"> -->
         <textarea cols="30" rows="10" th:field="*{description}"></textarea>
         <br>
+        <br>
+        <fieldset>
+          <legend>Categories:</legend>
+          <div th:each="c : ${cat}">
+            <label th:for="${c.name}">[[${c.name}]]</label>
+            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}">
+          </div>
+        </fieldset>
         <input type="submit">
       </form>
+
+      <br>
+
 
     </body>
 </html>

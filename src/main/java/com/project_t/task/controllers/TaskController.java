@@ -1,6 +1,7 @@
 package com.project_t.task.controllers;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project_t.task.models.Category;
 import com.project_t.task.models.Task;
+import com.project_t.task.repositories.CategoryRepository;
 import com.project_t.task.repositories.TaskRepository;
 import com.project_t.task.repositories.UserRepository;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,10 +30,12 @@ public class TaskController {
 
   private final TaskRepository taskDao;
   private final UserRepository userDao;
+  private final CategoryRepository categoryDao;
 
-  public TaskController(TaskRepository taskDao, UserRepository userDao) {
+  public TaskController(TaskRepository taskDao, UserRepository userDao, CategoryRepository categoryDao) {
     this.taskDao = taskDao;
     this.userDao = userDao;
+    this.categoryDao = categoryDao;
   }
 
   // @GetMapping("/tasks")
@@ -41,7 +46,7 @@ public class TaskController {
 
   @GetMapping("/tasks")
   public String getAllTasks(Model model) {
-    model.addAttribute("tasking", taskDao.findAll());
+    model.addAttribute("listAllTasks", taskDao.findAll());
     return "/tasks/index";
   }
 
@@ -65,13 +70,22 @@ public class TaskController {
 
   @GetMapping("/tasks/create")
   public String showCreateForm(Model model) {
+    List<Category> categories = categoryDao.findAll();
+    categories.sort(Comparator.comparing(Category::getName));
+    model.addAttribute("cat", categories);
     model.addAttribute("tasker", new Task());
     return "/tasks/create";
   }
 
   @PostMapping("/tasks/create")
-  public String postTask(@ModelAttribute Task tasker) {
+  public String postTask(@ModelAttribute Task tasker, @RequestParam(name = "cater") List<String> categories) {
     tasker.setUser(userDao.findUserById(1L));
+    List<Category> categoryList = new ArrayList<>();
+    for (String category : categories) {
+      Category categoryFromDB = categoryDao.findCategoryByName(category);
+      categoryList.add(categoryFromDB);
+    }
+    tasker.setCategories(categoryList);
     taskDao.save(tasker);
     return "redirect:/tasks";
   }
