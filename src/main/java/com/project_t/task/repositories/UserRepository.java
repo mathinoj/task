@@ -6,5 +6,6 @@ import com.project_t.task.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
   User findUserById(long id);
+  User findUserByUsername(String username);
 
 }
