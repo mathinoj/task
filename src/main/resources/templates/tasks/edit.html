@@ -39,9 +39,6 @@
 
                 <div th:each="x : ${task}">
                     <div th:each="b : ${x.categories}">
-                        <span th:text="${b.name}"></span>
-                        <br />
-                        <span th:text="${b.id}"></span>
                         <fieldset>
                             <legend>Categories:</legend>
                             <div th:each="c : ${cat}">
