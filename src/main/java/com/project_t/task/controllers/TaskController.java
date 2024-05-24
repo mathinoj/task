@@ -95,6 +95,9 @@ public class TaskController {
     Task task;
     if (taskDao.findById(id).isPresent()) {
       task = taskDao.findById(id).get();
+      List<Category> categories = categoryDao.findAll();
+      categories.sort(Comparator.comparing(Category::getName));
+      model.addAttribute("cat", categories);
     } else {
       task = null;
     }
@@ -103,8 +106,15 @@ public class TaskController {
   }
 
   @PostMapping("/tasks/{id}/edit")
-  public String doEditTask(@ModelAttribute Task task, @RequestParam long userId) {
+  public String doEditTask(@ModelAttribute Task task, @RequestParam(name = "cater") List<String> categories,
+      @RequestParam long userId) {
     task.setUser(userDao.findUserById(userId));
+    List<Category> categoryList = new ArrayList<>();
+    for (String category : categories) {
+      Category categoryFromDB = categoryDao.findCategoryByName(category);
+      categoryList.add(categoryFromDB);
+    }
+    task.setCategories(categoryList);
     taskDao.save(task);
     return "redirect:/tasks";
   }

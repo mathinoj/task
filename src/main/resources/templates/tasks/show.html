@@ -12,6 +12,9 @@
         <h2>Here is a Task:</h2>
         <h3 th:text="${task.title}"></h3>
         <p th:text="${task.description}"></p>
+        <div th:each="findCategoryName : ${task.categories}">
+            <h4 th:text="${findCategoryName.name}"></h4>
+        </div>
         <p>Posted By: [[${task.user.username}]]</p>
         <br />
         <!-- <span th:if="${task.user.id == userId}"> -->
