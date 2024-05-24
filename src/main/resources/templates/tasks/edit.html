@@ -1,32 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
     <head>
-        <th:block th:fragment="head (title='Task Editor')">
-            <meta charset="UTF-8">
-            <!-- <title th:text="${title}"></title> -->
-        </th:block>
-        <link rel="stylesheet" th:href="@{/css/main.css}">
-
+        <th:block
+            th:replace="~{partials/partials :: head (title='Task Editor')}"
+        ></th:block>
     </head>
-<body>
-  <nav insert="~{partials/partials :: navbar}"></nav>
-  <h2 th:if="${task == null}">No ticky, No tasky!</h2>
-  <div th:if="${task != null}">
-    <form
-    th:action="@{|/tasks/${task.id}/edit|}"
-    th:method="POST"
-    th:object="${task}"
-    >
-      <label for="title">Title</label>
-      <input type="text" name="title" id="title" th:value="${task.title}">
-      <br>
-      <label for="description">Title</label>
-      <textarea cols="30" rows="10" name="description" id="description" th:text="${task.description}"></textarea>
-      <input type="hidden" name="userId" th:value="${task.user.id}">
-      <button>Edit</button>
-    </form>
-  </div>
+    <body>
+        <nav th:insert="~{partials/partials :: navbar}"></nav>
 
+        <h2 th:if="${task == null}">No ticky, No tasky!</h2>
+        <div th:if="${task != null}">
+            <form
+                th:action="@{|/tasks/${task.id}/edit|}"
+                th:method="POST"
+                th:object="${task}"
+            >
+                <label for="title">Title</label>
+                <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    th:value="${task.title}"
+                />
+                <br />
+                <label for="description">Title</label>
+                <textarea
+                    cols="30"
+                    rows="10"
+                    name="description"
+                    id="description"
+                    th:text="${task.description}"
+                >
+                </textarea>
 
-</body>
+                <div th:each="x : ${task}">
+                    <div th:each="b : ${x.categories}">
+                        <span th:text="${b.name}"></span>
+                        <br />
+                        <span th:text="${b.id}"></span>
+                        <fieldset>
+                            <legend>Categories:</legend>
+                            <div th:each="c : ${cat}">
+                                <label th:for="${c.name}">[[${c.name}]]</label>
+                                <div th:if="${b.id == c.id}">
+                                    <input
+                                        type="checkbox"
+                                        name="cater"
+                                        th:id="${c.name}"
+                                        th:value="${c.getName()}"
+                                        checked
+                                    />
+                                </div>
+                                <div th:if="${b.id != c.id}">
+                                    <input
+                                        type="checkbox"
+                                        name="cater"
+                                        th:id="${c.name}"
+                                        th:value="${c.getName()}"
+                                    />
+                                </div>
+                                <!-- <span th:text="${c.id}"></span>
+                                <span th:text="${b.id}"></span> -->
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <input type="hidden" name="userId" th:value="${task.user.id}" />
+                <button>Edit</button>
+            </form>
+        </div>
+    </body>
 </html>

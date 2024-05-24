@@ -95,6 +95,11 @@ public class TaskController {
     Task task;
     if (taskDao.findById(id).isPresent()) {
       task = taskDao.findById(id).get();
+      List<Category> categories = categoryDao.findAll();
+      categories.sort(Comparator.comparing(Category::getName));
+      model.addAttribute("cat", categories);
+      // model.addAttribute("listAllTasks", taskDao.findAll());
+      // System.out.println("xxxxxx: " + taskDao.findAll());
     } else {
       task = null;
     }
