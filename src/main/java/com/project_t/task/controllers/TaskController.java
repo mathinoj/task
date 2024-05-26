@@ -119,4 +119,9 @@ public class TaskController {
     return "redirect:/tasks";
   }
 
+  @GetMapping("/tasks/addCategory")
+  public String addCat(){
+    return "tasks/addCategory";
+  }
+
 }

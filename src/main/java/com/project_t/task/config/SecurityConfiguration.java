@@ -16,8 +16,9 @@ public class SecurityConfiguration {
         .dispatcherTypeMatchers(DispatcherType.FORWARD,
             DispatcherType.ERROR)
         .permitAll()
-        .requestMatchers("/tasks/create", "/tasks/delete", "/profile").authenticated()
-        .requestMatchers("/", "/tasks", "/tasks/*", "/login", "/register", "/tasks/show", "/tasks/{id}",
+        .requestMatchers("/tasks/delete", "/profile").authenticated()
+        .requestMatchers("/", "/tasks", "/tasks/*", "/login", "/register", "/tasks/show", "/tasks/create",
+            "/tasks/{id}",
             "/tasks/*/edit")
         .permitAll()
         .requestMatchers("/js/*", "/css/*", "/img/*").permitAll())
