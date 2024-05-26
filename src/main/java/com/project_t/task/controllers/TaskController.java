@@ -120,8 +120,17 @@ public class TaskController {
   }
 
   @GetMapping("/tasks/addCategory")
-  public String addCat(){
+  public String addCat(Model model) {
+    model.addAttribute("newCat", new Category());
     return "tasks/addCategory";
+  }
+
+  @PostMapping("tasks/addCategory")
+  public String placeCat(@ModelAttribute Category newCat, @RequestParam(name = "name") String name) {
+    // newCat.setName(categoryDao);
+    newCat.setName(name);
+    categoryDao.save(newCat);
+    return "redirect:/tasks/create";
   }
 
 }

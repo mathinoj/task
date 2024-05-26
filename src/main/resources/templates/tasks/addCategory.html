@@ -12,5 +12,15 @@
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
         <h1>add category page!</h1>
+
+        <form
+            th:action="@{/tasks/addCategory}"
+            th:method="POST"
+            th:object="${newCat}"
+        >
+            <label for="name"></label>
+            <input th:field="*{name}" />
+            <input type="submit" />
+        </form>
     </body>
 </html>
