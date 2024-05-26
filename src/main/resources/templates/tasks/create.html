@@ -24,7 +24,7 @@
             <label th:for="${c.name}">[[${c.name}]]</label>
             <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}">
           </div>
-          <button th:action="@{/addCategory}">Add Category</button>
+          <a th:href="@{/tasks/addCategory}">Add Category</a>
         </fieldset>
         <input type="submit">
       </form>
