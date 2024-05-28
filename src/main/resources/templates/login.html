@@ -20,6 +20,10 @@
         <div th:if="${param.error}">
             <p>Invalid Username or P-Word</p>
         </div>
+        <div th:if="${param.logout}">
+            <p>You been Logged Out!</p>
+        </div>
+
         <form th:action="@{/login}" th:method="POST">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" />
