@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head>
+        <th:block
+            th:replace="~{partials/partials :: head(title= 'Task Profile')}"
+        >
+        </th:block>
+        <link rel="stylesheet" th:href="@{/css/createTasks.css}" />
+    </head>
+    <body>
+        <nav th:replace="~{partials/partials :: navbar}"></nav>
+        <form th:action="@{/profile}" th:method="POST">
+            <fieldset>
+                <legend>Change your Emiz</legend>
+                <p>Current Emiz: [[${user.email}]]</p>
+                <p>
+                    Current Emiz:
+                    <span th:if="sec.authentication" ="principal.email"></span>
+                </p>
+                <label for="email">New Email</label>
+                <input type="email" name="email" id="email" />
+                <br />
+                <div sec:authorize="isAuthenticated()">
+                    <p>
+                        User Id: <span sec:authentication="principal.id"></span>
+                    </p>
+                    <p>
+                        Welcome,
+                        <span sec:authentication="principal.username"></span>
+                    </p>
+                </div>
+                <br>
+                <input type="submit" value="submit">
+            </fieldset>
+        </form>
+    </body>
+</html>
