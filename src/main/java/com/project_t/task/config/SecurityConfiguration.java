@@ -33,11 +33,11 @@ public class SecurityConfiguration {
 
   // @Bean
   // public PasswordEncoder passwordEncoder() {
-  //   return NoOpPasswordEncoder.getInstance();
+  // return NoOpPasswordEncoder.getInstance();
   // }
 
   @Bean
-  public PasswordEncoder passwordEncoder(){
+  public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 }
