@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head>
+        <th:block
+            th:replace="~{partials/partials :: head(title= 'Task Login')}"
+        >
+        </th:block>
+        <link rel="stylesheet" th:href="@{/css/createTasks.css}" />
+    </head>
+    <body>
+        <h1>Log In</h1>
+        <a href="/tasks">All Tasks</a>
+        <br />
+        <br />
+
+        <div th:if="${param.error}">
+            <p>Invalid Username or P-Word</p>
+        </div>
+        <div th:if="${param.logout}">
+            <p>You been Logged Out!</p>
+        </div>
+
+        <form th:action="@{/login}" th:method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" />
+            <br />
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" />
+            <input type="submit" value="Log In" />
+        </form>
+    </body>
+</html>

@@ -17,11 +17,30 @@
       <li class="nav-item">
         <a href="/tasks/create">Create Tasks</a>
       </li>
+      <li class="nav-item">
+        <a href="/login">Login</a>
+      </li>
+      <li>
+        <a href="#" id="logOutLink">Logout</a>
+      </li>
     </ul>
+    <form th:action="@{/logout}" style="display: none" id="logOutForm" th:method="POST">
+      <button>LogOut</button>
+    </form>
   </nav>
   <header th:fragment="header">
     <h1>Task Lister</h1>
   </header>
 
+
+
+
+  <script>
+    const logOutForm = document.getElementById("logOutForm");
+    const logOutLink = document.getElementById("logOutLink");
+    logOutLink.addEventListener('click', () => {
+      logOutForm.submit();
+    })
+  </script>
 </body>
 </html>
