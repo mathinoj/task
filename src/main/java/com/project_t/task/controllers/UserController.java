@@ -35,15 +35,10 @@ public class UserController {
     return "redirect:/profile";
   }
 
-  // @GetMapping("/register")
-  // public String showRegForm(Model model) {
-  // model.addAttribute("user", new User());
-  // return "templates/register";
-  // }
-
   @GetMapping("/register")
-  public String showRegistrationForm(Model model) {
+  public String showRegForm(Model model) {
     model.addAttribute("user", new User());
-    return "register";
+    return "/register";
   }
+
 }
