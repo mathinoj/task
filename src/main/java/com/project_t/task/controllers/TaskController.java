@@ -87,6 +87,10 @@ public class TaskController {
       categoryList.add(categoryFromDB);
       // System.out.println();
     }
+    if (tasker.getTitle().isEmpty() || tasker.getDescription().isEmpty()) {
+      // model.addAttribute("")
+      return "/tasks/create";
+    }
     tasker.setCategories(categoryList);
     taskDao.save(tasker);
     return "redirect:/tasks";
@@ -130,7 +134,7 @@ public class TaskController {
   @PostMapping("tasks/addCategory")
   public String placeCat(@ModelAttribute Category newCat, @RequestParam(name = "name") String name) {
     newCat.setName(name);
-    categoryDao.save(newCat);
+    // categoryDao.save(newCat);
     return "redirect:/tasks/create";
   }
 

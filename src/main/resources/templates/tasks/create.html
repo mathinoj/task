@@ -24,13 +24,43 @@
             <label th:for="${c.name}">[[${c.name}]]</label>
             <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}">
           </div>
-          <a th:href="@{/tasks/addCategory}">Add Category</a>
+            <div>
+              <!-- <a th:href="@{/tasks/create}" id="blah">Add Category</a> -->
+              <button type="button" id="blah">Add Cat</button>
+                <div hidden id="removeHidden">
+                  <h1>add category page!</h1>
+                  <form>
+                    <label for="name"></label>
+                    <input type="text"/>
+                    <input type="submit" />
+                    <button type="button" id="bye">Cancel</button>
+                  </form>
+                </div>
+            </div>
         </fieldset>
         <input type="submit">
       </form>
 
       <br>
 
+<script>
+  // const x =document.getElementById("removeHidden");
+  const grabBurr = document.getElementById("blah");
+  const bye = document.getElementById("bye");
+  grabBurr.addEventListener('click', () => {
+    if('click'){
+      // x.removeAttribute("hidden");
+      // document.getElementById('bye').setAttribute("name", "cater")
+      document.getElementById("removeHidden").hidden = false;
 
+
+          }
+    });
+    bye.addEventListener('click', () =>{
+      if('click'){
+        document.getElementById("removeHidden").hidden = true;
+      }
+    })
+</script>
     </body>
 </html>
