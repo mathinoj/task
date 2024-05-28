@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head>
+        <th:block
+            th:replace="~{partials/partiasl :: head(title='Task Lister')}"
+        >
+            <!-- <meta charset="UTF-8">
+        <title th:text="${title}"></title> -->
+        </th:block>
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
+    </head>
+    <body>
+        <h1>Log In</h1>
+        <a href="/tasks">All Tasks</a>
+        <br />
+        <div th:if="${param.error}">
+            <p>Invalid Username or P-Word</p>
+        </div>
+        <form th:action="@{/login}" th:method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" />
+            <br />
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" />
+            <input type="submit" value="Log In" />
+        </form>
+    </body>
+</html>
