@@ -1,21 +1,26 @@
 package com.project_t.task.controllers;
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project_t.task.models.User;
 import com.project_t.task.repositories.UserRepository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
   private final UserRepository userDao;
+  private final PasswordEncoder passwordEncoder;
 
-  public UserController(UserRepository userDao) {
+  public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
     this.userDao = userDao;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @GetMapping("/profile")
@@ -39,6 +44,13 @@ public class UserController {
   public String showRegForm(Model model) {
     model.addAttribute("user", new User());
     return "/register";
+  }
+
+  @PostMapping("/register")
+  public String regUser(@ModelAttribute User user) {
+    user.setPassword(passwordEncoder.encode((user.getPassword())));
+    userDao.save(user);
+    return "redirect:/login";
   }
 
 }
