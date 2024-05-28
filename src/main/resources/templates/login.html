@@ -6,17 +6,17 @@
 >
     <head>
         <th:block
-            th:replace="~{partials/partiasl :: head(title='Task Lister')}"
+            th:replace="~{partials/partials :: head(title= 'Task Login')}"
         >
-            <!-- <meta charset="UTF-8">
-        <title th:text="${title}"></title> -->
         </th:block>
-        <link rel="stylesheet" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" th:href="@{/css/createTasks.css}" />
     </head>
     <body>
         <h1>Log In</h1>
         <a href="/tasks">All Tasks</a>
         <br />
+        <br />
+
         <div th:if="${param.error}">
             <p>Invalid Username or P-Word</p>
         </div>
