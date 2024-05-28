@@ -19,7 +19,7 @@
                 <p>Current Emiz: [[${user.email}]]</p>
                 <p>
                     Current Emiz:
-                    <span th:if="sec.authentication" ="principal.email"></span>
+                    <span sec:authentication="principal.email"></span>
                 </p>
                 <label for="email">New Email</label>
                 <input type="email" name="email" id="email" />
@@ -33,8 +33,8 @@
                         <span sec:authentication="principal.username"></span>
                     </p>
                 </div>
-                <br>
-                <input type="submit" value="submit">
+                <br />
+                <input type="submit" value="submit" />
             </fieldset>
         </form>
     </body>
