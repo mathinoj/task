@@ -75,25 +75,54 @@ public class TaskController {
     categories.sort(Comparator.comparing(Category::getName));
     model.addAttribute("cat", categories);
     model.addAttribute("tasker", new Task());
+    model.addAttribute("newCat", new Category());
     return "/tasks/create";
   }
 
+  // @GetMapping("/tasks/addCategory")
+  // public String addCat(Model model) {
+  // model.addAttribute("newCat", new Category());
+  // return "tasks/addCategory";
+  // }
+
+  // @PostMapping("tasks/addCategory")
+  // public String placeCat(@ModelAttribute Category newCat, @RequestParam(name =
+  // "name") String name) {
+  // newCat.setName(name);
+  // categoryDao.save(newCat);
+  // return "redirect:/tasks/create";
+  // }
+
   @PostMapping("/tasks/create")
-  public String postTask(@ModelAttribute Task tasker, @RequestParam(name = "cater") List<String> categories) {
+  public String postTask(@ModelAttribute Task tasker,
+      @RequestParam(name = "cater", required = false) List<String> categories, @ModelAttribute Category newCat,
+      @RequestParam(name = "name", required = false) String name) {
     tasker.setUser(userDao.findUserById(1L));
-    List<Category> categoryList = new ArrayList<>();
-    for (String category : categories) {
-      Category categoryFromDB = categoryDao.findCategoryByName(category);
-      categoryList.add(categoryFromDB);
-      // System.out.println();
+    if (categories == null) {
+      newCat.setName(name);
+      categoryDao.save(newCat);
+      return "redirect:/tasks/create";
+    } else {
+      List<Category> categoryList = new ArrayList<>();
+      for (String category : categories) {
+        Category categoryFromDB = categoryDao.findCategoryByName(category);
+        categoryList.add(categoryFromDB);
+      }
+
+      tasker.setCategories(categoryList);
+
+      // }
+      // List<Category> categoryList = new ArrayList<>();
+      // for (String category : categories) {
+      // Category categoryFromDB = categoryDao.findCategoryByName(category);
+      // categoryList.add(categoryFromDB);
+      // // System.out.println();
+      // }
+
+      taskDao.save(tasker);
+      return "redirect:/tasks";
     }
-    if (tasker.getTitle().isEmpty() || tasker.getDescription().isEmpty()) {
-      // model.addAttribute("")
-      return "/tasks/create";
-    }
-    tasker.setCategories(categoryList);
-    taskDao.save(tasker);
-    return "redirect:/tasks";
+    // }
   }
 
   @GetMapping("/tasks/{id}/edit")
@@ -125,17 +154,18 @@ public class TaskController {
     return "redirect:/tasks";
   }
 
-  @GetMapping("/tasks/addCategory")
-  public String addCat(Model model) {
-    model.addAttribute("newCat", new Category());
-    return "tasks/addCategory";
-  }
+  // @GetMapping("/tasks/addCategory")
+  // public String addCat(Model model) {
+  // model.addAttribute("newCat", new Category());
+  // return "tasks/addCategory";
+  // }
 
-  @PostMapping("tasks/addCategory")
-  public String placeCat(@ModelAttribute Category newCat, @RequestParam(name = "name") String name) {
-    newCat.setName(name);
-    // categoryDao.save(newCat);
-    return "redirect:/tasks/create";
-  }
+  // @PostMapping("tasks/addCategory")
+  // public String placeCat(@ModelAttribute Category newCat, @RequestParam(name =
+  // "name") String name) {
+  // newCat.setName(name);
+  // // categoryDao.save(newCat);
+  // return "redirect:/tasks/create";
+  // }
 
 }

@@ -10,12 +10,12 @@
       <h1>Create Task</h1>
       <form th:action="@{/tasks/create}" th:method="POST" th:object="${tasker}">
         <label for="title">Title</label>
-        <input th:field="*{title}">
+        <input th:field="*{title}" id="tytle">
         <br>
         <br>
         <label for="description">Description</label>
         <!-- <input th:field="*{description}"> -->
-        <textarea cols="30" rows="10" th:field="*{description}"></textarea>
+        <textarea cols="30" rows="10" th:field="*{description}" id="desc"></textarea>
         <br>
         <br>
         <fieldset>
@@ -24,43 +24,51 @@
             <label th:for="${c.name}">[[${c.name}]]</label>
             <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}">
           </div>
-            <div>
-              <!-- <a th:href="@{/tasks/create}" id="blah">Add Category</a> -->
-              <button type="button" id="blah">Add Cat</button>
+              <!-- <a th:href="@{/tasks/addCategory}" id="blah">Add Category</a> -->
+              <button type="button" id="hiddenForm">Add Cat</button>
                 <div hidden id="removeHidden">
                   <h1>add category page!</h1>
-                  <form>
+                  <form
+                  th:action="@{/tasks/create}"
+                  th:method="POST"
+                  th:object="${newCat}"
+                  >
+
                     <label for="name"></label>
-                    <input type="text"/>
-                    <input type="submit" />
-                    <button type="button" id="bye">Cancel</button>
+                    <input th:field="*{name}" id="catName" />
+                    <button type="button">Sub Cat</button>
+                    <button type="button" id="cancelCreateCat">Cancel</button>
                   </form>
                 </div>
-            </div>
         </fieldset>
-        <input type="submit">
+        <input type="submit" id="sobmit">
+        <!-- <button>Submit</button> -->
       </form>
 
       <br>
 
 <script>
-  // const x =document.getElementById("removeHidden");
-  const grabBurr = document.getElementById("blah");
-  const bye = document.getElementById("bye");
-  grabBurr.addEventListener('click', () => {
+  const removeHiddenAttribute = document.getElementById("hiddenForm");
+  const addHiddenAttribute = document.getElementById("cancelCreateCat");
+  const tint = document.getElementById("sobmit");
+  removeHiddenAttribute.addEventListener('click', () => {
     if('click'){
-      // x.removeAttribute("hidden");
-      // document.getElementById('bye').setAttribute("name", "cater")
       document.getElementById("removeHidden").hidden = false;
-
-
           }
     });
-    bye.addEventListener('click', () =>{
+    addHiddenAttribute.addEventListener('click', () =>{
       if('click'){
         document.getElementById("removeHidden").hidden = true;
+        console.log("kitty: " +catName.value)
+        alert("Cancel Klick")
+        let x = document.getElementById("catName")
+        x.value = ""
+        // console.log('x-val: ' +x.value)
+
       }
     })
+
 </script>
+
     </body>
 </html>
