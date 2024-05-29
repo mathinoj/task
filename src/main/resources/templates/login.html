@@ -22,6 +22,8 @@
         </div>
         <div th:if="${param.logout}">
             <p>You been Logged Out!</p>
+            <!-- Only works if you remove this from secConfig -->
+            <!-- .logout(logout -> logout.logoutSuccessUrl("/login")); -->
         </div>
 
         <form th:action="@{/login}" th:method="POST">

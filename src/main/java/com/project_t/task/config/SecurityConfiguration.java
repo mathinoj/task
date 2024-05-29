@@ -4,6 +4,7 @@ import org.apache.tomcat.util.net.DispatchType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -18,10 +19,12 @@ public class SecurityConfiguration {
         .dispatcherTypeMatchers(DispatcherType.FORWARD,
             DispatcherType.ERROR)
         .permitAll()
-        .requestMatchers("/tasks/delete", "/profile").authenticated()
-        .requestMatchers("/", "/tasks", "/tasks/*", "/login", "/register", "/tasks/show", "/tasks/create",
-            "/tasks/{id}",
+        // http.authorizeHttpRequests((requests) -> requests
+        .requestMatchers("/tasks/delete", "/profile", "/tasks/create",
             "/tasks/*/edit")
+        .authenticated()
+        .requestMatchers("/", "/tasks", "/tasks/*", "/login", "/register", "/tasks/show",
+            "/tasks/{id}")
         .permitAll()
         .requestMatchers("/js/*", "/css/*", "/img/*").permitAll())
         .formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/tasks"))
@@ -29,8 +32,13 @@ public class SecurityConfiguration {
     return http.build();
   }
 
+  // @Bean
+  // public PasswordEncoder passwordEncoder() {
+  // return NoOpPasswordEncoder.getInstance();
+  // }
+
   @Bean
   public PasswordEncoder passwordEncoder() {
-    return NoOpPasswordEncoder.getInstance();
+    return new BCryptPasswordEncoder();
   }
 }
