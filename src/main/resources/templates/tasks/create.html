@@ -56,7 +56,6 @@
 <script>
   const removeHiddenAttribute = document.getElementById("hiddenForm");
   const addHiddenAttribute = document.getElementById("cancelCreateCat");
-  // const sobmitButt = document.getElementById("sobmit");
   const grabTitleInput = document.getElementById("titleInput");
   const grabDescriptionInput = document.getElementById("descriptionInput");
 
@@ -79,9 +78,8 @@
       submitCategoryButton.addEventListener('click', ()=>{})
     };
     if(submitCategoryButtonListener){
-      document.getElementById('titleInput').value = sessionStorage.getItem('title');
+      grabTitleInput.value = sessionStorage.getItem('title');
       grabDescriptionInput.value = sessionStorage.getItem('description');
-
     };
 
   const partialsNavBar = document.getElementById('navBar');
