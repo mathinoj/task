@@ -79,26 +79,6 @@ public class TaskController {
     return "/tasks/create";
   }
 
-  // @GetMapping("/tasks/addCategory")
-  // public String addCat(Model model) {
-  // model.addAttribute("newCat", new Category());
-  // return "tasks/addCategory";
-  // }
-
-  // @PostMapping("tasks/addCategory")
-  // public String placeCat(@ModelAttribute Category newCat, @RequestParam(name =
-  // "name") String name) {
-  // newCat.setName(name);
-  // categoryDao.save(newCat);
-  // return "";
-  // }
-
-  // @PostMapping("/tasks/addCategory")
-  // public void placeCatty(@ModelAttribute Category newCat, Model model) {
-  // newCat.setName(newCat.getName());
-  // categoryDao.save(newCat);
-  // }
-
   @PostMapping("/tasks/create")
   public String postTask(@ModelAttribute Task tasker,
       @RequestParam(name = "cater", required = false) List<String> categories, @ModelAttribute Category newCat,
@@ -116,20 +96,9 @@ public class TaskController {
       }
 
       tasker.setCategories(categoryList);
-
-      // }
-      // List<Category> categoryList = new ArrayList<>();
-      // for (String category : categories) {
-      // Category categoryFromDB = categoryDao.findCategoryByName(category);
-      // categoryList.add(categoryFromDB);
-      // // System.out.println();
-      // }
       taskDao.save(tasker);
       return "redirect:/tasks";
-      // }
     }
-    // return "redirect:/tasks/create";
-
   }
 
   @GetMapping("/tasks/{id}/edit")
