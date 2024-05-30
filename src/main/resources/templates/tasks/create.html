@@ -6,16 +6,16 @@
         </th:block>
     </head>
     <body>
-      <nav th:insert="~{partials/partials :: navbar}" id="nuvBar"></nav>
+      <nav th:insert="~{partials/partials :: navbar}" id="navBar"></nav>
       <h1>Create Task</h1>
       <form th:action="@{/tasks/create}" th:method="POST" th:object="${tasker}">
         <label for="title">Title</label>
-        <input th:field="*{title}" id="tytle">
+        <input th:field="*{title}" id="titleInput">
         <br>
         <br>
         <label for="description">Description</label>
         <!-- <input th:field="*{description}"> -->
-        <textarea cols="30" rows="10" th:field="*{description}" id="desc"></textarea>
+        <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput"></textarea>
         <br>
         <br>
         <fieldset>
@@ -42,7 +42,7 @@
                     <label for="name"></label>
                     <input th:field="*{name}" id="catName" />
                     <!-- <button type="submit">Sub Cat</button> -->
-                     <input type="submit" value="Sobmyt" id="sobmitIt">
+                     <input type="submit" value="Sobmyt" id="submitCategory">
                     <button type="reset" id="cancelCreateCat">Cancel</button>
                   </form>
                 </div>
@@ -56,63 +56,40 @@
 <script>
   const removeHiddenAttribute = document.getElementById("hiddenForm");
   const addHiddenAttribute = document.getElementById("cancelCreateCat");
-  const sobmitButt = document.getElementById("sobmit");
-  const texter = document.getElementById("tytle")
-  removeHiddenAttribute.addEventListener('click', () => {
-    if('click'){
-      document.getElementById("removeHidden").hidden = false;
+  // const sobmitButt = document.getElementById("sobmit");
+  const grabTitleInput = document.getElementById("titleInput");
+  const grabDescriptionInput = document.getElementById("descriptionInput");
 
-      sessionStorage.setItem('title', texter.value);
-      // console.log("seshStor.get: " +sessionStorage.getItem('title'));
-      // sessionStorage.removeItem('title');
-      // const sobmitButt = document.getElementById("sobmitIt");
+    removeHiddenAttribute.addEventListener('click', () => {
+      if('click'){
+        document.getElementById("removeHidden").hidden = false;
+        sessionStorage.setItem('title', grabTitleInput.value);
+        sessionStorage.setItem('description', grabDescriptionInput.value);
+        }
+      });
 
-      //     sobmitButt.addEventListener('click', ()=>{
-      //     alert('beep!')
-      //     console.log("seshStor.get: " +sessionStorage.getItem('title'));
-
-      //     texter.value = "do you see?";
-      //   })
-
-      }
-    });
     addHiddenAttribute.addEventListener('click', () =>{
       if('click'){
         document.getElementById("removeHidden").hidden = true;
-        // console.log("kitty: " +texter.value)
-        // let x = document.getElementById("catName")
-        // x.value = ""
-        // console.log('x-val: ' +x.value)
+        }
+      });
 
-      }
-    })
-    // sobmitButt.addEventListener('click', ()=>{
-    //   alert('beep!')
-    // })
-    const sobmitButtz = document.getElementById("sobmitIt");
+  const submitCategoryButton = document.getElementById("submitCategory");
+    function submitCategoryButtonListener () {
+      submitCategoryButton.addEventListener('click', ()=>{})
+    };
+    if(submitCategoryButtonListener){
+      document.getElementById('titleInput').value = sessionStorage.getItem('title');
+      
+    };
 
-      function exer () {
-        sobmitButtz.addEventListener('click', ()=>{
-        alert('beep!')
-        // console.log("seshStor.get: " +sessionStorage.getItem('title'));
-        // document.getElementById('tytle').value = sessionStorage.getItem('title');
-        // texter.value = "do you see?";
-      })
-    }
-    if(exer){
-      // console.log("seshStor.get: " +sessionStorage.getItem('title'));
-        document.getElementById('tytle').value = sessionStorage.getItem('title');
-    }
-
-    let naver = document.getElementById('nuvBar');
-    function navBarr () {
-      naver.addEventListener('click', ()=>{
-      // alert('clicked!')
-    })
-  }
-  if(navBarr){
+  const partialsNavBar = document.getElementById('navBar');
+    function navBarListener () {
+      partialsNavBar.addEventListener('click', ()=>{})
+    };
+    if(navBarListener){
     sessionStorage.clear();
-  }
+    };
 </script>
 
     </body>
