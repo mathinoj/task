@@ -71,7 +71,7 @@ public class TaskController {
   @GetMapping("/tasks/create")
   public String showCreateForm(Model model) {
     List<Category> categories = categoryDao.findAll();
-    System.out.println("CARTEGORIES: " + categories);
+    // System.out.println("CARTEGORIES: " + categories);
     categories.sort(Comparator.comparing(Category::getName));
     model.addAttribute("cat", categories);
     model.addAttribute("tasker", new Task());
@@ -90,7 +90,13 @@ public class TaskController {
   // "name") String name) {
   // newCat.setName(name);
   // categoryDao.save(newCat);
-  // return "redirect:/tasks/create";
+  // return "";
+  // }
+
+  // @PostMapping("/tasks/addCategory")
+  // public void placeCatty(@ModelAttribute Category newCat, Model model) {
+  // newCat.setName(newCat.getName());
+  // categoryDao.save(newCat);
   // }
 
   @PostMapping("/tasks/create")
@@ -118,11 +124,12 @@ public class TaskController {
       // categoryList.add(categoryFromDB);
       // // System.out.println();
       // }
-
       taskDao.save(tasker);
       return "redirect:/tasks";
+      // }
     }
-    // }
+    // return "redirect:/tasks/create";
+
   }
 
   @GetMapping("/tasks/{id}/edit")
