@@ -71,64 +71,55 @@
   const addHiddenAttribute = document.getElementById("cancelCreateCat");
   const grabTitleInput = document.getElementById("titleInput");
   const grabDescriptionInput = document.getElementById("descriptionInput");
-  const newCategoryName = document.getElementById('catName');
 
-    removeHiddenAttribute.addEventListener('click', () => {
-      if('click'){
-        document.getElementById("removeHidden").hidden = false;
-        sessionStorage.setItem('title', grabTitleInput.value);
-        sessionStorage.setItem('description', grabDescriptionInput.value);
-        }
-      });
+  removeHiddenAttribute.addEventListener('click', () => {
+    if('click'){
+      document.getElementById("removeHidden").hidden = false;
+      sessionStorage.setItem('title', grabTitleInput.value);
+      sessionStorage.setItem('description', grabDescriptionInput.value);
+    }
+  });
 
-    addHiddenAttribute.addEventListener('click', () =>{
-      if('click'){
-        document.getElementById("removeHidden").hidden = true;
-        }
-      });
+  addHiddenAttribute.addEventListener('click', () =>{
+    if('click'){
+      document.getElementById("removeHidden").hidden = true;
+    }
+  });
 
   const submitCategoryButton = document.getElementById("submitCategory");
-    function submitCategoryButtonListener () {
-      submitCategoryButton.addEventListener('click', ()=>{})
-    };
-    if(submitCategoryButtonListener){
-      grabTitleInput.value = sessionStorage.getItem('title');
-      grabDescriptionInput.value = sessionStorage.getItem('description');
-    };
+  function submitCategoryButtonListener () {
+    submitCategoryButton.addEventListener('click', ()=>{})
+  };
+  if(submitCategoryButtonListener){
+    grabTitleInput.value = sessionStorage.getItem('title');
+    grabDescriptionInput.value = sessionStorage.getItem('description');
+  };
 
-
-if(submitCategoryButtonListener){
+  const newCategoryName = document.getElementById('catName');
+  if(submitCategoryButtonListener){
     newCategoryName.addEventListener('keyup', ()=>{
       const keyUpNewCategory = newCategoryName.value;
       sessionStorage.setItem('newCategory', keyUpNewCategory);
     })
   }
+
   const x = document.getElementById('cici').children;
-    for(let i = 1; i < x.length; i++){
-      let categoryName = x[i].children[1].id;
-      newCategoryName.value = sessionStorage.getItem('newCategory');
-      if(newCategoryName.value == categoryName){
-        // console.log("caName: " + categoryName);
-        // console.log("newly: " +newCategoryName.value)
-        // console.log("true");
-        console.log("ID name: " +categoryName)
-        document.getElementById(categoryName).checked = true;
-
-      }
-
+  for(let i = 1; i < x.length; i++){
+    let categoryName = x[i].children[1].id;
+    newCategoryName.value = sessionStorage.getItem('newCategory');
+    if(newCategoryName.value == categoryName){
+      console.log("ID name: " +categoryName)
+      document.getElementById(categoryName).checked = true;
     }
+  }
 
   const partialsNavBar = document.getElementById('navBar');
-    function navBarListener () {
-      partialsNavBar.addEventListener('click', ()=>{})
-    };
-    if(navBarListener){
+  function navBarListener () {
+    partialsNavBar.addEventListener('click', ()=>{})
+  };
+  if(navBarListener){
     sessionStorage.clear();
-    };
-
-
-
-
+  };
 </script>
 
     </body>
