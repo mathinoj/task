@@ -114,10 +114,14 @@
   }
 
   const partialsNavBar = document.getElementById('navBar');
-  function navBarListener () {
+  const createTaskSubmitButton = document.getElementById('sobmit');
+  function navBarListener() {
     partialsNavBar.addEventListener('click', ()=>{})
   };
-  if(navBarListener){
+  function createTaskListener() {
+    createFormSubmitButton.addEventListener('click', ()=>{})
+  };
+  if(navBarListener || createTaskListener){
     sessionStorage.clear();
   };
 </script>
