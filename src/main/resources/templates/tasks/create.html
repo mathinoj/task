@@ -6,27 +6,41 @@
         </th:block>
     </head>
     <body>
-      <nav th:insert="~{partials/partials :: navbar}" id="nuvBar"></nav>
+      <nav th:insert="~{partials/partials :: navbar}" id="navBar"></nav>
       <h1>Create Task</h1>
+
+      <div th:if="${newBee}" id="newlyAddedCat">
+        <!-- <div th:if="${newBee.getName == newBee.getName}"> -->
+        <span th:text="${newBee.getName()}"></span>
+          <!-- <div th:each="n : ${newBee}"> -->
+            <!-- <label th:for="${n.name}">[[${n.name}]]</label> -->
+            <!-- <input type="checkbox" name="cater" th:id="${n.name}" th:value="${n.getName()}" id="insertCheckedBox"> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      </div>
+
       <form th:action="@{/tasks/create}" th:method="POST" th:object="${tasker}">
         <label for="title">Title</label>
-        <input th:field="*{title}" id="tytle">
+        <input th:field="*{title}" id="titleInput">
         <br>
         <br>
         <label for="description">Description</label>
         <!-- <input th:field="*{description}"> -->
-        <textarea cols="30" rows="10" th:field="*{description}" id="desc"></textarea>
+        <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput"></textarea>
         <br>
         <br>
-        <fieldset>
+        <fieldset  id="cici">
           <legend>Categories:</legend>
+
           <div th:each="c : ${cat}">
             <label th:for="${c.name}">[[${c.name}]]</label>
-            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}">
+            <input type="checkbox" class="putCheck" name="cater" th:id="${c.name}" th:value="${c.getName()}">
+            <!-- <span th:text="${c.getName()}"></span> -->
           </div>
+
+          <!-- <span th:text="cat.getName()"></span> -->
         </fieldset>
         <input type="submit" id="sobmit">
-        <!-- <button type="submit" id="sobmit">Submit</button> -->
       </form>
               <!-- <a th:href="@{/tasks/addCategory}" id="blah">Add Category</a> -->
           <fieldset>
@@ -40,79 +54,76 @@
                   >
 
                     <label for="name"></label>
-                    <input th:field="*{name}" id="catName" />
+                    <input th:field="*{name}" id="catName"/>
                     <!-- <button type="submit">Sub Cat</button> -->
-                     <input type="submit" value="Sobmyt" id="sobmitIt">
+                     <input type="submit" value="Sobmyt" id="submitCategory">
                     <button type="reset" id="cancelCreateCat">Cancel</button>
                   </form>
                 </div>
-          </fieldset>
-        <!-- <input type="submit" id="sobmit"> -->
-        <!-- <button type="submit" id="sobmit">Submit</button> -->
-      <!-- </form> -->
 
+          </fieldset>
       <br>
+
+
 
 <script>
   const removeHiddenAttribute = document.getElementById("hiddenForm");
-  const addHiddenAttribute = document.getElementById("cancelCreateCat");
-  const sobmitButt = document.getElementById("sobmit");
-  const texter = document.getElementById("tytle")
+  const grabTitleInput = document.getElementById("titleInput");
+  const grabDescriptionInput = document.getElementById("descriptionInput");
+
   removeHiddenAttribute.addEventListener('click', () => {
     if('click'){
       document.getElementById("removeHidden").hidden = false;
-
-      sessionStorage.setItem('title', texter.value);
-      // console.log("seshStor.get: " +sessionStorage.getItem('title'));
-      // sessionStorage.removeItem('title');
-      // const sobmitButt = document.getElementById("sobmitIt");
-
-      //     sobmitButt.addEventListener('click', ()=>{
-      //     alert('beep!')
-      //     console.log("seshStor.get: " +sessionStorage.getItem('title'));
-
-      //     texter.value = "do you see?";
-      //   })
-
-      }
-    });
-    addHiddenAttribute.addEventListener('click', () =>{
-      if('click'){
-        document.getElementById("removeHidden").hidden = true;
-        // console.log("kitty: " +texter.value)
-        // let x = document.getElementById("catName")
-        // x.value = ""
-        // console.log('x-val: ' +x.value)
-
-      }
-    })
-    // sobmitButt.addEventListener('click', ()=>{
-    //   alert('beep!')
-    // })
-    const sobmitButtz = document.getElementById("sobmitIt");
-
-      function exer () {
-        sobmitButtz.addEventListener('click', ()=>{
-        alert('beep!')
-        // console.log("seshStor.get: " +sessionStorage.getItem('title'));
-        // document.getElementById('tytle').value = sessionStorage.getItem('title');
-        // texter.value = "do you see?";
-      })
+      sessionStorage.setItem('title', grabTitleInput.value);
+      sessionStorage.setItem('description', grabDescriptionInput.value);
     }
-    if(exer){
-      // console.log("seshStor.get: " +sessionStorage.getItem('title'));
-        document.getElementById('tytle').value = sessionStorage.getItem('title');
-    }
+  });
 
-    let naver = document.getElementById('nuvBar');
-    function navBarr () {
-      naver.addEventListener('click', ()=>{
-      // alert('clicked!')
+  const addHiddenAttribute = document.getElementById("cancelCreateCat");
+  addHiddenAttribute.addEventListener('click', () =>{
+    if('click'){
+      document.getElementById("removeHidden").hidden = true;
+    }
+  });
+
+  const submitCategoryButton = document.getElementById("submitCategory");
+  function submitCategoryButtonListener () {
+    submitCategoryButton.addEventListener('click', ()=>{})
+  };
+  if(submitCategoryButtonListener){
+    grabTitleInput.value = sessionStorage.getItem('title');
+    grabDescriptionInput.value = sessionStorage.getItem('description');
+  };
+
+  const newCategoryName = document.getElementById('catName');
+  if(submitCategoryButtonListener){
+    newCategoryName.addEventListener('keyup', ()=>{
+      const keyUpNewCategory = newCategoryName.value;
+      sessionStorage.setItem('newCategory', keyUpNewCategory);
     })
   }
-  if(navBarr){
+
+  const grabAllChildElements = document.getElementById('cici').children;
+  for(let i = 1; i < grabAllChildElements.length; i++){
+    let categoryName = grabAllChildElements[i].children[1].id;
+    newCategoryName.value = sessionStorage.getItem('newCategory');
+    if(newCategoryName.value == categoryName){
+      // console.log("ID name: " +categoryName)
+      document.getElementById(categoryName).checked = true;
+    }
+  }
+
+  const partialsNavBar = document.getElementById('navBar');
+  const createTaskSubmitButton = document.getElementById('sobmit');
+  function navBarListener() {
+    partialsNavBar.addEventListener('click', ()=>{})
+  };
+  function createTaskListener() {
+    createFormSubmitButton.addEventListener('click', ()=>{})
+  };
+  if(navBarListener || createTaskListener){
     sessionStorage.clear();
-  }
+  };
 </script>
 
     </body>

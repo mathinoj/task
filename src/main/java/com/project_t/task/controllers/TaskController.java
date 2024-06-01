@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.springframework.beans.factory.config.YamlProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -71,7 +72,6 @@ public class TaskController {
   @GetMapping("/tasks/create")
   public String showCreateForm(Model model) {
     List<Category> categories = categoryDao.findAll();
-    // System.out.println("CARTEGORIES: " + categories);
     categories.sort(Comparator.comparing(Category::getName));
     model.addAttribute("cat", categories);
     model.addAttribute("tasker", new Task());
@@ -79,34 +79,15 @@ public class TaskController {
     return "/tasks/create";
   }
 
-  // @GetMapping("/tasks/addCategory")
-  // public String addCat(Model model) {
-  // model.addAttribute("newCat", new Category());
-  // return "tasks/addCategory";
-  // }
-
-  // @PostMapping("tasks/addCategory")
-  // public String placeCat(@ModelAttribute Category newCat, @RequestParam(name =
-  // "name") String name) {
-  // newCat.setName(name);
-  // categoryDao.save(newCat);
-  // return "";
-  // }
-
-  // @PostMapping("/tasks/addCategory")
-  // public void placeCatty(@ModelAttribute Category newCat, Model model) {
-  // newCat.setName(newCat.getName());
-  // categoryDao.save(newCat);
-  // }
-
   @PostMapping("/tasks/create")
   public String postTask(@ModelAttribute Task tasker,
       @RequestParam(name = "cater", required = false) List<String> categories, @ModelAttribute Category newCat,
-      @RequestParam(name = "name", required = false) String name) {
+      @RequestParam(name = "name", required = false) String name, Model model) {
     tasker.setUser(userDao.findUserById(1L));
     if (categories == null) {
       newCat.setName(name);
       categoryDao.save(newCat);
+      model.addAttribute("newBee", newCat);
       return "redirect:/tasks/create";
     } else {
       List<Category> categoryList = new ArrayList<>();
@@ -116,20 +97,9 @@ public class TaskController {
       }
 
       tasker.setCategories(categoryList);
-
-      // }
-      // List<Category> categoryList = new ArrayList<>();
-      // for (String category : categories) {
-      // Category categoryFromDB = categoryDao.findCategoryByName(category);
-      // categoryList.add(categoryFromDB);
-      // // System.out.println();
-      // }
       taskDao.save(tasker);
       return "redirect:/tasks";
-      // }
     }
-    // return "redirect:/tasks/create";
-
   }
 
   @GetMapping("/tasks/{id}/edit")
