@@ -8,6 +8,17 @@
     <body>
       <nav th:insert="~{partials/partials :: navbar}" id="navBar"></nav>
       <h1>Create Task</h1>
+
+      <div th:if="${newBee}" id="newlyAddedCat">
+        <!-- <div th:if="${newBee.getName == newBee.getName}"> -->
+        <span th:text="${newBee.getName()}"></span>
+          <!-- <div th:each="n : ${newBee}"> -->
+            <!-- <label th:for="${n.name}">[[${n.name}]]</label> -->
+            <!-- <input type="checkbox" name="cater" th:id="${n.name}" th:value="${n.getName()}" id="insertCheckedBox"> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      </div>
+
       <form th:action="@{/tasks/create}" th:method="POST" th:object="${tasker}">
         <label for="title">Title</label>
         <input th:field="*{title}" id="titleInput">
@@ -18,15 +29,18 @@
         <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput"></textarea>
         <br>
         <br>
-        <fieldset>
+        <fieldset  id="cici">
           <legend>Categories:</legend>
+
           <div th:each="c : ${cat}">
             <label th:for="${c.name}">[[${c.name}]]</label>
-            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}">
+            <input type="checkbox" class="putCheck" name="cater" th:id="${c.name}" th:value="${c.getName()}">
+            <!-- <span th:text="${c.getName()}"></span> -->
           </div>
+
+          <!-- <span th:text="cat.getName()"></span> -->
         </fieldset>
         <input type="submit" id="sobmit">
-        <!-- <button type="submit" id="sobmit">Submit</button> -->
       </form>
               <!-- <a th:href="@{/tasks/addCategory}" id="blah">Add Category</a> -->
           <fieldset>
@@ -40,24 +54,26 @@
                   >
 
                     <label for="name"></label>
-                    <input th:field="*{name}" id="catName" />
+                    <input th:field="*{name}" id="catName"/>
                     <!-- <button type="submit">Sub Cat</button> -->
                      <input type="submit" value="Sobmyt" id="submitCategory">
                     <button type="reset" id="cancelCreateCat">Cancel</button>
                   </form>
                 </div>
-          </fieldset>
-        <!-- <input type="submit" id="sobmit"> -->
-        <!-- <button type="submit" id="sobmit">Submit</button> -->
-      <!-- </form> -->
 
+          </fieldset>
       <br>
+
+
 
 <script>
   const removeHiddenAttribute = document.getElementById("hiddenForm");
   const addHiddenAttribute = document.getElementById("cancelCreateCat");
   const grabTitleInput = document.getElementById("titleInput");
   const grabDescriptionInput = document.getElementById("descriptionInput");
+  const newCategoryName = document.getElementById('catName');
+  // console.log("LLLL: " +newCategoryName.value);
+
 
     removeHiddenAttribute.addEventListener('click', () => {
       if('click'){
@@ -80,7 +96,34 @@
     if(submitCategoryButtonListener){
       grabTitleInput.value = sessionStorage.getItem('title');
       grabDescriptionInput.value = sessionStorage.getItem('description');
+      // newCategoryName.value = sessionStorage.getItem('newCategory');
     };
+
+
+if(submitCategoryButtonListener){
+    newCategoryName.addEventListener('keyup', ()=>{
+     const keyUpNewCategory = newCategoryName.value;
+      // if(submitCategoryButtonListener){
+        sessionStorage.setItem('newCategory', keyUpNewCategory);
+      // }
+    })
+  }
+  const x = document.getElementById('cici').children;
+    for(let i = 1; i < x.length; i++){
+      // console.log(x[i].children[1].id)
+      let categoryName = x[i].children[1].id;
+      // console.log("ID name: " +categoryName)
+      newCategoryName.value = sessionStorage.getItem('newCategory');
+      if(newCategoryName.value == categoryName){
+        // console.log("caName: " + categoryName);
+        // console.log("newly: " +newCategoryName.value)
+        // console.log("true");
+        console.log("ID name: " +categoryName)
+        document.getElementById(categoryName).checked = true;
+
+      }
+
+    }
 
   const partialsNavBar = document.getElementById('navBar');
     function navBarListener () {
@@ -89,6 +132,33 @@
     if(navBarListener){
     sessionStorage.clear();
     };
+
+
+    //  if(submitCategoryButtonListener){
+      // newCategoryName.addEventListener('keyup', ()=>{
+     const keyUpNewCategory = newCategoryName.value;
+    //  console.log("keyUp: " +keyUpNewCategory);
+      // document.querySelector(".putCheck").checked = true;
+      // sessionStorage.setItem('newCategory', keyUpNewCategory);
+      // console.log('Keydup: ' +keyUpNewCategory)
+
+      // if(submitCategoryButtonListener){
+
+        // let vee = sessionStorage.getItem('newCategory');
+        // console.log("sssss: " +vee)
+      // console.log("SEE VEE: " +vee);
+      // alert('beeeeeeep')
+
+    // };
+        // })
+        // grabNewCat.value = sessionStorage.getItem('newCategory');
+
+        // const grabCiCi =
+        // if(grabNewCat.value){
+
+        // }
+
+
 </script>
 
     </body>
