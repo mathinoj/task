@@ -103,12 +103,12 @@
     })
   }
 
-  const x = document.getElementById('cici').children;
-  for(let i = 1; i < x.length; i++){
-    let categoryName = x[i].children[1].id;
+  const grabAllChildElements = document.getElementById('cici').children;
+  for(let i = 1; i < grabAllChildElements.length; i++){
+    let categoryName = grabAllChildElements[i].children[1].id;
     newCategoryName.value = sessionStorage.getItem('newCategory');
     if(newCategoryName.value == categoryName){
-      console.log("ID name: " +categoryName)
+      // console.log("ID name: " +categoryName)
       document.getElementById(categoryName).checked = true;
     }
   }
