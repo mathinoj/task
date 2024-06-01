@@ -68,7 +68,6 @@
 
 <script>
   const removeHiddenAttribute = document.getElementById("hiddenForm");
-  const addHiddenAttribute = document.getElementById("cancelCreateCat");
   const grabTitleInput = document.getElementById("titleInput");
   const grabDescriptionInput = document.getElementById("descriptionInput");
 
@@ -80,6 +79,7 @@
     }
   });
 
+  const addHiddenAttribute = document.getElementById("cancelCreateCat");
   addHiddenAttribute.addEventListener('click', () =>{
     if('click'){
       document.getElementById("removeHidden").hidden = true;
