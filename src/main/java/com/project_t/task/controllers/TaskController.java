@@ -71,26 +71,11 @@ public class TaskController {
 
   @GetMapping("/tasks/create")
   public String showCreateForm(Model model) {
-    // long newAdd = categoryDao.count();
     List<Category> categories = categoryDao.findAll();
     categories.sort(Comparator.comparing(Category::getName));
     model.addAttribute("cat", categories);
-    // System.out.println("scatergory size: " + categories.size());
-    // System.out.println("Possilbe last one: " + categoryDao.count());
     model.addAttribute("tasker", new Task());
-    // Category x = new Category();
-    boolean u = categories.equals(categories);
-    // boolean b = x.equals(true);
     model.addAttribute("newCat", new Category());
-    // System.out.println("Is UUU true: " + categories.);
-    // System.out.println("new Size?: " + new Category());
-    // long x = categories.indexOf(categories.size());
-    // int b = y + 1;
-    // System.out.println("Y: " + x);
-    // System.out.println("B: " + b);
-    // if (u == true && categories.size() == (categories.size())) {
-    // model.addAttribute("sizePlus", categories);
-    // }
     return "/tasks/create";
   }
 
@@ -102,7 +87,6 @@ public class TaskController {
     if (categories == null) {
       newCat.setName(name);
       categoryDao.save(newCat);
-      // System.out.println("newCAT: " + newCat.getName());
       model.addAttribute("newBee", newCat);
       return "redirect:/tasks/create";
     } else {
@@ -110,8 +94,6 @@ public class TaskController {
       for (String category : categories) {
         Category categoryFromDB = categoryDao.findCategoryByName(category);
         categoryList.add(categoryFromDB);
-        // model.addAttribute("newBee", newCat);
-
       }
 
       tasker.setCategories(categoryList);
