@@ -72,8 +72,6 @@
   const grabTitleInput = document.getElementById("titleInput");
   const grabDescriptionInput = document.getElementById("descriptionInput");
   const newCategoryName = document.getElementById('catName');
-  // console.log("LLLL: " +newCategoryName.value);
-
 
     removeHiddenAttribute.addEventListener('click', () => {
       if('click'){
@@ -96,23 +94,18 @@
     if(submitCategoryButtonListener){
       grabTitleInput.value = sessionStorage.getItem('title');
       grabDescriptionInput.value = sessionStorage.getItem('description');
-      // newCategoryName.value = sessionStorage.getItem('newCategory');
     };
 
 
 if(submitCategoryButtonListener){
     newCategoryName.addEventListener('keyup', ()=>{
-     const keyUpNewCategory = newCategoryName.value;
-      // if(submitCategoryButtonListener){
-        sessionStorage.setItem('newCategory', keyUpNewCategory);
-      // }
+      // const keyUpNewCategory = newCategoryName.value;
+      // sessionStorage.setItem('newCategory', keyUpNewCategory);
     })
   }
   const x = document.getElementById('cici').children;
     for(let i = 1; i < x.length; i++){
-      // console.log(x[i].children[1].id)
       let categoryName = x[i].children[1].id;
-      // console.log("ID name: " +categoryName)
       newCategoryName.value = sessionStorage.getItem('newCategory');
       if(newCategoryName.value == categoryName){
         // console.log("caName: " + categoryName);
