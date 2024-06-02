@@ -49,6 +49,8 @@ public class TaskController {
 
   @GetMapping("/tasks")
   public String getAllTasks(Model model) {
+    long userId = Input.userIsLoggedIn().id;
+    System.out.println("userID: " + userId);
     model.addAttribute("listAllTasks", taskDao.findAll());
     return "/tasks/index";
   }
@@ -63,19 +65,19 @@ public class TaskController {
   public String showOneTask(@PathVariable long id, Model model) {
     Task task;
     task = taskDao.findById(id).get();
-    if(Input.checkIfUserLoggedIn == "anonymousUser"){
+    if (Input.checkIfUserLoggedIn == "anonymousUser") {
       task = new Task("Task unfounded", "");
       task = taskDao.findById(id).get();
-    }else{
+    } else {
       long userId = Input.userIsLoggedIn().id;
       model.addAttribute("userId", userId);
       model.addAttribute(task);
-      return "/task/show";
+      return "/tasks/show";
     }
     // if (taskDao.findById(id).isPresent()) {
-    //   task = taskDao.findById(id).get();
+    // task = taskDao.findById(id).get();
     // } else {
-    //   task = new Task("Task no find!", "");
+    // task = new Task("Task no find!", "");
     // }
     model.addAttribute(task);
     return "/tasks/show";

@@ -17,10 +17,10 @@
         </div>
         <p>Posted By: [[${task.user.username}]]</p>
         <br />
-        <!-- <span th:if="${task.user.id == userId}"> -->
-        <a th:href="@{|/tasks/${task.id}/edit|}">Edit</a>
-        <br />
-        <a th:href="@{|/tasks/${task.id}/delete|}">Delete</a>
-        <!-- </span> -->
+        <span th:if="${task.user.id == userId}">
+            <a th:href="@{|/tasks/${task.id}/edit|}">Edit</a>
+            <br />
+            <a th:href="@{|/tasks/${task.id}/delete|}">Delete</a>
+        </span>
     </body>
 </html>
