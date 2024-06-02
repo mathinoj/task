@@ -21,6 +21,8 @@ import com.project_t.task.repositories.TaskRepository;
 import com.project_t.task.repositories.UserRepository;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.project_t.task.utils.Input;
+
 @Controller
 public class TaskController {
   // Task task1 = new Task("task 1", "doing task 1");
@@ -60,11 +62,21 @@ public class TaskController {
   @GetMapping("/tasks/{id}")
   public String showOneTask(@PathVariable long id, Model model) {
     Task task;
-    if (taskDao.findById(id).isPresent()) {
+    task = taskDao.findById(id).get();
+    if(Input.checkIfUserLoggedIn == "anonymousUser"){
+      task = new Task("Task unfounded", "");
       task = taskDao.findById(id).get();
-    } else {
-      task = new Task("Task no find!", "");
+    }else{
+      long userId = Input.userIsLoggedIn().id;
+      model.addAttribute("userId", userId);
+      model.addAttribute(task);
+      return "/task/show";
     }
+    // if (taskDao.findById(id).isPresent()) {
+    //   task = taskDao.findById(id).get();
+    // } else {
+    //   task = new Task("Task no find!", "");
+    // }
     model.addAttribute(task);
     return "/tasks/show";
   }

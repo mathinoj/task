@@ -14,4 +14,6 @@ public class Input {
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     return user;
   }
+
+  public static String checkIfUserLoggedIn = isSomeoneLoggedIn().toString();
 }
