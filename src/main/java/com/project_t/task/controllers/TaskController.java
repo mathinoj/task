@@ -49,8 +49,6 @@ public class TaskController {
 
   @GetMapping("/tasks")
   public String getAllTasks(Model model) {
-    long userId = Input.userIsLoggedIn().id;
-    System.out.println("userID: " + userId);
     model.addAttribute("listAllTasks", taskDao.findAll());
     return "/tasks/index";
   }
@@ -97,18 +95,53 @@ public class TaskController {
   public String postTask(@ModelAttribute Task tasker,
       @RequestParam(name = "cater", required = false) List<String> categories, @ModelAttribute Category newCat,
       @RequestParam(name = "name", required = false) String name, Model model) {
-    tasker.setUser(userDao.findUserById(1L));
+    long userId = Input.userIsLoggedIn().id;
+    tasker.setUser(userDao.findUserById(userId));
+    System.out.println("HERLLLLLOOO!!!!");
+    System.out.println("What categories !!!: " + categories);
+    // System.out.println("EMPTY categories !!!: " + categories.isEmpty());
+
+    // if (categories == null || tasker.getTitle().isEmpty() ||
+    // tasker.getDescription().isEmpty()) {
+    // return "/tasks/create";
+    // }
+
+    if (newCat.getName().isEmpty()) {
+      System.out.println("ANYTHING SEEN?");
+      // System.out.println("EMPTY categories !!!: " + categories.isEmpty());
+      // return "/tasks/index";
+      return showCreateForm(model);
+    }
+
     if (categories == null) {
       newCat.setName(name);
       categoryDao.save(newCat);
-      model.addAttribute("newBee", newCat);
+      System.out.println("CATS inside null cat: " + categories);
+      System.out.println("CATS inside NAME cat: " + newCat.getName());
+      System.out.println("CATS inside EMPTY cat: " + newCat.getName().isEmpty());
+
+      // model.addAttribute("newBee", newCat);
       return "redirect:/tasks/create";
     } else {
       List<Category> categoryList = new ArrayList<>();
       for (String category : categories) {
         Category categoryFromDB = categoryDao.findCategoryByName(category);
         categoryList.add(categoryFromDB);
+        System.out.println("cATEgory list: " + categoryList);
+        System.out.println("category : " + category);
+        System.out.println("caetgoryFromDB: " + categoryFromDB);
+        System.out.println("isbLANK? " + category.isBlank());
+        if (category.isBlank() == true || categoryFromDB.getName().isEmpty()) {
+          return "/tasks/create";
+        }
       }
+
+      if (categories == null || tasker.getTitle().isEmpty() || tasker.getDescription().isEmpty()) {
+        System.out.println("DO YOU SEE THIS ATOL?");
+        return "/tasks/create";
+      }
+
+      System.out.println("What categories: " + categoryList);
 
       tasker.setCategories(categoryList);
       taskDao.save(tasker);
