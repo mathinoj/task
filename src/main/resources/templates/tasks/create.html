@@ -25,7 +25,7 @@
 
           <div th:each="c : ${cat}">
             <label th:for="${c.name}">[[${c.name}]]</label>
-            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker">
+            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker" data-toggle="toggle">
             <!-- <span th:text="${c.getName()}"></span> -->
           </div>
 
@@ -108,6 +108,48 @@
     }
   }
 
+  // console.log(grabAllChildElements.length)
+  const x = document.getElementsByName("cater")
+  // console.log(x.length)
+
+  var checkbox = document.querySelector("input[name=cater]");
+  // console.log("c")
+  // console.log(checkbox)
+
+checkbox.addEventListener('change', function() {
+  if (this.checked) {
+    console.log("Checkbox is checked..");
+  } else {
+    console.log("Checkbox is not checked..");
+  }
+});
+
+  for(let i = 0; i < x.length; i++){
+  const getNames = document.getElementsByName("cater")[i]
+  // console.log(i)
+  // console.log(x)
+  // console.log(x[i])
+  let b = x[i].id
+  // console.log(b)
+//   b.addEventListener.addEventListener('change', function() {
+//     console.log(b)
+//   if (this.checked) {
+//     console.log("Checkbox is checked..");
+//   } else {
+//     console.log("Checkbox is not checked..");
+//   }
+// });
+  }
+  for(i of x){
+    console.log(i)
+    i.addEventListener('change', function() {
+  if (this.checked) {
+    console.log("Checkbox is checked..");
+  } else {
+    console.log("Checkbox is not checked..");
+  }
+});
+  }
 
   const partialsNavBar = document.getElementById('navBar');
   const createTaskSubmitButton = document.getElementById('sobmit');
