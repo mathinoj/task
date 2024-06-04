@@ -16,6 +16,7 @@ removeHiddenAttribute.addEventListener('click', () => {
 const addHiddenAttribute = document.getElementById("cancelCreateCat");
 addHiddenAttribute.addEventListener('click', () =>{
   if('click'){
+    sessionStorage.clear();
     document.getElementById("removeHidden").hidden = true;
   }
 });
@@ -67,15 +68,17 @@ for(let singleCheckbox of grabCheckboxInput){
 }
 
 const partialsNavBar = document.getElementById('navBar');
-const createTaskSubmitButton = document.getElementById('sobmit');
 function navBarListener() {
   partialsNavBar.addEventListener('click', ()=>{})
 };
-function createTaskListener() {
-  createFormSubmitButton.addEventListener('click', ()=>{})
-};
 if(navBarListener){
   sessionStorage.clear();
+};
+
+const createTaskSubmitButton = document.getElementById('sobmit');
+function createTaskListener() {
+  createTaskSubmitButton.addEventListener('click', ()=>{})
+  // createFormSubmitButton.addEventListener('click', ()=>{})
 };
 if(createTaskListener){
   sessionStorage.clear();
