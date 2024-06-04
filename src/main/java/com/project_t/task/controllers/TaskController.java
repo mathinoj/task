@@ -98,7 +98,6 @@ public class TaskController {
     long userId = Input.userIsLoggedIn().id;
     tasker.setUser(userDao.findUserById(userId));
     System.out.println("What categories !!!: " + categories);
-    // System.out.println("HERLLLLLOOO!!!!" + newCat);
     System.out.println("bew Cat getnAME: " + newCat.getName());
 
     if (categories == null) {
