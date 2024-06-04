@@ -12,12 +12,12 @@
 
       <form th:action="@{/tasks/create}" th:method="POST" th:object="${tasker}">
         <label for="title">Title</label>
-        <input th:field="*{title}" id="titleInput">
+        <input th:field="*{title}" id="titleInput" required>
         <br>
         <br>
-        <label for="description">Description</label>
+        <label for="description" id="desc">Description</label>
         <!-- <input th:field="*{description}"> -->
-        <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput"></textarea>
+        <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput" required></textarea>
         <br>
         <br>
         <fieldset  id="cici">
@@ -25,7 +25,7 @@
 
           <div th:each="c : ${cat}">
             <label th:for="${c.name}">[[${c.name}]]</label>
-            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}">
+            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker">
             <!-- <span th:text="${c.getName()}"></span> -->
           </div>
 
@@ -45,7 +45,7 @@
                   >
 
                     <label for="name"></label>
-                    <input th:field="*{name}" id="catName"/>
+                    <input th:field="*{name}" id="catName" required/>
                     <!-- <button type="submit">Sub Cat</button> -->
                      <input type="submit" value="Sobmyt" id="submitCategory">
                     <button type="reset" id="cancelCreateCat">Cancel</button>
@@ -61,6 +61,7 @@
   const removeHiddenAttribute = document.getElementById("hiddenForm");
   const grabTitleInput = document.getElementById("titleInput");
   const grabDescriptionInput = document.getElementById("descriptionInput");
+
 
   removeHiddenAttribute.addEventListener('click', () => {
     if('click'){
@@ -95,14 +96,18 @@
   }
 
   const grabAllChildElements = document.getElementById('cici').children;
+  let u = document.getElementById('cici')
+  console.log(u)
   for(let i = 1; i < grabAllChildElements.length; i++){
     let categoryName = grabAllChildElements[i].children[1].id;
+    // console.log("??? " +i)
     newCategoryName.value = sessionStorage.getItem('newCategory');
     if(newCategoryName.value == categoryName){
       // console.log("ID name: " +categoryName)
       document.getElementById(categoryName).checked = true;
     }
   }
+
 
   const partialsNavBar = document.getElementById('navBar');
   const createTaskSubmitButton = document.getElementById('sobmit');
