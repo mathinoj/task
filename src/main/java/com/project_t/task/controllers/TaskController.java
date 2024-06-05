@@ -3,6 +3,8 @@ package com.project_t.task.controllers;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.config.YamlProcessor;
 import org.springframework.stereotype.Controller;
@@ -62,11 +64,44 @@ public class TaskController {
 
   @GetMapping("/tasks/{id}")
   public String showOneTask(@PathVariable long id, Model model) {
+    System.out.println("TOP OF CONTROLLER");
+    System.out.println("tDAO: " + taskDao.findById(id).isPresent());
+    boolean p = taskDao.findById(id).isPresent();
+    System.out.println("SEE PEEE: " + p);
+    if (p == false) {
+      System.out.println("p could be falsey");
+      return "redirect:/tasks";
+    }
+
     Task task;
+    System.out.println("EYE-d: " + id);
+    if (taskDao.findById(id) == null) {
+      System.out.println("juST BELOW THE TOP");
+    }
     task = taskDao.findById(id).get();
-    if (Input.checkIfUserLoggedIn == "anonymousUser") {
+    System.out.println("UNDER task=taskDAO.FIND......");
+    // System.out.println("cccaddd: " + taskDao.findAllById(id));
+    System.out.println("Exists: " + taskDao.existsById(id));
+    System.out.println("task: " + task);
+    System.out.println("taskGETid: " + task.getId());
+    long x = task.getId();
+    boolean v = taskDao.findById(x).isPresent();
+    System.out.println("VEEE: " + v);
+    System.out.println(Input.checkIfUserLoggedIn);
+    // System.out.println("EYE-d: " + id);
+    // Object NoS
+
+    if (v == false) {
+      System.out.println("as;dfkljasd;fjads");
       task = new Task("Task unfounded", "");
-      task = taskDao.findById(id).get();
+
+      return "/tasks/show";
+    }
+    if (v) {
+      System.out.println("SEE ANY THING HER??");
+      // task = new Task("Task unfounded", "");
+      // task = taskDao.findById(id).get();
+      // return "/tasks/index";
     } else {
       long userId = Input.userIsLoggedIn().id;
       model.addAttribute("userId", userId);
