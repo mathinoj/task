@@ -64,55 +64,22 @@ public class TaskController {
 
   @GetMapping("/tasks/{id}")
   public String showOneTask(@PathVariable long id, Model model) {
-    System.out.println("TOP OF CONTROLLER");
-    System.out.println("tDAO: " + taskDao.findById(id).isPresent());
-    boolean p = taskDao.findById(id).isPresent();
-    System.out.println("SEE PEEE: " + p);
-    if (p == false) {
-      System.out.println("p could be falsey");
+    boolean checkIfTaskIdIsInTaskDao = taskDao.findById(id).isPresent();
+    if (checkIfTaskIdIsInTaskDao == false) {
       return "redirect:/tasks";
     }
-
     Task task;
-    System.out.println("EYE-d: " + id);
-    if (taskDao.findById(id) == null) {
-      System.out.println("juST BELOW THE TOP");
-    }
     task = taskDao.findById(id).get();
-    System.out.println("UNDER task=taskDAO.FIND......");
-    // System.out.println("cccaddd: " + taskDao.findAllById(id));
-    System.out.println("Exists: " + taskDao.existsById(id));
-    System.out.println("task: " + task);
-    System.out.println("taskGETid: " + task.getId());
-    long x = task.getId();
-    boolean v = taskDao.findById(x).isPresent();
-    System.out.println("VEEE: " + v);
-    System.out.println(Input.checkIfUserLoggedIn);
-    // System.out.println("EYE-d: " + id);
-    // Object NoS
-
-    if (v == false) {
-      System.out.println("as;dfkljasd;fjads");
+    if (Input.checkIfUserLoggedIn == "anonymousUser") {
       task = new Task("Task unfounded", "");
-
-      return "/tasks/show";
-    }
-    if (v) {
-      System.out.println("SEE ANY THING HER??");
-      // task = new Task("Task unfounded", "");
-      // task = taskDao.findById(id).get();
-      // return "/tasks/index";
+      task = taskDao.findById(id).get();
+      // return "/tasks/show";
     } else {
       long userId = Input.userIsLoggedIn().id;
       model.addAttribute("userId", userId);
       model.addAttribute(task);
       return "/tasks/show";
     }
-    // if (taskDao.findById(id).isPresent()) {
-    // task = taskDao.findById(id).get();
-    // } else {
-    // task = new Task("Task no find!", "");
-    // }
     model.addAttribute(task);
     return "/tasks/show";
   }
