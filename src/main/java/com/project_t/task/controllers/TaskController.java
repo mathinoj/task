@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project_t.task.models.Category;
 import com.project_t.task.models.Task;
+import com.project_t.task.models.User;
 import com.project_t.task.repositories.CategoryRepository;
 import com.project_t.task.repositories.TaskRepository;
 import com.project_t.task.repositories.UserRepository;
@@ -97,8 +98,6 @@ public class TaskController {
       @RequestParam(name = "name", required = false) String name, Model model) {
     long userId = Input.userIsLoggedIn().id;
     tasker.setUser(userDao.findUserById(userId));
-    System.out.println("What categories !!!: " + categories);
-    System.out.println("bew Cat getnAME: " + newCat.getName());
 
     if (categories == null) {
       newCat.setName(name);
@@ -161,4 +160,22 @@ public class TaskController {
     return "redirect:/tasks";
   }
 
+  @GetMapping("/tasks/{id}/delete")
+  public String deleteTask(@PathVariable long id) {
+    long loggedInUser = Input.userIsLoggedIn().id;
+    User user = userDao.findUserById(loggedInUser);
+    boolean isTaskPresent = taskDao.findById(id).isPresent();
+    long userIdNumber = user.getId();
+    Task findTaskById = taskDao.findById(id).get();
+    long getTaskByUserId = findTaskById.getUser().getId();
+
+    if (getTaskByUserId != userIdNumber) {
+      return "redirect:/tasks";
+    } else if (isTaskPresent) {
+      taskDao.deleteById(id);
+    } else {
+      return "redirect:/tasks";
+    }
+    return "redirect:/tasks";
+  }
 }
