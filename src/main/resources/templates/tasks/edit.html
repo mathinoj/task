@@ -47,7 +47,7 @@
                                 <label th:for="${c.name}">[[${c.name}]]</label>
                                 <div th:if="${b.id == c.id}">
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="cater"
                                         th:id="${c.name}"
                                         th:value="${c.getName()}"
@@ -56,7 +56,7 @@
                                 </div>
                                 <div th:if="${b.id != c.id}">
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="cater"
                                         th:id="${c.name}"
                                         th:value="${c.getName()}"
