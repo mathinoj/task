@@ -25,13 +25,13 @@
 
           <div th:each="c : ${cat}">
             <label th:for="${c.name}">[[${c.name}]]</label>
-            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker" data-toggle="toggle">
+            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker">
             <!-- <span th:text="${c.getName()}"></span> -->
           </div>
 
           <!-- <span th:text="cat.getName()"></span> -->
         </fieldset>
-        <input type="submit" id="sobmit">
+        <input type="submit" id="sobmit" class="subit" disabled>
       </form>
               <!-- <a th:href="@{/tasks/addCategory}" id="blah">Add Category</a> -->
           <fieldset>

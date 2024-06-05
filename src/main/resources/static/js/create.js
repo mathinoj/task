@@ -39,32 +39,16 @@ if(submitCategoryButtonListener){
 }
 
 const grabAllChildElements = document.getElementById('cici').children;
-let u = document.getElementById('cici')
-console.log(u)
 for(let i = 1; i < grabAllChildElements.length; i++){
   let categoryName = grabAllChildElements[i].children[1].id;
-  // console.log("??? " +i)
   newCategoryName.value = sessionStorage.getItem('newCategory');
   if(newCategoryName.value == categoryName){
-    // console.log("ID name: " +categoryName)
     document.getElementById(categoryName).checked = true;
+    document.getElementById('sobmit').disabled = false;
+
+
+    console.log(document.getElementById(categoryName))
   }
-}
-
-
-const grabCheckboxInput = document.getElementsByName("cater")
-for(let singleCheckbox of grabCheckboxInput){
-  console.log(singleCheckbox.id)
-  let boxName = singleCheckbox.id;
-  singleCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-      console.log(`Checkbox ${boxName} is checked..`);
-    } else {
-      console.log(`Checkbox ${boxName} is not checked..`);
-    }
-    // https://stackoverflow.com/questions/14544104/checkbox-check-event-listener
-    // https://codepen.io/simonjvardy/pen/ZEpEgEj
-  });
 }
 
 const partialsNavBar = document.getElementById('navBar');
@@ -82,4 +66,21 @@ function createTaskListener() {
 };
 if(createTaskListener){
   sessionStorage.clear();
+}
+
+
+const grabCheckboxInput = document.getElementsByName("cater")
+for(let singleCheckbox of grabCheckboxInput){
+  let boxName = singleCheckbox.id;
+  console.log(singleCheckbox)
+ singleCheckbox.addEventListener('change', function(e) {
+  if(submitCategoryButtonListener){
+    if (this.checked) {
+      console.log(`Checkbox ${boxName} is checked..`);
+      document.getElementById('sobmit').disabled = false;
+    }
+    // https://stackoverflow.com/questions/14544104/checkbox-check-event-listener
+    // https://codepen.io/simonjvardy/pen/ZEpEgEj
+  }
+  });
 }
