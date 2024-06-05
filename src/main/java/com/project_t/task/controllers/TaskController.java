@@ -134,7 +134,16 @@ public class TaskController {
   @GetMapping("/tasks/{id}/edit")
   public String getEditTask(@PathVariable long id, Model model) {
     Task task;
-    if (taskDao.findById(id).isPresent()) {
+    long loggedInUser = Input.userIsLoggedIn().id;
+    User user = userDao.findUserById(loggedInUser);
+    boolean isTaskPresent = taskDao.findById(id).isPresent();
+    long userIdNumber = user.getId();
+    Task findTaskById = taskDao.findById(id).get();
+    long getTaskByUserId = findTaskById.getUser().getId();
+    if (getTaskByUserId != userIdNumber) {
+      return "redirect:/tasks";
+    } else if (isTaskPresent) {
+      // if (taskDao.findById(id).isPresent()) {
       task = taskDao.findById(id).get();
       List<Category> categories = categoryDao.findAll();
       categories.sort(Comparator.comparing(Category::getName));
