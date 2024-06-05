@@ -25,7 +25,7 @@
 
           <div th:each="c : ${cat}">
             <label th:for="${c.name}">[[${c.name}]]</label>
-            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker">
+            <input type="radio" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker">
             <!-- <span th:text="${c.getName()}"></span> -->
           </div>
 
