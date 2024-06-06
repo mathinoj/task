@@ -13,6 +13,12 @@ removeHiddenAttribute.addEventListener('click', () => {
   }
 });
 
+const x = document.getElementById('start');
+x.addEventListener('change', ()=>{
+  // console.log(x.value)
+  sessionStorage.setItem('taskDueDate', x.value)
+})
+
 const addHiddenAttribute = document.getElementById("cancelCreateCat");
 addHiddenAttribute.addEventListener('click', () =>{
   if('click'){
@@ -28,6 +34,7 @@ function submitCategoryButtonListener () {
 if(submitCategoryButtonListener){
   grabTitleInput.value = sessionStorage.getItem('title');
   grabDescriptionInput.value = sessionStorage.getItem('description');
+  x.value = sessionStorage.getItem('taskDueDate')
 };
 
 const newCategoryName = document.getElementById('catName');
@@ -84,3 +91,5 @@ for(let singleCheckbox of grabCheckboxInput){
   }
   });
 }
+
+

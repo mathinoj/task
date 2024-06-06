@@ -21,15 +21,14 @@
         <br>
         <br>
 
+        <!-- <label for="taskDueDate">
+          Task Due Date:
+          <input type="date" name="taskDueDate" th:field="*{taskDueDate}" required/>
+        </label> -->
 
-          <!-- <label>
-            Task Due Date:
-            <input type="date" name="bday" />
-          </label> -->
-
-
-        </form>
-
+        <label for="due">Due date:</label>
+        <input type="date" id="start" name="task-due" th:field="*{taskDueDate}"/>
+        <br>
         <br>
         <fieldset  id="cici">
           <legend>Categories:</legend>
