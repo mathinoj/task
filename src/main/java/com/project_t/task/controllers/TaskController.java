@@ -1,5 +1,7 @@
 package com.project_t.task.controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -68,6 +70,7 @@ public class TaskController {
     if (checkIfTaskIdIsInTaskDao == false) {
       return "redirect:/tasks";
     }
+
     Task task;
     task = taskDao.findById(id).get();
     if (Input.checkIfUserLoggedIn == "anonymousUser") {
@@ -101,6 +104,18 @@ public class TaskController {
     long userId = Input.userIsLoggedIn().id;
     tasker.setUser(userDao.findUserById(userId));
 
+    // System.out.println("You had something her and it would mess up");
+    LocalDate date = LocalDate.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+    String publishDate = date.format(formatter);
+    System.out.println("is X strang: " + publishDate);
+    System.out.println("class: " +publishDate.getClass());
+    // if(publishDate.getClass() == String){}
+    tasker.setPublishDate(publishDate);
+
+
+
+
     if (categories == null) {
       newCat.setName(name);
       categoryDao.save(newCat);
@@ -125,10 +140,9 @@ public class TaskController {
       // return showCreateForm(model);
       // }
 
-      System.out.println("What categories: " + categoryList);
-
       tasker.setCategories(categoryList);
       taskDao.save(tasker);
+
       return "redirect:/tasks";
     }
   }
