@@ -30,6 +30,9 @@ public class Task {
   @Column(nullable = false)
   private String publishDate;
 
+  @Column(nullable = false)
+  private String taskDueDate;
+
   @ManyToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "user_id")
 
@@ -87,13 +90,22 @@ public class Task {
     this.publishDate = publishDate;
   }
 
+  public String getTaskDueDate() {
+    return taskDueDate;
+  }
+
+  public void setTaskDueDate(String taskDueDate) {
+    this.taskDueDate = taskDueDate;
+  }
+
   public Task() {
   }
 
-  public Task(String title, String description, String publishDate) {
+  public Task(String title, String description, String publishDate, String taskDueDate) {
     this.title = title;
     this.description = description;
     this.publishDate = publishDate;
+    this.taskDueDate = taskDueDate;
   }
 
   public Task(String title, String description, User user) {
