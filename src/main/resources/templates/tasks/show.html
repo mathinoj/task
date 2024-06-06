@@ -15,8 +15,9 @@
         <div th:each="findCategoryName : ${task.categories}">
             <h4 th:text="${findCategoryName.name}"></h4>
         </div>
-        <p>Posted on: <span th:text="${task.publishDate}"></span></p>
         <p>Posted By: [[${task.user.username}]]</p>
+        <p>Posted on: <span th:text="${task.publishDate}"></span></p>
+        <p>Due on/by: <span th:text="${task.taskDueDate}"></span></p>
         <br />
         <span th:if="${task.user.id == userId}">
             <a th:href="@{|/tasks/${task.id}/edit|}">Edit</a>
