@@ -30,14 +30,6 @@ public class Task {
   @Column(nullable = false)
   private String publishDate;
 
-  public String getPublishDate() {
-    return publishDate;
-  }
-
-  public void setPublishDate(String publishDate) {
-    this.publishDate = publishDate;
-  }
-
   @ManyToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "user_id")
 
@@ -85,6 +77,14 @@ public class Task {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public String getPublishDate() {
+    return publishDate;
+  }
+
+  public void setPublishDate(String publishDate) {
+    this.publishDate = publishDate;
   }
 
   public Task() {

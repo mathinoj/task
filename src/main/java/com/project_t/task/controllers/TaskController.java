@@ -74,7 +74,7 @@ public class TaskController {
     Task task;
     task = taskDao.findById(id).get();
     if (Input.checkIfUserLoggedIn == "anonymousUser") {
-      task = new Task("Task unfounded", "");
+      // task = new Task("Task unfounded", "");
       task = taskDao.findById(id).get();
       // return "/tasks/show";
     } else {
@@ -104,7 +104,7 @@ public class TaskController {
     long userId = Input.userIsLoggedIn().id;
     tasker.setUser(userDao.findUserById(userId));
 
-  
+
     LocalDate date = LocalDate.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     String publishDate = date.format(formatter);
