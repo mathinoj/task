@@ -104,17 +104,11 @@ public class TaskController {
     long userId = Input.userIsLoggedIn().id;
     tasker.setUser(userDao.findUserById(userId));
 
-    // System.out.println("You had something her and it would mess up");
+  
     LocalDate date = LocalDate.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     String publishDate = date.format(formatter);
-    System.out.println("is X strang: " + publishDate);
-    System.out.println("class: " +publishDate.getClass());
-    // if(publishDate.getClass() == String){}
     tasker.setPublishDate(publishDate);
-
-
-
 
     if (categories == null) {
       newCat.setName(name);
