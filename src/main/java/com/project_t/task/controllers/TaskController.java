@@ -1,9 +1,11 @@
 package com.project_t.task.controllers;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -104,8 +106,8 @@ public class TaskController {
     long userId = Input.userIsLoggedIn().id;
     tasker.setUser(userDao.findUserById(userId));
 
-
     LocalDate date = LocalDate.now();
+    System.out.println("NOWWWW: " + date);
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     String publishDate = date.format(formatter);
     tasker.setPublishDate(publishDate);
@@ -133,6 +135,13 @@ public class TaskController {
       // newCat.getName() == null) {
       // return showCreateForm(model);
       // }
+
+      String getOldDateFormat = tasker.getTaskDueDate();
+      LocalDate parseOldTOLocalDate = LocalDate.parse(getOldDateFormat);
+      DateTimeFormatter newFormatDate = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+      String setNewDateFormat = parseOldTOLocalDate.format(newFormatDate);
+      tasker.setTaskDueDate(setNewDateFormat);
+
 
       tasker.setCategories(categoryList);
       taskDao.save(tasker);
