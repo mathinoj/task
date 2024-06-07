@@ -16,7 +16,15 @@
             <h4 th:text="${findCategoryName.name}"></h4>
         </div>
         <p>Posted By: [[${task.user.username}]]</p>
-        <p>Posted on: <span th:text="${task.publishDate}"></span></p>
+        <!-- <p>Posted on: <span th:text="${task.publishDate}"></span></p> -->
+
+        <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
+        <span id="publish" th:text="${task.publishDate}" hidden></span>
+        <p>
+            Posted on:
+            <span id="publishAgain"></span>
+        </p>
+
         <p>Due by: <span th:text="${task.taskDueDate}"></span></p>
         <br />
         <span th:if="${task.user.id == userId}">
@@ -24,5 +32,7 @@
             <br />
             <a th:href="@{|/tasks/${task.id}/delete|}">Delete</a>
         </span>
+
+        <script src="../js/formatDate.js"></script>
     </body>
 </html>
