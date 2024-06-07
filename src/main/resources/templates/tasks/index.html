@@ -50,7 +50,12 @@
                 Posted on:
                 <span id="publishAgain"></span>
             </p>
-            <p>Due on: <span th:text="${listingAll.taskDueDate}"></span></p>
+            <span
+                id="publish2"
+                th:text="${listingAll.taskDueDate}"
+                hidden
+            ></span>
+            <p>Due on: <span id="publishAgain2"></span></p>
         </div>
 
         <script src="../js/formatDate.js"></script>
