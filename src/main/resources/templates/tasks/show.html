@@ -17,7 +17,7 @@
         </div>
         <p>Posted By: [[${task.user.username}]]</p>
         <p>Posted on: <span th:text="${task.publishDate}"></span></p>
-        <p>Due on/by: <span th:text="${task.taskDueDate}"></span></p>
+        <p>Due by: <span th:text="${task.taskDueDate}"></span></p>
         <br />
         <span th:if="${task.user.id == userId}">
             <a th:href="@{|/tasks/${task.id}/edit|}">Edit</a>

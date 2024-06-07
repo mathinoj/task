@@ -108,9 +108,11 @@ public class Task {
     this.taskDueDate = taskDueDate;
   }
 
-  public Task(String title, String description, User user) {
+  public Task(String title, String description, String publishDate, String taskDueDate, User user) {
     this.title = title;
     this.description = description;
+    this.publishDate = publishDate;
+    this.taskDueDate = taskDueDate;
     this.user = user;
   }
 

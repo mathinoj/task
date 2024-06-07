@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -107,10 +108,10 @@ public class TaskController {
     tasker.setUser(userDao.findUserById(userId));
 
     LocalDate date = LocalDate.now();
-    System.out.println("NOWWWW: " + date);
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-    String publishDate = date.format(formatter);
-    tasker.setPublishDate(publishDate);
+    tasker.setPublishDate(date.toString());
+    // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+    // String publishDate = date.format(formatter);
+    // tasker.setPublishDate(publishDate);
 
     if (categories == null) {
       newCat.setName(name);
@@ -136,12 +137,13 @@ public class TaskController {
       // return showCreateForm(model);
       // }
 
-      String getOldDateFormat = tasker.getTaskDueDate();
-      LocalDate parseOldTOLocalDate = LocalDate.parse(getOldDateFormat);
-      DateTimeFormatter newFormatDate = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-      String setNewDateFormat = parseOldTOLocalDate.format(newFormatDate);
-      tasker.setTaskDueDate(setNewDateFormat);
-
+      // String getOldDateFormat = tasker.getTaskDueDate();
+      // System.out.println("old date format: " + getOldDateFormat);
+      // LocalDate parseOldTOLocalDate = LocalDate.parse(getOldDateFormat);
+      // DateTimeFormatter newFormatDate = DateTimeFormatter.ofPattern("dd LLLL
+      // yyyy");
+      // String setNewDateFormat = parseOldTOLocalDate.format(newFormatDate);
+      // tasker.setTaskDueDate(setNewDateFormat);
 
       tasker.setCategories(categoryList);
       taskDao.save(tasker);
@@ -153,6 +155,7 @@ public class TaskController {
   @GetMapping("/tasks/{id}/edit")
   public String getEditTask(@PathVariable long id, Model model) {
     Task task;
+
     long loggedInUser = Input.userIsLoggedIn().id;
     User user = userDao.findUserById(loggedInUser);
     boolean isTaskPresent = taskDao.findById(id).isPresent();
@@ -170,6 +173,15 @@ public class TaskController {
     } else {
       task = null;
     }
+
+    System.out.println("taskkkkk: " + task.getPublishDate());
+    // String theDate = task.getTaskDueDate();
+    // System.out.println("this is x: " + theDate);
+    // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy",
+    // Locale.ENGLISH);
+    // LocalDate date = LocalDate.parse(theDate, formatter);
+    // System.out.println("dddddaaate: " + date);
+
     model.addAttribute("task", task);
     return "/tasks/edit";
   }
@@ -183,7 +195,9 @@ public class TaskController {
       Category categoryFromDB = categoryDao.findCategoryByName(category);
       categoryList.add(categoryFromDB);
     }
+
     task.setCategories(categoryList);
+
     taskDao.save(task);
     return "redirect:/tasks";
   }

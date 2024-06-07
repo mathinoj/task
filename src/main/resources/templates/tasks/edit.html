@@ -38,7 +38,27 @@
                     required
                 >
                 </textarea>
+                <br />
+                <br />
 
+                <label for="due">Due date:</label>
+                <input
+                    type="date"
+                    id="start"
+                    name="taskDueDate"
+                    value="yyyy-MM-dd"
+                    th:value="${task.taskDueDate}"
+                />
+                <br />
+                <input
+                    type="text"
+                    name="publishDate"
+                    id="publishDate"
+                    th:value="${task.publishDate}"
+                    hidden
+                />
+                <!-- Hi: <span th:text="${task.publishDate}"></span> -->
+                <br />
                 <div th:each="x : ${task}">
                     <div th:each="b : ${x.categories}">
                         <fieldset>
@@ -73,5 +93,10 @@
                 <button>Edit</button>
             </form>
         </div>
+
+        <script>
+            const dateControl = document.querySelector('input[type="date"]');
+            console.log(dateControl.value);
+        </script>
     </body>
 </html>
