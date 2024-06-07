@@ -25,8 +25,8 @@
             <span id="publishAgain"></span>
         </p>
 
-        <span id="publish2" th:text="${task.taskDueDate}" hidden></span>
-        <p>Due by: <span id="publishAgain2"></span></p>
+        <span id="publishTask" th:text="${task.taskDueDate}" hidden></span>
+        <p>Due by: <span id="publishNewTask"></span></p>
 
         <br />
         <span th:if="${task.user.id == userId}">
