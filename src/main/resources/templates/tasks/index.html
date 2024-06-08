@@ -27,7 +27,7 @@
             </ul>
         </div>
 
-        <div th:each="listingAll : ${listAllTasks}">
+        <div id="allIn" th:each="listingAll : ${listAllTasks}">
             <h2>
                 <a
                     th:text="${listingAll.title}"
@@ -41,21 +41,31 @@
             </div>
 
             <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
-            <span
-                id="publish"
-                th:text="${listingAll.publishDate}"
-                hidden
-            ></span>
-            <p>
-                Posted on:
-                <span id="publishAgain"></span>
-            </p>
-            <span
-                id="publishTask"
-                th:text="${listingAll.taskDueDate}"
-                hidden
-            ></span>
-            <p>Due on: <span id="publishNewTask"></span></p>
+            <div id="dates">
+                <span
+                    id="publish"
+                    th:text="${listingAll.publishDate}"
+                    hidden
+                ></span>
+                <p>
+                    Posted on:
+                    <span id="publishAgain"></span>
+                </p>
+
+                <span
+                    id="publishTask"
+                    class="lish"
+                    th:text="${listingAll.taskDueDate}"
+                    hidden
+                ></span>
+                <br />
+                Due on:
+                <span id="publishNewTask" class="hey"></span>
+                <p>
+                    <!-- Due on: <span id="publishNewTask" class="lishAgain"></span> -->
+                    <!-- Due on: <span id="publishNewTask"></span> -->
+                </p>
+            </div>
         </div>
 
         <script src="../js/formatDate.js"></script>

@@ -109,6 +109,7 @@ public class TaskController {
 
     LocalDate date = LocalDate.now();
     tasker.setPublishDate(date.toString());
+
     // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     // String publishDate = date.format(formatter);
     // tasker.setPublishDate(publishDate);
