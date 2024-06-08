@@ -1,40 +1,29 @@
 "use strict"
 
-let g = document.querySelectorAll('.lish')
-let bz = document.querySelectorAll('.hey')
-// console.log(bz);
-// console.log(g)
+let oldTaskDateArea = document.querySelectorAll('.getPublishTask')
+let newTaskDateArea = document.querySelectorAll('.publishNewTask')
 
-for(let key = 1; key < g.length; key++){
-// for(let key in g){
-      // console.log("key: " +key);
-  if(key >= 0){
-    // console.log("key: " +key);
-    let x = parseInt(key)
-    // console.log("xx: " +typeof(x));
-    let seperate = g[x].innerHTML
-    // console.log(seperate);
-    let changeCurrentPublishFormat = new Date(seperate);
-    let newFormat = {
+for(let i = 1; i < oldTaskDateArea.length; i++){
+  if(i >= 0){
+    let indexNumbers = parseInt(i)
+    let getOldDateFormat = oldTaskDateArea[indexNumbers].innerHTML
+    let changeCurrentTaskFormat = new Date(getOldDateFormat);
+    let newTaskFormat = {
       day: "2-digit",
       month: "short",
       year: "numeric",
       };
-      let formatDate = changeCurrentPublishFormat.toLocaleDateString(
+      let formatTaskDate = changeCurrentTaskFormat.toLocaleDateString(
       "en-US", {timeZone: 'UTC'},
-      newFormat
+      newTaskFormat
       );
-      // console.log(formatDate);
-      // seperate.replace(seperate, formatDate)
-      let you = bz[x].textContent;
-      // console.log(bz[x]);
-      console.log(you);
-      if(you == ""){
-        let o = bz[x]
-        let b = document.createTextNode(formatDate)
-        o.appendChild(b)
-        // console.log(bz[x]);
 
+      let findBlankTextContent = newTaskDateArea[indexNumbers].textContent;
+      if(findBlankTextContent == ""){
+        let getTaskDueSpace = newTaskDateArea[indexNumbers]
+        // console.log(getTaskDueSpace);
+        let insertFormattedTaskDate = document.createTextNode(formatTaskDate)
+        getTaskDueSpace.appendChild(insertFormattedTaskDate)
       }
       }
     }
