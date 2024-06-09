@@ -1,7 +1,33 @@
 "use strict"
+let oldPublishDateArea = document.querySelectorAll('.getPublishDate')
+let newPublishDateArea = document.querySelectorAll('.publishNewDate')
+for(let i = 0; i < oldPublishDateArea.length; i++){
+if(i >= 0){
+  let indexNumbers = parseInt(i)
+  let getOldDateFormat = oldPublishDateArea[indexNumbers].innerHTML
+  let changeCurrentTaskFormat = new Date(getOldDateFormat);
+  let newPublishFormat = {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    };
+    let formatPublishDate = changeCurrentTaskFormat.toLocaleDateString(
+      "en-US", {timeZone: 'UTC'},
+      newPublishFormat
+      );
+    let findBlankTextContent = newPublishDateArea[indexNumbers].textContent;
+    if(findBlankTextContent == ""){
+      let getPublishDateSpace = newPublishDateArea[indexNumbers]
+      // console.log(getTaskDueSpace);
+      let insertFormattedPublishDate = document.createTextNode(formatPublishDate)
+      getPublishDateSpace.appendChild(insertFormattedPublishDate)
+    }
+}
+}
 
-let oldTaskDateArea = document.querySelectorAll('.getPublishTask')
-let newTaskDateArea = document.querySelectorAll('.publishNewTask')
+
+let oldTaskDateArea = document.querySelectorAll('.getOldTaskDate')
+let newTaskDateArea = document.querySelectorAll('.showNewTaskFormatDate')
 for(let i = 0; i < oldTaskDateArea.length; i++){
   if(i >= 0){
     let indexNumbers = parseInt(i)

@@ -26,11 +26,11 @@
         </p> -->
 
         <span
-            class="getPublishTask"
+            class="getOldTaskDate"
             th:text="${task.taskDueDate}"
             hidden
         ></span>
-        <p>Due by: <span class="publishNewTask"></span></p>
+        <p>Due by: <span class="showNewTaskFormatDate"></span></p>
 
         <br />
         <span th:if="${task.user.id == userId}">
