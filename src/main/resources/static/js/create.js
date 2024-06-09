@@ -96,4 +96,5 @@ for(let singleCheckbox of grabCheckboxInput){
 let getHiddenCurrentDate = document.querySelector('.dateToInsertIntoCalendar').textContent
 let setDateIntoCalendar = document.querySelector('input[type="date"]');
 setDateIntoCalendar.value = getHiddenCurrentDate
+// https://developer.mozilla.org/en-US/play
 

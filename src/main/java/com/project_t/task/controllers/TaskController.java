@@ -1,17 +1,11 @@
 package com.project_t.task.controllers;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
-import org.springframework.beans.factory.config.YamlProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -27,7 +21,6 @@ import com.project_t.task.models.User;
 import com.project_t.task.repositories.CategoryRepository;
 import com.project_t.task.repositories.TaskRepository;
 import com.project_t.task.repositories.UserRepository;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.project_t.task.utils.Input;
 
@@ -59,6 +52,13 @@ public class TaskController {
   public String getAllTasks(Model model) {
     model.addAttribute("listAllTasks", taskDao.findAll());
     return "/tasks/index";
+  }
+
+  @GetMapping("/tasks/myTasks")
+  public String getUsersOwnTasks(Model model) {
+    long userId = Input.userIsLoggedIn().id;
+    model.addAttribute("userSpecificTasks", taskDao.findById(userId));
+    return "/tasks/myTasks";
   }
 
   @GetMapping("/tasks/search")

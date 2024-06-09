@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head>
+        <th:block
+            th:replace="~{partials/partials :: head (title='Your Tasks')}"
+        ></th:block>
+    </head>
+    <body>
+        <nav th:insert="~{partials/partials :: navbar}"></nav>
+        <!-- <header th:insert="~{partials/partials :: header}"></header> -->
+        <h1>THIS WILL BE YOUR TASKS</h1>
+        <div th:each="listUserTasks : ${userSpecificTasks}">
+            <h2>
+                <a
+                    th:text="${listUserTasks.title}"
+                    th:href="@{|/tasks/${listUserTasks.id}|}"
+                ></a>
+            </h2>
+        </div>
+    </body>
+</html>
