@@ -92,4 +92,8 @@ for(let singleCheckbox of grabCheckboxInput){
   });
 }
 
+//This adds current date into calendar when user wants to Create a Task
+let getHiddenCurrentDate = document.querySelector('.dateToInsertIntoCalendar').textContent
+let setDateIntoCalendar = document.querySelector('input[type="date"]');
+setDateIntoCalendar.value = getHiddenCurrentDate
 
