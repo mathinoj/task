@@ -50,6 +50,9 @@ public class TaskController {
 
   @GetMapping("/tasks")
   public String getAllTasks(Model model) {
+    long userId = Input.userIsLoggedIn().id;
+    // System.out.println("USER ID: " + userId);
+    // System.out.println("TJTJTJ: " + taskDao.findAll());
     model.addAttribute("listAllTasks", taskDao.findAll());
     return "/tasks/index";
   }
@@ -57,7 +60,8 @@ public class TaskController {
   @GetMapping("/tasks/myTasks")
   public String getUsersOwnTasks(Model model) {
     long userId = Input.userIsLoggedIn().id;
-    model.addAttribute("userSpecificTasks", taskDao.findById(userId));
+    model.addAttribute("userId", userId);
+    model.addAttribute("userSpecificTasks", taskDao.findAll());
     return "/tasks/myTasks";
   }
 

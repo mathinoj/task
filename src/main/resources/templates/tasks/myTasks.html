@@ -12,14 +12,43 @@
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
         <!-- <header th:insert="~{partials/partials :: header}"></header> -->
-        <h1>THIS WILL BE YOUR TASKS</h1>
+        <h1>YOUR TASKS</h1>
+
         <div th:each="listUserTasks : ${userSpecificTasks}">
-            <h2>
-                <a
-                    th:text="${listUserTasks.title}"
-                    th:href="@{|/tasks/${listUserTasks.id}|}"
-                ></a>
-            </h2>
+            <div th:if="${listUserTasks.user.id == userId}">
+                <h3 th:text="${listUserTasks.title}"></h3>
+                <p th:text="${listUserTasks.description}"></p>
+                <div th:each="findCategoryName : ${listUserTasks.categories}">
+                    <h4 th:text="${findCategoryName.name}"></h4>
+                </div>
+
+                <p>Posted By: [[${listUserTasks.user.username}]]</p>
+                <span
+                    class="getPublishDate"
+                    th:text="${listUserTasks.publishDate}"
+                    hidden
+                ></span>
+                <p>
+                    Posted on:
+                    <span class="publishNewDate"></span>
+                </p>
+
+                <span
+                    class="getOldTaskDate"
+                    th:text="${listUserTasks.taskDueDate}"
+                    hidden
+                ></span>
+                <p>Due by: <span class="showNewTaskFormatDate"></span></p>
+
+                <!-- <span th:if="${listUserTasks.user.id == userId}"> -->
+                <a th:href="@{|/tasks/${listUserTasks.id}/edit|}">Edit</a>
+                <br />
+                <a th:href="@{|/tasks/${listUserTasks.id}/delete|}">Delete</a>
+                <!-- </span> -->
+                <hr />
+            </div>
         </div>
+
+        <script src="../js/formatDate.js"></script>
     </body>
 </html>
