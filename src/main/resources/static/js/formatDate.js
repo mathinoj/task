@@ -2,8 +2,7 @@
 
 let oldTaskDateArea = document.querySelectorAll('.getPublishTask')
 let newTaskDateArea = document.querySelectorAll('.publishNewTask')
-
-for(let i = 1; i < oldTaskDateArea.length; i++){
+for(let i = 0; i < oldTaskDateArea.length; i++){
   if(i >= 0){
     let indexNumbers = parseInt(i)
     let getOldDateFormat = oldTaskDateArea[indexNumbers].innerHTML
@@ -64,21 +63,27 @@ for(let i = 1; i < oldTaskDateArea.length; i++){
 
 
 //THIS CHANGES THE FORMATTING FOR TASK DUE DATE!
-let grabCurrentTaskFormat2 =
-document.getElementById("publishTask").textContent;
-let changeCurrentTaskFormat2 = new Date(grabCurrentTaskFormat2);
-let newTaskFormat = {
-day: "2-digit",
-month: "short",
-year: "numeric",
-};
-let formatTaskDate = changeCurrentTaskFormat2.toLocaleDateString(
-"en-US", {timeZone: 'UTC'},
-newTaskFormat
-);
-// https://stackoverflow.com/questions/32877278/tolocaledatestring-is-subtracting-a-day
+// let grabCurrentTaskFormat2 =
+// document.getElementById("publishTask2").textContent;
+// console.log(grabCurrentTaskFormat2);
+// let changeCurrentTaskFormat2 = new Date(grabCurrentTaskFormat2);
+// console.log(changeCurrentTaskFormat2);
+// let newTaskFormat = {
+// day: "2-digit",
+// month: "short",
+// year: "numeric",
+// };
+// console.log(newTaskFormat);
+// let formatTaskDate = changeCurrentTaskFormat2.toLocaleDateString(
+// "en-US", {timeZone: 'UTC'},
+// newTaskFormat
+// );
+// console.log(formatTaskDate);
+// // https://stackoverflow.com/questions/32877278/tolocaledatestring-is-subtracting-a-day
 
-let getSpaceToInputNewTaskDate =
-document.getElementById("publishNewTask");
-let newTaskFormatSet = document.createTextNode(formatTaskDate);
-getSpaceToInputNewTaskDate.appendChild(newTaskFormatSet);
+// let getSpaceToInputNewTaskDate =
+// document.getElementById("publishNewTask2");
+// console.log(getSpaceToInputNewTaskDate);
+// let newTaskFormatSet = document.createTextNode(formatTaskDate);
+// console.log(newTaskFormatSet);
+// getSpaceToInputNewTaskDate.appendChild(newTaskFormatSet);

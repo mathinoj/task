@@ -42,25 +42,25 @@
 
             <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
             <div id="dates">
-                <span
+                <!-- <span
                     id="publish"
+                    class="getPublishDate"
                     th:text="${listingAll.publishDate}"
                     hidden
                 ></span>
                 <p>
                     Posted on:
-                    <span id="publishAgain"></span>
-                </p>
+                    <span id="publishAgain" class="publishNewDate"></span>
+                </p> -->
 
                 <span
-                    id="publishTask"
                     class="getPublishTask"
                     th:text="${listingAll.taskDueDate}"
                     hidden
                 ></span>
                 <br />
                 Due on:
-                <span id="publishNewTask" class="publishNewTask"></span>
+                <span class="publishNewTask"></span>
                 <p>
                     <!-- Due on: <span id="publishNewTask" class="lishAgain"></span> -->
                     <!-- Due on: <span id="publishNewTask"></span> -->

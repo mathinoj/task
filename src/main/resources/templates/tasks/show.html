@@ -19,14 +19,18 @@
         <!-- <p>Posted on: <span th:text="${task.publishDate}"></span></p> -->
 
         <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
-        <span id="publish" th:text="${task.publishDate}" hidden></span>
+        <!-- <span id="publish" th:text="${task.publishDate}" hidden></span>
         <p>
             Posted on:
             <span id="publishAgain"></span>
-        </p>
+        </p> -->
 
-        <span id="publishTask" th:text="${task.taskDueDate}" hidden></span>
-        <p>Due by: <span id="publishNewTask"></span></p>
+        <span
+            class="getPublishTask"
+            th:text="${task.taskDueDate}"
+            hidden
+        ></span>
+        <p>Due by: <span class="publishNewTask"></span></p>
 
         <br />
         <span th:if="${task.user.id == userId}">
