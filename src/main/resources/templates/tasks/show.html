@@ -19,11 +19,15 @@
         <!-- <p>Posted on: <span th:text="${task.publishDate}"></span></p> -->
 
         <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
-        <!-- <span id="publish" th:text="${task.publishDate}" hidden></span>
+        <span
+            class="getPublishDate"
+            th:text="${task.publishDate}"
+            hidden
+        ></span>
         <p>
             Posted on:
-            <span id="publishAgain"></span>
-        </p> -->
+            <span class="publishNewDate"></span>
+        </p>
 
         <span
             class="getOldTaskDate"
