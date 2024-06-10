@@ -65,6 +65,9 @@
             <div th:if="${listingAll.isComplete == 'false'}">
                 <span>Task Incomplete</span>
             </div>
+            <div th:if="${listingAll.isComplete == 'true'}">
+                <span>Task Complete</span>
+            </div>
             <hr />
         </div>
 
