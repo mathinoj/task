@@ -39,7 +39,13 @@
                     hidden
                 ></span>
                 <p>Due by: <span class="showNewTaskFormatDate"></span></p>
-
+                <div th:if="${listUserTasks.isComplete == 'false'}">
+                    <span>Task not Finished.</span>
+                </div>
+                <div th:if="${listUserTasks.isComplete == 'true'}">
+                    <span>Task Completed!</span>
+                </div>
+                <br />
                 <!-- <span th:if="${listUserTasks.user.id == userId}"> -->
                 <a th:href="@{|/tasks/${listUserTasks.id}/edit|}">Edit</a>
                 <br />
