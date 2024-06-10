@@ -57,10 +57,11 @@
                     name="isComplete"
                     th:value="${task.isComplete}"
                 />
-                <br />
                 <!-- <div th:if="${task.isComplete == 'false'}"> -->
-                <input class="cb" type="checkbox" id="html" name="checkbox" />
-                <!-- </div> -->
+                <div>
+                    <input type="checkbox" id="html" name="checkbox" />
+                    <span id="insertIfComplete">Is Task Complete?</span>
+                </div>
 
                 <input
                     type="text"
@@ -112,14 +113,15 @@
 
             let getCheckbox = document.querySelector("input[name=checkbox]");
             let grabTrueOrFalse = document.getElementById("completeBox").value;
+            let insertIfComplete = document.getElementById("insertIfComplete");
 
             if (grabTrueOrFalse == "true") {
                 getCheckbox.addEventListener("change", function () {
                     if (grabTrueOrFalse == "true" && this.checked) {
                         document.getElementById("completeBox").value = "false";
-                    } else if (this.checked) {
-                        // console.log("Checkbox is checked..");
-                        document.getElementById("completeBox").value = "true";
+                        // } else if (this.checked) {
+                        //     // console.log("Checkbox is checked..");
+                        //     document.getElementById("completeBox").value = "true";
                     } else {
                         // console.log("Checkbox is not checked..");
                         document.getElementById("completeBox").value = "true";
@@ -130,12 +132,18 @@
                 getCheckbox.addEventListener("change", function () {
                     if (grabTrueOrFalse == "false" && this.checked) {
                         document.getElementById("completeBox").value = "true";
-                    } else if (this.checked) {
-                        // console.log("Checkbox is checked..");
-                        document.getElementById("completeBox").value = "false";
+                        document.getElementById("insertIfComplete").innerText =
+                            "Task is Completed!";
+                        // } else if (this.checked) {
+                        //     // console.log("Checkbox is checked..");
+                        //     document.getElementById("completeBox").value = "false";
+                        // document.getElementById("insertIfComplete").innerText =
+                        //     "Task is Completed!";
                     } else {
                         // console.log("Checkbox is not checked..");
                         document.getElementById("completeBox").value = "false";
+                        document.getElementById("insertIfComplete").innerText =
+                            "Task not Finished.";
                     }
                 });
             }
