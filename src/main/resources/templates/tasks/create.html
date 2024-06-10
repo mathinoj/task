@@ -26,6 +26,11 @@
         <input type="date" id="start" class="haterz" name="task-due" th:field="*{taskDueDate}"/>
         <br>
         <br>
+        <!-- <input type="text" value="${false}" th:field="*{isComplete}"> -->
+        <input type="radio" id="html" name="fav_language" value="false" th:field="*{isComplete}" hidden>
+
+        <br>
+        <br>
 
         <fieldset  id="cici">
           <legend>Categories:</legend>

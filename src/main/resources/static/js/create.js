@@ -52,6 +52,8 @@ for(let i = 1; i < grabAllChildElements.length; i++){
   if(newCategoryName.value == categoryName){
     document.getElementById(categoryName).checked = true;
     document.getElementById('sobmit').disabled = false;
+    document.getElementById("html").setAttribute("checked","checked")
+
 
 
     console.log(document.getElementById(categoryName))
@@ -97,4 +99,7 @@ let getHiddenCurrentDate = document.querySelector('.dateToInsertIntoCalendar').t
 let setDateIntoCalendar = document.querySelector('input[type="date"]');
 setDateIntoCalendar.value = getHiddenCurrentDate
 // https://developer.mozilla.org/en-US/play
+
+let htx = document.getElementById('html')
+      console.log(htx);
 

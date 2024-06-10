@@ -40,13 +40,14 @@
                 <h4 th:text="${findCategoryName.name}"></h4>
             </div>
 
+            <!-- <span th:text="${listingAll.isComplete}"></span> -->
+
             <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
             <span
                 class="getPublishDate"
                 th:text="${listingAll.publishDate}"
                 hidden
             ></span>
-            <br />
             <p>
                 Posted on:
                 <span class="publishNewDate"></span>
@@ -57,9 +58,13 @@
                 th:text="${listingAll.taskDueDate}"
                 hidden
             ></span>
-            <br />
             Due on:
             <span class="showNewTaskFormatDate"></span>
+            <br />
+            <br />
+            <div th:if="${listingAll.isComplete == 'false'}">
+                <span>Task Incomplete</span>
+            </div>
             <hr />
         </div>
 

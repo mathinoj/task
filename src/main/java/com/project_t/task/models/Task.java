@@ -33,6 +33,9 @@ public class Task {
   @Column(nullable = false)
   private String taskDueDate;
 
+  @Column(nullable = false)
+  private String isComplete;
+
   @ManyToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "user_id")
 
@@ -98,6 +101,14 @@ public class Task {
     this.taskDueDate = taskDueDate;
   }
 
+  public String getIsComplete() {
+    return isComplete;
+  }
+
+  public void setIsComplete(String isComplete) {
+    this.isComplete = isComplete;
+  }
+
   public Task() {
   }
 
@@ -108,6 +119,14 @@ public class Task {
     this.taskDueDate = taskDueDate;
   }
 
+  public Task(String title, String description, String publishDate, String taskDueDate, String isComplete) {
+    this.title = title;
+    this.description = description;
+    this.publishDate = publishDate;
+    this.taskDueDate = taskDueDate;
+    this.isComplete = isComplete;
+  }
+
   public Task(String title, String description, String publishDate, String taskDueDate, User user) {
     this.title = title;
     this.description = description;
@@ -115,5 +134,16 @@ public class Task {
     this.taskDueDate = taskDueDate;
     this.user = user;
   }
+
+  public Task(String title, String description, String publishDate, String taskDueDate, String isComplete, User user) {
+    this.title = title;
+    this.description = description;
+    this.publishDate = publishDate;
+    this.taskDueDate = taskDueDate;
+    this.isComplete = isComplete;
+    this.user = user;
+  }
+
+  
 
 }
