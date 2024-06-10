@@ -110,15 +110,12 @@
             const dateControl = document.querySelector('input[type="date"]');
             console.log(dateControl.value);
 
-            let t = document.getElementById("html");
-            let u = document.getElementById("editButt");
-            let cbox = document.querySelector("input[name=checkbox]");
-            let p = document.getElementById("completeBox").value;
-            let z = document.getElementById("completeBox");
-            let g = document.querySelector(".cb").checked;
-            if (p == "true") {
-                cbox.addEventListener("change", function () {
-                    if (p == "true" && this.checked) {
+            let getCheckbox = document.querySelector("input[name=checkbox]");
+            let grabTrueOrFalse = document.getElementById("completeBox").value;
+
+            if (grabTrueOrFalse == "true") {
+                getCheckbox.addEventListener("change", function () {
+                    if (grabTrueOrFalse == "true" && this.checked) {
                         document.getElementById("completeBox").value = "false";
                     } else if (this.checked) {
                         // console.log("Checkbox is checked..");
@@ -129,9 +126,9 @@
                     }
                 });
             }
-            if (p == "false") {
-                cbox.addEventListener("change", function () {
-                    if (p == "false" && this.checked) {
+            if (grabTrueOrFalse == "false") {
+                getCheckbox.addEventListener("change", function () {
+                    if (grabTrueOrFalse == "false" && this.checked) {
                         document.getElementById("completeBox").value = "true";
                     } else if (this.checked) {
                         // console.log("Checkbox is checked..");
