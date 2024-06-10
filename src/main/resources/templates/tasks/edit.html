@@ -50,7 +50,7 @@
                 />
                 <br />
                 <br />
-                <span th:text="${task.isComplete}"></span>
+                <!-- <span th:text="${task.isComplete}"></span> -->
                 <input
                     id="completeBox"
                     type="text"
@@ -59,13 +59,7 @@
                 />
                 <br />
                 <!-- <div th:if="${task.isComplete == 'false'}"> -->
-                <input
-                    type="checkbox"
-                    id="html"
-                    name="checkbox"
-                    th:text="${task.isComplete}"
-                    checked
-                />
+                <input class="cb" type="checkbox" id="html" name="checkbox" />
                 <!-- </div> -->
 
                 <input
@@ -121,19 +115,33 @@
             let cbox = document.querySelector("input[name=checkbox]");
             let p = document.getElementById("completeBox").value;
             let z = document.getElementById("completeBox");
-
-            // console.log("pp " + p);
-
-            cbox.addEventListener("change", function () {
-                if (this.checked) {
-                    console.log("Checkbox is checked..");
-                } else {
-                    console.log("Checkbox is not checked..");
-                    // console.log("pp " + p);
-                    document.getElementById("completeBox").value = "true";
-                    console.log(z);
-                }
-            });
+            let g = document.querySelector(".cb").checked;
+            if (p == "true") {
+                cbox.addEventListener("change", function () {
+                    if (p == "true" && this.checked) {
+                        document.getElementById("completeBox").value = "false";
+                    } else if (this.checked) {
+                        // console.log("Checkbox is checked..");
+                        document.getElementById("completeBox").value = "true";
+                    } else {
+                        // console.log("Checkbox is not checked..");
+                        document.getElementById("completeBox").value = "true";
+                    }
+                });
+            }
+            if (p == "false") {
+                cbox.addEventListener("change", function () {
+                    if (p == "false" && this.checked) {
+                        document.getElementById("completeBox").value = "true";
+                    } else if (this.checked) {
+                        // console.log("Checkbox is checked..");
+                        document.getElementById("completeBox").value = "false";
+                    } else {
+                        // console.log("Checkbox is not checked..");
+                        document.getElementById("completeBox").value = "false";
+                    }
+                });
+            }
         </script>
     </body>
 </html>
