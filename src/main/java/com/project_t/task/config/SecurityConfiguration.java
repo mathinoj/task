@@ -20,7 +20,8 @@ public class SecurityConfiguration {
             DispatcherType.ERROR)
         .permitAll()
         // http.authorizeHttpRequests((requests) -> requests
-        .requestMatchers("/tasks/create", "/tasks/*/edit", "/tasks/*/delete", "/profile").authenticated()
+        .requestMatchers("/tasks/create", "/tasks/*/edit", "/tasks/*/delete", "/profile", "/tasks/myTasks")
+        .authenticated()
         .requestMatchers("/", "/tasks", "/tasks/*", "/login", "/register", "/tasks/show", "/tasks/{id}")
         .permitAll()
         .requestMatchers("/js/*", "/css/*", "/img/*").permitAll())
