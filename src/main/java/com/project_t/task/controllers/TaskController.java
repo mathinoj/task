@@ -65,22 +65,9 @@ public class TaskController {
   @GetMapping("/tasks/search")
   public String searchTaskByTitle(
       @RequestParam(name = "search") String title,
-
       @RequestParam(name = "search") String description,
       Model model) {
-
-    // model.addAttribute("results",
-    // taskDao.findByTitleStartingWithOrTitleEndingWith(title, title));
-    // model.addAttribute("results",
-    // taskDao.findByDescriptionStartingWithOrDescriptionEndingWith(description,
-    // description));
     model.addAttribute("results", taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description));
-    // model.addAttribute("results", taskDao.findByTitleIsContaining(title));
-    // model.addAttribute("results",
-    // taskDao.findByDescriptionIsContaining(description));
-    System.out.println(title);
-    // System.out.println(description);
-    // model.addAttribute("results", taskDao.findByDescription(description));
     return "/tasks/index";
   }
 
