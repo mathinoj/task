@@ -19,12 +19,15 @@
             <button>Search</button>
         </form>
         <div th:if="${results}">
-            <ul>
-                <li th:each="task : ${results}">
-                    <h2 th:text="${task.title}"></h2>
-                    <p th:text="${task.description}"></p>
-                </li>
-            </ul>
+            <!-- <ul> -->
+            <div th:each="task : ${results}">
+                <h2 th:text="${task.title}"></h2>
+                <p th:text="${task.description}"></p>
+                <div th:each="findCategoryName : ${task.categories}">
+                    <h4 th:text="${findCategoryName.name}"></h4>
+                </div>
+            </div>
+            <!-- </ul> -->
         </div>
 
         <div th:each="listingAll : ${listAllTasks}">

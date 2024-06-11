@@ -68,6 +68,7 @@ public class TaskController {
       @RequestParam(name = "search") String description,
       Model model) {
     model.addAttribute("results", taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description));
+    // model.addAttribute("listAllTasks", taskDao.findAll());
     return "/tasks/index";
   }
 
