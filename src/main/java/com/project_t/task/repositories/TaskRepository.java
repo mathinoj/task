@@ -12,4 +12,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
   List<Task> findByTitleIsContainingOrDescriptionIsContaining(String title, String description);
   // https://stackoverflow.com/questions/52497673/how-to-use-multiple-like-keyword-in-sping-jpa-on-same-column
+  // https://docs.spring.io/spring-data/jpa/reference/repositories/query-keywords-reference.html
 }

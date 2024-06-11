@@ -179,14 +179,6 @@ public class TaskController {
       task = null;
     }
 
-    System.out.println("taskkkkk: " + task.getPublishDate());
-    // String theDate = task.getTaskDueDate();
-    // System.out.println("this is x: " + theDate);
-    // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy",
-    // Locale.ENGLISH);
-    // LocalDate date = LocalDate.parse(theDate, formatter);
-    // System.out.println("dddddaaate: " + date);
-
     model.addAttribute("task", task);
     return "/tasks/edit";
   }
