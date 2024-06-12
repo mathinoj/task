@@ -205,7 +205,7 @@ public class TaskController {
     task.setCategories(categoryList);
 
     taskDao.save(task);
-    return "redirect:/tasks";
+    return "redirect:/tasks/myTasks";
   }
 
   @GetMapping("/tasks/{id}/delete")
