@@ -18,53 +18,22 @@
             <input type="text" name="search" id="search" />
             <button>Search</button>
         </form>
+        <!-- This is when the user searches by TITLE or DESCRIPTION -->
         <div th:if="${results}">
-            <!-- <ul> -->
             <div th:each="task : ${results}">
                 <h2 th:text="${task.title}"></h2>
                 <p th:text="${task.description}"></p>
-
                 <div th:each="findCategoryName : ${task.categories}">
                     <h4 th:text="${findCategoryName.name}"></h4>
                 </div>
-                <!-- </div> -->
             </div>
-
-            <!-- <h4 th:text="${cat}"></h4> -->
-            <!-- <div th:if="${cat}">
-                <h4 th:text="${cat}"></h4>
-            </div> -->
-            <!-- <div th:each="c : ${cat}">
-                <h4 th:text="${c.name}"></h4>
-            </div> -->
-            <!-- <h4 th:text="${cat.name}"></h4> -->
-
-            <!-- </ul> -->
-            <!-- <div th:if="${cat}">
-                <h4 th:text="${cat}"></h4>
-            </div> -->
         </div>
-        <!-- <div th:if="${results2}"> -->
+        <!-- This is when the user searches by CATEGORY -->
         <div th:each="task : ${results2}">
             <h2 th:text="${task.title}"></h2>
             <p th:text="${task.description}"></p>
-
-            <!-- <div th:each="findCategoryName : ${task.categories}">
-                    <h4 th:text="${findCategoryName.name}"></h4>
-                </div> -->
+            <h4 th:text="${cat}"></h4>
         </div>
-
-        <h4 th:text="${cat}"></h4>
-        <!-- </div> -->
-        <!-- </div> -->
-
-        <!-- <h4 th:text="${cat}"></h4> -->
-        <!-- <div th:if="${cat}"> -->
-        <!-- <h4 th:text="${cat}"></h4> -->
-        <!-- </div> -->
-        <!-- <div th:each="c : ${cat}">
-            <h4 th:text="${c.name}"></h4>
-        </div> -->
 
         <div th:each="listingAll : ${listAllTasks}">
             <h2>
