@@ -32,7 +32,7 @@
         <div th:each="task : ${results2}">
             <h2 th:text="${task.title}"></h2>
             <p th:text="${task.description}"></p>
-            <h4 th:text="${cat}"></h4>
+            <h4 th:text="${categoryName}"></h4>
         </div>
 
         <div th:each="listingAll : ${listAllTasks}">

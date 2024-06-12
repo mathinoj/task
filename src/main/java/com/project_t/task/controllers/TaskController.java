@@ -68,18 +68,16 @@ public class TaskController {
       @RequestParam(name = "search") String description,
       @RequestParam(name = "search") String categoryName,
       Model model) {
-    List<Task> searchTsks = taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description);
+    List<Task> searchTasks = taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description);
     Category categories = categoryDao.findCategoryByNameIsContaining(categoryName);
     if (categories == null) {
-      model.addAttribute("results", searchTsks);
+      model.addAttribute("results", searchTasks);
     } else {
-      Long g = categories.getId();
-      model.addAttribute("results2", taskDao.findByCategoriesId(g));
-      model.addAttribute("cat", categories.getName());
-      System.out.println("here: " + categories);
+      Long getCategoryId = categories.getId();
+      model.addAttribute("results2", taskDao.findByCategoriesId(getCategoryId));
+      model.addAttribute("categoryName", categories.getName());
     }
     return "/tasks/index";
-
   }
 
   @GetMapping("/tasks/{id}")
