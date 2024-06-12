@@ -66,10 +66,10 @@ public class TaskController {
   public String searchTaskByTitle(
       @RequestParam(name = "search") String title,
       @RequestParam(name = "search") String description,
-      @RequestParam(name = "search") String name,
+      @RequestParam(name = "search") String categoryName,
       Model model) {
     List<Task> searchTsks = taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description);
-    Category categories = categoryDao.findCategoryByNameIsContaining(name);
+    Category categories = categoryDao.findCategoryByNameIsContaining(categoryName);
     if (categories == null) {
       model.addAttribute("results", searchTsks);
     } else {
