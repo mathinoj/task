@@ -68,29 +68,12 @@ public class TaskController {
       @RequestParam(name = "search") String description,
       @RequestParam(name = "search") String name,
       Model model) {
-    // Category categories = categoryDao.findCategoryByName(name);
-    // categories.sort(Comparator.comparing(Category::getName));
     List<Task> searchTsks = taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description);
-    System.out.println(("Serch Tz: " + searchTsks));
     Category categories = categoryDao.findCategoryByNameIsContaining(name);
-    System.out.println("categgoriez: " + categories);
-    System.out.println("nombra: " + name);
-    System.out.println(("Serch Tz222: " + searchTsks));
-    // taskDao.findById(categories.getId());
-
     if (categories == null) {
       model.addAttribute("results", searchTsks);
-      // model.addAttribute("cat", categories.getName());
-
     } else {
       Long g = categories.getId();
-      System.out.println("catID: " + g);
-      System.out.println(taskDao.findByCategoriesId(g));
-      // Object x = taskDao.findById(g);
-      // System.out.println("this xxx: " + x);
-      // String c = x.toString();
-      // System.out.println("this xxx: " + c);
-      // model.addAttribute("results2", x);
       model.addAttribute("results2", taskDao.findByCategoriesId(g));
       model.addAttribute("cat", categories.getName());
       System.out.println("here: " + categories);
