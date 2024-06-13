@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head>
+        <th:block
+            th:replace="~{partials/partials :: head (title='Your Tasks')}"
+        ></th:block>
+    </head>
+    <body>
+        <nav th:insert="~{partials/partials :: navbar}"></nav>
+        <h1>Complete or NOt</h1>
+        <div th:each="x : ${isComplete}">
+            <h3 th:text="${x.title}"></h3>
+            <p th:text="${x.description}"></p>
+            <div th:each="findCategoryName : ${x.categories}">
+                <h4 th:text="${findCategoryName.name}"></h4>
+            </div>
+            <p>Posted By: [[${x.user.username}]]</p>
+            <span
+                class="getPublishDate"
+                th:text="${x.publishDate}"
+                hidden
+            ></span>
+            <p>
+                Posted on:
+                <span class="publishNewDate"></span>
+            </p>
+            <span
+                class="getOldTaskDate"
+                th:text="${x.taskDueDate}"
+                hidden
+            ></span>
+            <p>Due by: <span class="showNewTaskFormatDate"></span></p>
+
+            <div th:if="${x.isComplete == 'false'}">
+                <span>Task not Finished.</span>
+            </div>
+            <div th:if="${x.isComplete == 'true'}">
+                <span>Task Completed!</span>
+            </div>
+            <hr />
+        </div>
+
+        <script src="../js/formatDate.js"></script>
+    </body>
+</html>
