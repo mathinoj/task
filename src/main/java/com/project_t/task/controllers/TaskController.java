@@ -5,9 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
-import org.hibernate.engine.jdbc.env.internal.LobCreationLogging_.logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -61,8 +59,6 @@ public class TaskController {
       Model model) {
     long userId = Input.userIsLoggedIn().id;
     System.out.println("uuu: " + userId);
-    // List<Task> findComplete = taskDao.findByIsComplete(isComplete);
-    // System.out.println("xxxx: " + findComplete);
     model.addAttribute("tf", taskDao.findById(userId));
     model.addAttribute("userId", userId);
     model.addAttribute("userSpecificTasks", taskDao.findAll());
@@ -70,12 +66,30 @@ public class TaskController {
   }
 
   @GetMapping("/tasks/completeOrNot")
-  public String getCompleteOrNot(@RequestParam(name = "search") String isComplete, Model model) {
+  public String getCompleteOrNot(
+      @RequestParam(name = "search") String isComplete,
+      // @RequestParam(name = "search") String isIncomplete,
+      Model model) {
+    long userId = Input.userIsLoggedIn().id;
+
     System.out.println("is it comp: " + isComplete);
     List<Task> findComplete = taskDao.findByIsComplete(isComplete);
-    System.out.println("xxxx: " + findComplete);
+
+    if (isComplete.equals("false")) {
+      System.out.println("true it is FALSE");
+      // List<Task> findIncomplete = taskDao.findByIsComplete(isComplete);
+      model.addAttribute("userId", userId);
+      model.addAttribute("isIncomplete", findComplete);
+    }
+
+    // List<Task> findComplete = taskDao.findByIsComplete(isComplete);
+    // List<Task> findIncomplete = taskDao.findByIsComplete(isIncomplete);
+    // System.out.println("xxxx: " + findComplete);
+    model.addAttribute("userId", userId);
     model.addAttribute("isComplete", findComplete);
-    return "tasks/completeorNot";
+
+    // model.addAttribute("isIncomplete", findIncomplete);
+    return "tasks/completeOrNot";
   }
 
   @GetMapping("/tasks/search")
