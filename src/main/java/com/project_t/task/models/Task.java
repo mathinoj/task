@@ -112,27 +112,12 @@ public class Task {
   public Task() {
   }
 
-  public Task(String title, String description, String publishDate, String taskDueDate) {
-    this.title = title;
-    this.description = description;
-    this.publishDate = publishDate;
-    this.taskDueDate = taskDueDate;
-  }
-
   public Task(String title, String description, String publishDate, String taskDueDate, String isComplete) {
     this.title = title;
     this.description = description;
     this.publishDate = publishDate;
     this.taskDueDate = taskDueDate;
     this.isComplete = isComplete;
-  }
-
-  public Task(String title, String description, String publishDate, String taskDueDate, User user) {
-    this.title = title;
-    this.description = description;
-    this.publishDate = publishDate;
-    this.taskDueDate = taskDueDate;
-    this.user = user;
   }
 
   public Task(String title, String description, String publishDate, String taskDueDate, String isComplete, User user) {
@@ -145,5 +130,42 @@ public class Task {
   }
 
   
+
+  // public Task() {
+  // }
+
+  // public Task(String title, String description, String publishDate, String taskDueDate) {
+  //   this.title = title;
+  //   this.description = description;
+  //   this.publishDate = publishDate;
+  //   this.taskDueDate = taskDueDate;
+  // }
+
+  // public Task(String title, String description, String publishDate, String taskDueDate, String isComplete) {
+  //   this.title = title;
+  //   this.description = description;
+  //   this.publishDate = publishDate;
+  //   this.taskDueDate = taskDueDate;
+  //   this.isComplete = isComplete;
+  // }
+
+  // public Task(String title, String description, String publishDate, String taskDueDate, User user) {
+  //   this.title = title;
+  //   this.description = description;
+  //   this.publishDate = publishDate;
+  //   this.taskDueDate = taskDueDate;
+  //   this.user = user;
+  // }
+
+  // public Task(String title, String description, String publishDate, String taskDueDate, String isComplete, User user) {
+  //   this.title = title;
+  //   this.description = description;
+  //   this.publishDate = publishDate;
+  //   this.taskDueDate = taskDueDate;
+  //   this.isComplete = isComplete;
+  //   this.user = user;
+  // }
+
+
 
 }
