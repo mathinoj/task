@@ -22,4 +22,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
   List<Task> findCategoriesById(long id);
 
+  List<Task> findByIsComplete(String isComplete);
+
 }
