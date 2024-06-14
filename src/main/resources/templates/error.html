@@ -13,5 +13,8 @@
         <nav th:insert="~{partials/partials :: navbar}"></nav>
 
         <span th:if="${error}" th:text="${error}">Error</span>
+        <span th:if="${errorCategory}" th:text="${errorCategory}">Error</span>
+        <br />
+        <a href="../tasks/create">Go Back</a>
     </body>
 </html>
