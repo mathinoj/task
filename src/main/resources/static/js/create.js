@@ -16,23 +16,8 @@ removeHiddenAttribute.addEventListener('click', () => {
 });
 
 const x = document.getElementById('start');
-const createTaskSubmitButton2 = document.getElementById('sobmit');
-function createTaskListener() {
-  createTaskSubmitButton2.addEventListener('click', ()=>{})
-  // createFormSubmitButton.addEventListener('click', ()=>{})
-};
-if(x.value == "" && createTaskListener){
-  console.log('see this?')
-  sessionStorage.setItem('title', grabTitleInput.value);
-  sessionStorage.setItem('description', grabDescriptionInput.value);
-}
-
 x.addEventListener('change', ()=>{
   console.log(x.value)
-  if(x.value != ""){
-    console.log('see this?')
-  }
-
   sessionStorage.setItem('taskDueDate', x.value)
 })
 
