@@ -12,19 +12,25 @@
       <span hidden id="grab" class="dateToInsertIntoCalendar" th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
       <!-- https://stackoverflow.com/questions/39860643/formatting-date-in-thymeleaf -->
 
+
+
+
       <form th:action="@{/tasks/create}" th:method="POST" th:object="${tasker}">
         <label for="title">Title</label>
-        <input th:field="*{title}" id="titleInput" required>
+        <input th:field="*{title}" id="titleInput" >
         <br>
         <br>
         <label for="description" id="desc">Description</label>
         <!-- <input th:field="*{description}"> -->
-        <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput" required></textarea>
+        <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput" ></textarea>
         <br>
         <br>
+
         <label for="due">Due date:</label>
         <input type="date" id="start" class="haterz" name="task-due" th:field="*{taskDueDate}"/>
         <br>
+        <!-- <span th:text="${needDate}"></span> -->
+
         <br>
         <!-- <input type="text" value="${false}" th:field="*{isComplete}"> -->
         <input type="radio" id="html" name="fav_language" value="false" th:field="*{isComplete}" hidden>
