@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -159,6 +160,12 @@ public class TaskController {
     // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     // String publishDate = date.format(formatter);
     // tasker.setPublishDate(publishDate);
+    System.out.println("newcat: " + newCat.getName());
+    String newCatString = newCat.getName();
+    if (newCatString.equals("") || newCatString.isBlank()) {
+      model.addAttribute("errorCategory", "Category cannot be Blank!");
+      return "error";
+    }
 
     if (categories == null) {
       newCat.setName(name);
@@ -170,7 +177,28 @@ public class TaskController {
       for (String category : categories) {
         Category categoryFromDB = categoryDao.findCategoryByName(category);
         categoryList.add(categoryFromDB);
+        System.out.println("xxxxxxxxx");
+        System.out.println(categoryFromDB);
+        System.out.println(categoryList);
+        System.out.println(category); // this gets the actual name of the box clicked (i.e. truck)
+        System.out.println(categories);
+        if (category == "" || category.isEmpty() || category.equals("")) {
+          model.addAttribute("errorCategory", "Category cannot be Blank!");
+          return "error";
+        }
+
       }
+      System.out.println("youpouoipupoiuoi");
+      System.out.println(categories.getClass());
+      System.out.println(categories.toString());
+      String listString = String.join(", ", categories);
+      System.out.println(listString);
+      if (listString.equals("")) {
+        model.addAttribute("errorCategory", "Category cannot be Blank!");
+        return "error";
+      }
+
+      // Arrays.toString(categories);
 
       // if (tasker.getTitle() == null || tasker.getDescription() == null ||
       // tasker.getTitle().isEmpty()
@@ -186,7 +214,7 @@ public class TaskController {
         model.addAttribute("error", "Input field(s) cannot be Blank!");
         return "error";
       }
-
+      System.out.println("categoryL: " + categoryList);
       // String getOldDateFormat = tasker.getTaskDueDate();
       // System.out.println("old date format: " + getOldDateFormat);
       // LocalDate parseOldTOLocalDate = LocalDate.parse(getOldDateFormat);
