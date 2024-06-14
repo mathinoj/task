@@ -48,12 +48,36 @@ if(submitCategoryButtonListener){
   })
 }
 
+
+const grabCheckboxInput = document.getElementsByName("cater")
+for(let singleCheckbox of grabCheckboxInput){
+  let boxName = singleCheckbox.id;
+  // console.log(singleCheckbox)
+ singleCheckbox.addEventListener('change', function(e) {
+  if(submitCategoryButtonListener){
+    if (this.checked) {
+      console.log(`Checkbox ${boxName} is checked..`);
+      document.getElementById('sobmit').disabled = false;
+    }
+    // https://stackoverflow.com/questions/14544104/checkbox-check-event-listener
+    // https://codepen.io/simonjvardy/pen/ZEpEgEj
+  }
+  });
+}
+
 const grabAllChildElements = document.getElementById('cici').children;
+// console.log(grabAllChildElements);
 for(let i = 1; i < grabAllChildElements.length; i++){
   let categoryName = grabAllChildElements[i].children[1].id;
+  // console.log(categoryName);
+
   newCategoryName.value = sessionStorage.getItem('newCategory');
+  console.log(newCategoryName.value);
+  // console.log(categoryName);
+
   if(newCategoryName.value == categoryName){
-    document.getElementById(categoryName).checked = true;
+    let b = document.getElementById(categoryName)
+    b.checked = true;
     document.getElementById('sobmit').disabled = false;
     document.getElementById("html").setAttribute("checked","checked")
 
@@ -81,21 +105,7 @@ if(createTaskListener){
 }
 
 
-const grabCheckboxInput = document.getElementsByName("cater")
-for(let singleCheckbox of grabCheckboxInput){
-  let boxName = singleCheckbox.id;
-  // console.log(singleCheckbox)
- singleCheckbox.addEventListener('change', function(e) {
-  if(submitCategoryButtonListener){
-    if (this.checked) {
-      console.log(`Checkbox ${boxName} is checked..`);
-      document.getElementById('sobmit').disabled = false;
-    }
-    // https://stackoverflow.com/questions/14544104/checkbox-check-event-listener
-    // https://codepen.io/simonjvardy/pen/ZEpEgEj
-  }
-  });
-}
+
 
 //This adds current date into calendar when user wants to Create a Task
 let getHiddenCurrentDate = document.querySelector('.dateToInsertIntoCalendar').textContent
