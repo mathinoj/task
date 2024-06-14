@@ -7,6 +7,8 @@ const grabDescriptionInput = document.getElementById("descriptionInput");
 
 removeHiddenAttribute.addEventListener('click', () => {
   if('click'){
+    let u = document.getElementById('start')
+    // console.log('uuu: ' +u);
     document.getElementById("removeHidden").hidden = false;
     sessionStorage.setItem('title', grabTitleInput.value);
     sessionStorage.setItem('description', grabDescriptionInput.value);
@@ -14,8 +16,23 @@ removeHiddenAttribute.addEventListener('click', () => {
 });
 
 const x = document.getElementById('start');
+const createTaskSubmitButton2 = document.getElementById('sobmit');
+function createTaskListener() {
+  createTaskSubmitButton2.addEventListener('click', ()=>{})
+  // createFormSubmitButton.addEventListener('click', ()=>{})
+};
+if(x.value == "" && createTaskListener){
+  console.log('see this?')
+  sessionStorage.setItem('title', grabTitleInput.value);
+  sessionStorage.setItem('description', grabDescriptionInput.value);
+}
+
 x.addEventListener('change', ()=>{
-  // console.log(x.value)
+  console.log(x.value)
+  if(x.value != ""){
+    console.log('see this?')
+  }
+
   sessionStorage.setItem('taskDueDate', x.value)
 })
 
@@ -34,6 +51,7 @@ function submitCategoryButtonListener () {
 if(submitCategoryButtonListener){
   grabTitleInput.value = sessionStorage.getItem('title');
   grabDescriptionInput.value = sessionStorage.getItem('description');
+  console.log("xxxx: " +sessionStorage.getItem('taskDueDate'));
   x.value = sessionStorage.getItem('taskDueDate')
 };
 
@@ -81,7 +99,7 @@ if(createTaskListener){
 const grabCheckboxInput = document.getElementsByName("cater")
 for(let singleCheckbox of grabCheckboxInput){
   let boxName = singleCheckbox.id;
-  console.log(singleCheckbox)
+  // console.log(singleCheckbox)
  singleCheckbox.addEventListener('change', function(e) {
   if(submitCategoryButtonListener){
     if (this.checked) {
@@ -97,9 +115,6 @@ for(let singleCheckbox of grabCheckboxInput){
 //This adds current date into calendar when user wants to Create a Task
 let getHiddenCurrentDate = document.querySelector('.dateToInsertIntoCalendar').textContent
 let setDateIntoCalendar = document.querySelector('input[type="date"]');
-setDateIntoCalendar.value = getHiddenCurrentDate
+setDateIntoCalendar.min = getHiddenCurrentDate
 // https://developer.mozilla.org/en-US/play
-
-let htx = document.getElementById('html')
-      console.log(htx);
 
