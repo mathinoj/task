@@ -1,5 +1,6 @@
 package com.project_t.task.controllers;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
@@ -8,13 +9,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project_t.task.exception.ApiExceptionHandler;
+import com.project_t.task.exception.ApiRequestException;
 import com.project_t.task.models.Category;
 import com.project_t.task.models.Task;
 import com.project_t.task.models.User;
@@ -146,7 +149,7 @@ public class TaskController {
   @PostMapping("/tasks/create")
   public String postTask(@ModelAttribute Task tasker,
       @RequestParam(name = "cater", required = false) List<String> categories, @ModelAttribute Category newCat,
-      @RequestParam(name = "name", required = false) String name, Model model) {
+      @RequestParam(name = "name", required = false) String name, Model model, BindingResult result) {
     long userId = Input.userIsLoggedIn().id;
     tasker.setUser(userDao.findUserById(userId));
 
@@ -169,17 +172,20 @@ public class TaskController {
         categoryList.add(categoryFromDB);
       }
 
-      if (tasker.getTitle() == null || tasker.getDescription() == null || tasker.getTitle().isEmpty()
-          || tasker.getDescription().isEmpty()) {
-        return showCreateForm(model);
-      }
-
       // if (tasker.getTitle() == null || tasker.getDescription() == null ||
       // tasker.getTitle().isEmpty()
-      // || tasker.getDescription().isEmpty() || categories == null ||
-      // newCat.getName() == null) {
+      // || tasker.getDescription().isEmpty()) {
       // return showCreateForm(model);
       // }
+
+      String title = tasker.getTitle();
+      String description = tasker.getDescription();
+      String dateTime = tasker.getTaskDueDate();
+      if (title.isBlank() || description.isBlank() || dateTime.isBlank()) {
+        // throw new ApiRequestException("Input field is blank!");
+        model.addAttribute("error", "Input field(s) cannot be Blank!");
+        return "error";
+      }
 
       // String getOldDateFormat = tasker.getTaskDueDate();
       // System.out.println("old date format: " + getOldDateFormat);
