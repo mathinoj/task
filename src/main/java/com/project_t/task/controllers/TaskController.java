@@ -143,46 +143,30 @@ public class TaskController {
     categories.sort(Comparator.comparing(Category::getName));
     model.addAttribute("cat", categories);
     model.addAttribute("tasker", new Task());
-    model.addAttribute("newCat", new Category());
+    model.addAttribute("newCategory", new Category());
     return "/tasks/create";
   }
 
   @PostMapping("/tasks/create")
   public String postTask(@ModelAttribute Task tasker,
-      @RequestParam(name = "cater", required = false) List<String> categories, @ModelAttribute Category newCat,
+      @RequestParam(name = "cater", required = false) List<String> categories, @ModelAttribute Category newCategory,
       @RequestParam(name = "name", required = false) String name, Model model, BindingResult result) {
     long userId = Input.userIsLoggedIn().id;
     tasker.setUser(userDao.findUserById(userId));
 
     LocalDate date = LocalDate.now();
     tasker.setPublishDate(date.toString());
-
-    System.out.println("asfkjdsa;lfj;ladskf;asd");
-    System.out.println(categories);
-    // String listString = String.join(", ", categories);
-    // System.out.println("bbbbbbbb");
-    // System.out.println(listString);
-
-    // System.out.println(categories.getClass());
-
     // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     // String publishDate = date.format(formatter);
     // tasker.setPublishDate(publishDate);
-    System.out.println("newcat: " + newCat.getName());
-    String newCatString = newCat.getName();
-
-    // if (newCat.equals(null)) {
-    // model.addAttribute("errorCategory", "Category cannot be Blank!");
-    // return "error";
-    // }
 
     if (categories == null || categories.equals(null)) {
-      if (newCat.getName().isEmpty()) {
+      if (newCategory.getName().isEmpty()) {
         model.addAttribute("errorCategory", "Category cannot be Blank!");
         return "error";
       } else {
-        newCat.setName(name);
-        categoryDao.save(newCat);
+        newCategory.setName(name);
+        categoryDao.save(newCategory);
         return "redirect:/tasks/create";
       }
     } else {
@@ -190,44 +174,18 @@ public class TaskController {
       for (String category : categories) {
         Category categoryFromDB = categoryDao.findCategoryByName(category);
         categoryList.add(categoryFromDB);
-        System.out.println("xxxxxxxxx");
-        System.out.println(categoryFromDB);
-        System.out.println(categoryList);
-        System.out.println(category); // this gets the actual name of the box clicked (i.e. truck)
-        System.out.println(categories);
-        // if (category == "" || category.isEmpty() || category.equals("")) {
-        // model.addAttribute("errorCategory", "Category cannot be Blank!");
-        // return "error";
-        // }
-
       }
-      // System.out.println();
-      // if (newCatString.equals("") || newCatString.isBlank()) {
-      // model.addAttribute("errorCategory", "Category cannot be Blank!");
-      // return "error";
-      // }
-
-      // Arrays.toString(categories);
-
-      // if (tasker.getTitle() == null || tasker.getDescription() == null ||
-      // tasker.getTitle().isEmpty()
-      // || tasker.getDescription().isEmpty()) {
-      // return showCreateForm(model);
-      // }
 
       String title = tasker.getTitle();
       String description = tasker.getDescription();
       String dateTime = tasker.getTaskDueDate();
-      // if (title.isBlank() || description.isBlank() || dateTime.isBlank()) {
-      // // throw new ApiRequestException("Input field is blank!");
-      // model.addAttribute("error", "Input field(s) cannot be Blank!");
-      // return "error";
-      // }
-      System.out.println("categoryL: " + categoryList);
+      if (title.isBlank() || description.isBlank() || dateTime.isBlank()) {
+        // throw new ApiRequestException("Input field is blank!");
+        model.addAttribute("error", "Input field(s) cannot be Blank!");
+        return "error";
+      }
 
-      String listString = String.join(", ", categories);
-      System.out.println("bbbbbbbb");
-      System.out.println(listString);
+
       // String getOldDateFormat = tasker.getTaskDueDate();
       // System.out.println("old date format: " + getOldDateFormat);
       // LocalDate parseOldTOLocalDate = LocalDate.parse(getOldDateFormat);
@@ -235,16 +193,9 @@ public class TaskController {
       // yyyy");
       // String setNewDateFormat = parseOldTOLocalDate.format(newFormatDate);
       // tasker.setTaskDueDate(setNewDateFormat);
-      System.out.println("a;kldsfjl;adskfjs");
-      System.out.println(newCat);
-      System.out.println(categories);
 
-      // if (newCat.equals(null)) {
-      // model.addAttribute("errorCategory", "Category cannot be Blank!");
-      // return "error";
-      // }
-
-      if ((newCat != null || listString == null)) {
+      String categoryToString = String.join(", ", categories);
+      if ((newCategory != null || categoryToString == null)) {
         tasker.setIsComplete("false");
         tasker.setCategories(categoryList);
         taskDao.save(tasker);
