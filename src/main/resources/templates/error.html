@@ -25,6 +25,10 @@
         <span th:if="${searchBlank}" th:text="${searchBlank}"
             ><a href="../tasks/index">Back to All Tasks</a></span
         >
+        <span th:if="${nothingFound}" th:text="${nothingFound}"
+            ><a href="../tasks/index">Back to All Tasks</a></span
+        >
+
         <br />
         <!-- <a href="../tasks/create">Go Back</a> -->
     </body>
