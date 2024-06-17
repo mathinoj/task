@@ -185,7 +185,6 @@ public class TaskController {
         return "error";
       }
 
-
       // String getOldDateFormat = tasker.getTaskDueDate();
       // System.out.println("old date format: " + getOldDateFormat);
       // LocalDate parseOldTOLocalDate = LocalDate.parse(getOldDateFormat);
