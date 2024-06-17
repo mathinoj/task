@@ -159,32 +159,13 @@ public class TaskController {
     // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     // String publishDate = date.format(formatter);
     // tasker.setPublishDate(publishDate);
-    System.out.println("qqqqqqqqqqqqqqqqqqq");
-    // List<Category> categories1 = categoryDao.findAll();
-    // System.out.println(categories1);
-    // for (Category category1 : categories1) {
-    // System.out.println(category1.getName());
-    // }
-    // List<Category> categoryList1 = new ArrayList<>();
-    // System.out.println(categoryList1);
-    // for (String category1 : categories) {
-    // Category categoryFromDB1 = categoryDao.findCategoryByName(category1);
-    // // categoryList1.add(categoryFromDB1);
-    // System.out.println("xxxxxxxxxxxxxxxxxxxxxxxx");
-    // System.out.println(categoryFromDB1);
-    // System.out.println(categoryFromDB1.getName());
-    // }
+
 
     if (categories == null || categories.equals(null)) {
-      System.out.println("a;lfdslfjkads;lfja;lsdjf");
       List<Category> categories1 = categoryDao.findAll();
       System.out.println(categories1);
       for (Category category1 : categories1) {
-        // System.out.println(category1.getName());
-        System.out.println("MMMMMMMMMMMMM");
-        // System.out.println(newCategory.getName());
         if (category1.getName() == newCategory.getName() || category1.getName().equals(newCategory.getName())) {
-          System.out.println("DO YOU SEE THIS???");
           model.addAttribute("errorCategoryExists", "Category already Exists!");
           return "error";
         }
