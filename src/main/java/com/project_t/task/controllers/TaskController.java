@@ -162,10 +162,9 @@ public class TaskController {
 
 
     if (categories == null || categories.equals(null)) {
-      List<Category> categories1 = categoryDao.findAll();
-      System.out.println(categories1);
-      for (Category category1 : categories1) {
-        if (category1.getName() == newCategory.getName() || category1.getName().equals(newCategory.getName())) {
+      List<Category> categoriesFindAll = categoryDao.findAll();
+      for (Category categoryLoop : categoriesFindAll) {
+        if (categoryLoop.getName() == newCategory.getName() || categoryLoop.getName().equals(newCategory.getName())) {
           model.addAttribute("errorCategoryExists", "Category already Exists!");
           return "error";
         }
