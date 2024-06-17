@@ -12,6 +12,8 @@ removeHiddenAttribute.addEventListener('click', () => {
     document.getElementById("removeHidden").hidden = false;
     sessionStorage.setItem('title', grabTitleInput.value);
     sessionStorage.setItem('description', grabDescriptionInput.value);
+    console.log("Set title inp: " +sessionStorage.setItem('title', grabTitleInput.value));
+    console.log("Set desc inp: " +sessionStorage.setItem('description', grabDescriptionInput.value));
   }
 });
 
@@ -19,6 +21,7 @@ const x = document.getElementById('start');
 x.addEventListener('change', ()=>{
   console.log(x.value)
   sessionStorage.setItem('taskDueDate', x.value)
+  console.log("Set date: " +sessionStorage.setItem('taskDueDate', x.value));
 })
 
 const addHiddenAttribute = document.getElementById("cancelCreateCat");
@@ -36,7 +39,9 @@ function submitCategoryButtonListener () {
 if(submitCategoryButtonListener){
   grabTitleInput.value = sessionStorage.getItem('title');
   grabDescriptionInput.value = sessionStorage.getItem('description');
-  console.log("xxxx: " +sessionStorage.getItem('taskDueDate'));
+  console.log("get title inp: " +sessionStorage.getItem('title'));
+  console.log("get desc inp: " +sessionStorage.getItem('description'));
+  console.log("get task date: " +sessionStorage.getItem('taskDueDate'));
   x.value = sessionStorage.getItem('taskDueDate')
 };
 

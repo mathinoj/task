@@ -150,7 +150,7 @@ public class TaskController {
   @PostMapping("/tasks/create")
   public String postTask(@ModelAttribute Task tasker,
       @RequestParam(name = "cater", required = false) List<String> categories, @ModelAttribute Category newCategory,
-      @RequestParam(name = "name", required = false) String name, Model model, BindingResult result) {
+      @RequestParam(name = "name", required = false) String name, Model model) {
     long userId = Input.userIsLoggedIn().id;
     tasker.setUser(userDao.findUserById(userId));
 
@@ -159,7 +159,6 @@ public class TaskController {
     // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     // String publishDate = date.format(formatter);
     // tasker.setPublishDate(publishDate);
-
 
     if (categories == null || categories.equals(null)) {
       List<Category> categoriesFindAll = categoryDao.findAll();
@@ -241,7 +240,7 @@ public class TaskController {
 
   @PostMapping("/tasks/{id}/edit")
   public String doEditTask(@ModelAttribute Task task, @RequestParam(name = "cater") List<String> categories,
-      @RequestParam long userId) {
+      @RequestParam long userId, Model model) {
     task.setUser(userDao.findUserById(userId));
     List<Category> categoryList = new ArrayList<>();
     for (String category : categories) {
@@ -249,7 +248,15 @@ public class TaskController {
       categoryList.add(categoryFromDB);
     }
 
+    // System.out.println(task.getId());
     task.setCategories(categoryList);
+    if (task.getTitle().isEmpty() || task.getDescription().isEmpty()) {
+      System.out.println("xxxxxx: " + task.getId());
+      System.out.println(userId);
+      model.addAttribute("taskId", task.getId());
+      model.addAttribute("error", "Input field(s) cannot be Blank!");
+      return "/error";
+    }
 
     taskDao.save(task);
     return "redirect:/tasks/myTasks";
