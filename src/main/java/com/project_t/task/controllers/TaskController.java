@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import org.hibernate.grammars.hql.HqlParser.IsEmptyPredicateContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,8 @@ import com.project_t.task.repositories.TaskRepository;
 import com.project_t.task.repositories.UserRepository;
 
 import com.project_t.task.utils.Input;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class TaskController {
@@ -101,7 +104,17 @@ public class TaskController {
       @RequestParam(name = "search") String title,
       @RequestParam(name = "search") String description,
       @RequestParam(name = "search") String categoryName,
+      HttpServletRequest request,
+      // https://stackoverflow.com/questions/17291849/get-textfield-string-input-from-html-file-to-process-use-in-java-class
       Model model) {
+    System.out.println("titleeeeeeeeee");
+    String getWhatUserTyped = request.getParameter("search");
+    System.out.println(getWhatUserTyped);
+    if (getWhatUserTyped == null || getWhatUserTyped.equals(null) || getWhatUserTyped.isBlank()
+        || getWhatUserTyped.isEmpty()) {
+      model.addAttribute("searchBlank", "Search cannot be Blank!");
+      return "error";
+    }
     List<Task> searchTasks = taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description);
     Category categories = categoryDao.findCategoryByNameIsContaining(categoryName);
     if (categories == null) {
