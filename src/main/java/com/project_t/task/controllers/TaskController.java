@@ -78,33 +78,6 @@ public class TaskController {
     return "/tasks/myTasks";
   }
 
-  @GetMapping("/tasks/completeOrNot")
-  public String getCompleteOrNot(
-      @RequestParam(name = "search") String isComplete,
-      // @RequestParam(name = "search") String isIncomplete,
-      HttpServletRequest request,
-      Model model) {
-    long userId = Input.userIsLoggedIn().id;
-    System.out.println("is it comp: " + isComplete);
-    List<Task> findComplete = taskDao.findByIsComplete(isComplete);
-
-    if (isComplete.equals("false")) {
-      System.out.println("true it is FALSE");
-      // List<Task> findIncomplete = taskDao.findByIsComplete(isComplete);
-      model.addAttribute("userId", userId);
-      model.addAttribute("isIncomplete", findComplete);
-    }
-
-    // List<Task> findComplete = taskDao.findByIsComplete(isComplete);
-    // List<Task> findIncomplete = taskDao.findByIsComplete(isIncomplete);
-    // System.out.println("xxxx: " + findComplete);
-    model.addAttribute("userId", userId);
-    model.addAttribute("isComplete", findComplete);
-
-    // model.addAttribute("isIncomplete", findIncomplete);
-    return "tasks/completeOrNot";
-  }
-
   @GetMapping("/tasks/search")
   public String searchTaskByTitle(
       @RequestParam(name = "search") String title,
