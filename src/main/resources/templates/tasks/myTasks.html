@@ -13,27 +13,16 @@
         <nav th:insert="~{partials/partials :: navbar}"></nav>
         <!-- <header th:insert="~{partials/partials :: header}"></header> -->
         <h1>YOUR TASKS</h1>
-        <!-- <div th:each="x : ${userSpecificTasks}">
-            <div th:if="${userId == x.user.id}">
-                <span th:text="${x.isComplete}"></span>
-            </div>
-        </div> -->
-
-        <!-- <input type="radio" name="isComplete" id="incomplete" value="false" />
-        <label id="inc" for="incomplete">Incomplete</label> -->
-
         <div>
-        <form action="/tasks/completeOrNot" method="GET">
+        <form action="/tasks/myTasks" method="GET">
             <fieldset>
                 <legend>Sort By:</legend>
                 <div>
-                    <!-- <input
+                    <input
                         type="radio"
-                        id="allTasks"
-                        name="search"
-                        value="allTasks"
+                        href="/tasks/myTasks"
                     />
-                    <label for="allTasks">All Tasks</label> -->
+                    <label for="allTasks">All Tasks</label>
 
                     <input
                         type="radio"
@@ -59,13 +48,11 @@
 
         <div th:each="listUserTasks : ${userSpecificTasks}">
             <div th:if="${listUserTasks.user.id == userId}">
-                <!-- <h1 id="trueOrFalse" th:text="${listUserTasks.isComplete}"></h1> -->
                 <h3 th:text="${listUserTasks.title}"></h3>
                 <p th:text="${listUserTasks.description}"></p>
                 <div th:each="findCategoryName : ${listUserTasks.categories}">
                     <h4 th:text="${findCategoryName.name}"></h4>
                 </div>
-
                 <p>Posted By: [[${listUserTasks.user.username}]]</p>
                 <span
                     class="getPublishDate"
@@ -92,14 +79,51 @@
                 </div>
 
                 <br />
-                <!-- <span th:if="${listUserTasks.user.id == userId}"> -->
                 <a th:href="@{|/tasks/${listUserTasks.id}/edit|}">Edit</a>
                 <br />
                 <a th:href="@{|/tasks/${listUserTasks.id}/delete|}">Delete</a>
-                <!-- </span> -->
                 <hr />
             </div>
         </div>
+
+
+        <!-- <span th:text="${complete}"></span> -->
+
+        <div th:each="x : ${complete}">
+            <div th:if="${x.user.id == userId}">
+                <h3 th:text="${x.title}"></h3>
+                <p th:text="${x.description}"></p>
+                <div th:each="findCategoryName : ${x.categories}">
+                    <h4 th:text="${findCategoryName.name}"></h4>
+                </div>
+                <p>Posted By: [[${x.user.username}]]</p>
+                <span
+                class="getPublishDate"
+                th:text="${x.publishDate}"
+                hidden
+            ></span>
+            <p>
+                Posted on:
+                <span class="publishNewDate"></span>
+            </p>
+            <span
+                class="getOldTaskDate"
+                th:text="${x.taskDueDate}"
+                hidden
+            ></span>
+            <p>Due by: <span class="showNewTaskFormatDate"></span></p>
+
+            <div th:if="${x.isComplete == 'false'}">
+                <span>Task not Finished.</span>
+            </div>
+            <div th:if="${x.isComplete == 'true'}">
+                <span>Task Completed!</span>
+            </div>
+            <hr />
+            </div>
+        </div>
+
+
 
         <script src="../js/formatDate.js"></script>
         <script>
