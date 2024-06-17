@@ -12,12 +12,18 @@
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
 
-        <span th:if="${error}" th:text="${error}">Error</span>
-        <span th:if="${errorCategory}" th:text="${errorCategory}">Error</span>
-        <span th:if="${errorCategoryExists}" th:text="${errorCategoryExists}"
-            >Error</span
+        <span th:if="${error}" th:text="${error}"
+            ><a href="../tasks/create">Go Back</a></span
         >
+        <span th:if="${errorCategory}" th:text="${errorCategory}"
+            ><a href="../tasks/create">Go Back</a></span
+        >
+        <span
+            th:if="${errorCategoryExists}"
+            th:text="${errorCategoryExists}"
+        ></span>
+        <a th:href="#{|tasks/${taskId}|}">Edit Return</a>
         <br />
-        <a href="../tasks/create">Go Back</a>
+        <!-- <a href="../tasks/create">Go Back</a> -->
     </body>
 </html>
