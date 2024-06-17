@@ -251,8 +251,6 @@ public class TaskController {
     // System.out.println(task.getId());
     task.setCategories(categoryList);
     if (task.getTitle().isEmpty() || task.getDescription().isEmpty()) {
-      System.out.println("xxxxxx: " + task.getId());
-      System.out.println(userId);
       model.addAttribute("taskId", task.getId());
       model.addAttribute("error", "Input field(s) cannot be Blank!");
       return "/error";
