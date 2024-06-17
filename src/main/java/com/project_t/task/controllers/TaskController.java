@@ -62,13 +62,19 @@ public class TaskController {
   }
 
   @GetMapping("/tasks/myTasks")
-  public String getUsersOwnTasks(
-      Model model) {
+  public String getUsersOwnTasks(HttpServletRequest request, Model model) {
     long userId = Input.userIsLoggedIn().id;
-    System.out.println("uuu: " + userId);
-    model.addAttribute("tf", taskDao.findById(userId));
-    model.addAttribute("userId", userId);
-    model.addAttribute("userSpecificTasks", taskDao.findAll());
+    String getWhatUserPicked = request.getParameter("search");
+
+    if (getWhatUserPicked == null) {
+      model.addAttribute("tf", taskDao.findById(userId));
+      model.addAttribute("userId", userId);
+      model.addAttribute("userSpecificTasks", taskDao.findAll());
+    } else if (getWhatUserPicked.equals("true") || getWhatUserPicked.equals("false")) {
+      List<Task> findComplete = taskDao.findByIsComplete(getWhatUserPicked);
+      model.addAttribute("complete", findComplete);
+      model.addAttribute("userId", userId);
+    }
     return "/tasks/myTasks";
   }
 
@@ -76,9 +82,9 @@ public class TaskController {
   public String getCompleteOrNot(
       @RequestParam(name = "search") String isComplete,
       // @RequestParam(name = "search") String isIncomplete,
+      HttpServletRequest request,
       Model model) {
     long userId = Input.userIsLoggedIn().id;
-
     System.out.println("is it comp: " + isComplete);
     List<Task> findComplete = taskDao.findByIsComplete(isComplete);
 
@@ -117,7 +123,7 @@ public class TaskController {
     List<Task> searchTasks = taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description);
     Category categories = categoryDao.findCategoryByNameIsContaining(categoryName);
 
-    if(searchTasks.isEmpty()){
+    if (searchTasks.isEmpty()) {
       model.addAttribute("nothingFound", "Your search turned up Nathan!");
       return "error";
     }
