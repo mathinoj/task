@@ -28,6 +28,9 @@
                 </div>
             </div>
         </div>
+        <div th:if="${results == ''}">
+            <h1>Hi</h1>
+        </div>
         <!-- This is when the user searches by CATEGORY -->
         <div th:each="task : ${results2}">
             <h2 th:text="${task.title}"></h2>

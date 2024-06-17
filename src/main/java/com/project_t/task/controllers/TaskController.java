@@ -104,6 +104,8 @@ public class TaskController {
       @RequestParam(name = "search") String title,
       @RequestParam(name = "search") String description,
       @RequestParam(name = "search") String categoryName,
+      // @RequestParam(name = "task") String title2,
+      // @RequestParam(name = "task") String description2,
       HttpServletRequest request,
       // https://stackoverflow.com/questions/17291849/get-textfield-string-input-from-html-file-to-process-use-in-java-class
       Model model) {
@@ -115,8 +117,19 @@ public class TaskController {
       model.addAttribute("searchBlank", "Search cannot be Blank!");
       return "error";
     }
+
     List<Task> searchTasks = taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description);
     Category categories = categoryDao.findCategoryByNameIsContaining(categoryName);
+    System.out.println("yyyyyyyyyyyyyyyyyyy");
+    System.out.println("searchTz: " + searchTasks);
+    System.out.println("catTz: " + categories);
+    // if(getWhatUserTyped.equals(searchTasks)){
+    System.out.println("sad;kfj;dsajfdsa;fadjks");
+    // }
+    if(searchTasks.isEmpty()){
+      model.addAttribute("nothingFound", "Your search turned up Nathan!");
+      return "error";
+    }
     if (categories == null) {
       model.addAttribute("results", searchTasks);
     } else {
@@ -124,6 +137,10 @@ public class TaskController {
       model.addAttribute("results2", taskDao.findByCategoriesId(getCategoryId));
       model.addAttribute("categoryName", categories.getName());
     }
+    // if (categories) {
+    System.out.println("SEE MEE??" + searchTasks.isEmpty());
+    // }
+
     return "/tasks/index";
   }
 

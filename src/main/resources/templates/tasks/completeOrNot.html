@@ -12,6 +12,9 @@
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
         <h1>Complete or NOt</h1>
+        <!-- <a href="/tasks/myTasks">All Your Tasks</a> -->
+        <a href="/tasks/myTasks">My Tasks</a>
+
         <div th:each="x : ${isComplete}">
             <div th:if="${x.user.id == userId}">
                 <h3 th:text="${x.title}"></h3>
