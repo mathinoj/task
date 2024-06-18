@@ -9,6 +9,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.hibernate.grammars.hql.HqlParser.IsEmptyPredicateContext;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,8 +58,8 @@ public class TaskController {
   // }
 
   @GetMapping("/tasks")
-  public String getAllTasks(Model model) {
-    model.addAttribute("listAllTasks", taskDao.findAll());
+  public String getAllTasks(Model model, @PageableDefault(value = 2) Pageable pageable) {
+    model.addAttribute("listAllTasks", taskDao.findAll(pageable));
     return "/tasks/index";
   }
 
