@@ -82,6 +82,69 @@
             <hr />
         </div>
 
+        <div class="container">
+            <!-- Show the ads -->
+            <div th:each="listingAll : ${listAllTasks}">
+                <h1 th:text="${listingAll.title}" />
+                <p th:text="${listingAll.description}" />
+            </div>
+
+            <!-- Build the pagination component -->
+            <nav class="text-center">
+                <ul class="pagination">
+                    <li th:class="${listAllTasks.isFirst()}? 'disabled' : ''">
+                        <span th:if='${listAllTasks.isFirst()}'>← First</span>
+                        <a th:if='${not listAllTasks.isFirst()}' th:href="'?listAllTasks=0'">
+                            ← First
+                        </a>
+                    </li>
+                    <li th:class="${listAllTasks.hasPrevious()}? '' : 'disabled'">
+                        <span th:if='${not listAllTasks.hasPrevious()}'>«</span>
+                        <a
+                            th:if='${listAllTasks.hasPrevious()}'
+                            th:href="'?listAllTasks=' + ${listAllTasks.getNumber() - 1}"
+                            title='Go to previous listAllTasks'
+                        >
+                            «
+                        </a>
+                    </li>
+                    <-- Show a link to each page -->
+                    <li th:each="i : ${#numbers.sequence(1, listAllTasks.getTotalPages())}">
+                        <span
+                            th:if='${(i - 1) == param.listAllTasks}'
+                            th:text='${i}'>
+                            1
+                        </span>
+                        <a
+                            th:if='${not ((i - 1) == param.listAllTasks)}'
+                            th:href="'?listAllTasks=' + ${(i -1)}"
+                        >
+                            <span th:text='${i}'>1</span>
+                        </a>
+                    </li>
+                    <li th:class="${listAllTasks.hasNext()} ? '' : 'disabled'">
+                        <span th:if='${not listAllTasks.hasNext()}'>»</span>
+                        <a
+                            th:if='${listAllTasks.hasNext()}'
+                            th:href="'?listAllTasks=' + ${listAllTasks.getNumber() + 1}"
+                            title='Go to next listAllTasks'
+                        >
+                            »
+                        </a>
+                    </li>
+                    <li th:class="${listAllTasks.isLast()}? 'disabled' : ''">
+                        <span th:if='${listAllTasks.isLast()}'>Last →</span>
+                        <a
+                            th:if='${not listAllTasks.isLast()}'
+                            th:href="'?listAllTasks=' + ${listAllTasks.getTotalPages() - 1}"
+                        >
+                            Last →
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
         <script src="../js/formatDate.js"></script>
     </body>
 </html>
