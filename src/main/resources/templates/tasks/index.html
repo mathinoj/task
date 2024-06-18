@@ -38,113 +38,147 @@
             <h4 th:text="${categoryName}"></h4>
         </div>
 
-        <div th:each="listingAll : ${listAllTasks}">
-            <h2>
-                <a
-                    th:text="${listingAll.title}"
-                    th:href="@{|/tasks/${listingAll.id}|}"
-                ></a>
-            </h2>
-            <p th:text="${listingAll.description}"></p>
-            <!-- <span th:text="${listingAll.publishDate}"></span> -->
-            <div th:each="findCategoryName : ${listingAll.categories}">
-                <h4 th:text="${findCategoryName.name}"></h4>
-            </div>
-
-            <!-- <span th:text="${listingAll.isComplete}"></span> -->
-
-            <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
-            <span
-                class="getPublishDate"
-                th:text="${listingAll.publishDate}"
-                hidden
-            ></span>
-            <p>
-                Posted on:
-                <span class="publishNewDate"></span>
-            </p>
-
-            <span
-                class="getOldTaskDate"
-                th:text="${listingAll.taskDueDate}"
-                hidden
-            ></span>
-            Due on:
-            <span class="showNewTaskFormatDate"></span>
-            <br />
-            <br />
-            <div th:if="${listingAll.isComplete == 'false'}">
-                <span>Task Incomplete</span>
-            </div>
-            <div th:if="${listingAll.isComplete == 'true'}">
-                <span>Task Complete</span>
-            </div>
-            <hr />
-        </div>
-
         <div class="container">
-            <!-- Show the ads -->
             <div th:each="listingAll : ${listAllTasks}">
+                <h2>
+                    <a
+                        th:text="${listingAll.title}"
+                        th:href="@{|/tasks/${listingAll.id}|}"
+                    ></a>
+                </h2>
+                <p th:text="${listingAll.description}"></p>
+                <!-- <span th:text="${listingAll.publishDate}"></span> -->
+                <div th:each="findCategoryName : ${listingAll.categories}">
+                    <h4 th:text="${findCategoryName.name}"></h4>
+                </div>
+
+                <!-- <span th:text="${listingAll.isComplete}"></span> -->
+
+                <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
+                <span
+                    class="getPublishDate"
+                    th:text="${listingAll.publishDate}"
+                    hidden
+                ></span>
+                <p>
+                    Posted on:
+                    <span class="publishNewDate"></span>
+                </p>
+
+                <span
+                    class="getOldTaskDate"
+                    th:text="${listingAll.taskDueDate}"
+                    hidden
+                ></span>
+                Due on:
+                <span class="showNewTaskFormatDate"></span>
+                <br />
+                <br />
+                <div th:if="${listingAll.isComplete == 'false'}">
+                    <span>Task Incomplete</span>
+                </div>
+                <div th:if="${listingAll.isComplete == 'true'}">
+                    <span>Task Complete</span>
+                </div>
+                <hr />
+            </div>
+
+            <!-- <div class="container"> -->
+            <!-- Show the ads -->
+            <!-- <div th:each="listingAll : ${listAllTasks}">
                 <h1 th:text="${listingAll.title}" />
                 <p th:text="${listingAll.description}" />
-            </div>
+            </div> -->
+            <span th:text="${listAllTasks.isFirst()}"></span>
+            <span th:text="${listAllTasks.hasPrevious()}"></span>
+            <span th:text="${listAllTasks.getTotalPages()}"></span>
 
             <!-- Build the pagination component -->
             <nav class="text-center">
                 <ul class="pagination">
                     <li th:class="${listAllTasks.isFirst()}? 'disabled' : ''">
-                        <span th:if='${listAllTasks.isFirst()}'>← First</span>
-                        <a th:if='${not listAllTasks.isFirst()}' th:href="'?listAllTasks=0'">
+                        <span th:if="${listAllTasks.isFirst()}">← First</span>
+                        <a
+                            th:if="${!listAllTasks.isFirst()}"
+                            th:href="'?page=0'"
+                        >
                             ← First
                         </a>
                     </li>
-                    <li th:class="${listAllTasks.hasPrevious()}? '' : 'disabled'">
-                        <span th:if='${not listAllTasks.hasPrevious()}'>«</span>
+                    <li
+                        th:class="${listAllTasks.hasPrevious()}? '' : 'disabled'"
+                    >
+                        <span th:if="${!listAllTasks.hasPrevious()}">«</span>
                         <a
-                            th:if='${listAllTasks.hasPrevious()}'
-                            th:href="'?listAllTasks=' + ${listAllTasks.getNumber() - 1}"
-                            title='Go to previous listAllTasks'
+                            th:if="${listAllTasks.hasPrevious()}"
+                            th:href="'?page=' + ${listAllTasks.getNumber() - 1}"
+                            title="Go to previous page"
                         >
                             «
                         </a>
                     </li>
                     <-- Show a link to each page -->
-                    <li th:each="i : ${#numbers.sequence(1, listAllTasks.getTotalPages())}">
-                        <span
-                            th:if='${(i - 1) == param.listAllTasks}'
-                            th:text='${i}'>
+                    <li
+                        th:each="i : ${#numbers.sequence(1, listAllTasks.getTotalPages())}"
+                    >
+                        <span th:if="${(i - 1) == param.page}" th:text="${i}">
                             1
                         </span>
                         <a
-                            th:if='${not ((i - 1) == param.listAllTasks)}'
-                            th:href="'?listAllTasks=' + ${(i -1)}"
+                            th:if="${not ((i - 1) == param.listAllTasks)}"
+                            th:href="'?page=' + ${(i -1)}"
                         >
-                            <span th:text='${i}'>1</span>
+                            <span th:text="${i}">1</span>
                         </a>
                     </li>
                     <li th:class="${listAllTasks.hasNext()} ? '' : 'disabled'">
-                        <span th:if='${not listAllTasks.hasNext()}'>»</span>
+                        <span th:if="${!listAllTasks.hasNext()}">»</span>
                         <a
-                            th:if='${listAllTasks.hasNext()}'
-                            th:href="'?listAllTasks=' + ${listAllTasks.getNumber() + 1}"
-                            title='Go to next listAllTasks'
+                            th:if="${listAllTasks.hasNext()}"
+                            th:href="'?page=' + ${listAllTasks.getNumber() + 1}"
+                            title="Go to next page"
                         >
                             »
                         </a>
                     </li>
                     <li th:class="${listAllTasks.isLast()}? 'disabled' : ''">
-                        <span th:if='${listAllTasks.isLast()}'>Last →</span>
+                        <span th:if="${listAllTasks.isLast()}">Last →</span>
                         <a
-                            th:if='${not listAllTasks.isLast()}'
-                            th:href="'?listAllTasks=' + ${listAllTasks.getTotalPages() - 1}"
+                            th:if="${!listAllTasks.isLast()}"
+                            th:href="'?page=' + ${listAllTasks.getTotalPages() - 1}"
                         >
                             Last →
                         </a>
                     </li>
                 </ul>
             </nav>
+
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"
+        ></script>
         <script src="../js/formatDate.js"></script>
     </body>
 </html>
