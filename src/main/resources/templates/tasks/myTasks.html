@@ -119,6 +119,10 @@
             <div th:if="${x.isComplete == 'true'}">
                 <span>Task Completed!</span>
             </div>
+            <br />
+            <a th:href="@{|/tasks/${x.id}/edit|}">Edit</a>
+            <br />
+            <a th:href="@{|/tasks/${x.id}/delete|}">Delete</a>
             <hr />
             </div>
         </div>
