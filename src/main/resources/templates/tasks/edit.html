@@ -35,10 +35,43 @@
                     name="description"
                     id="description"
                     th:text="${task.description}"
-                    required
                 >
                 </textarea>
+                <br />
+                <br />
 
+                <label for="due">Due date:</label>
+                <input
+                    type="date"
+                    id="start"
+                    name="taskDueDate"
+                    th:value="${task.taskDueDate}"
+                />
+                <br />
+                <br />
+                <!-- <span th:text="${task.isComplete}"></span> -->
+                <input
+                    id="completeBox"
+                    type="text"
+                    name="isComplete"
+                    th:value="${task.isComplete}"
+                    hidden
+                />
+                <!-- <div th:if="${task.isComplete == 'false'}"> -->
+                <div>
+                    <span id="insertIfComplete">Is Task Complete?</span>
+                    <input type="checkbox" id="html" name="checkbox" />
+                </div>
+
+                <input
+                    type="text"
+                    name="publishDate"
+                    id="publishDate"
+                    th:value="${task.publishDate}"
+                    hidden
+                />
+                <!-- Hi: <span th:text="${task.publishDate}"></span> -->
+                <br />
                 <div th:each="x : ${task}">
                     <div th:each="b : ${x.categories}">
                         <fieldset>
@@ -47,7 +80,7 @@
                                 <label th:for="${c.name}">[[${c.name}]]</label>
                                 <div th:if="${b.id == c.id}">
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="cater"
                                         th:id="${c.name}"
                                         th:value="${c.getName()}"
@@ -56,7 +89,7 @@
                                 </div>
                                 <div th:if="${b.id != c.id}">
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="cater"
                                         th:id="${c.name}"
                                         th:value="${c.getName()}"
@@ -70,8 +103,10 @@
                 </div>
 
                 <input type="hidden" name="userId" th:value="${task.user.id}" />
-                <button>Edit</button>
+                <button id="editButt">Edit</button>
             </form>
         </div>
+
+        <script src="/js/isCompleted.js"></script>
     </body>
 </html>

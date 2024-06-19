@@ -9,29 +9,43 @@
       <nav th:insert="~{partials/partials :: navbar}" id="navBar"></nav>
       <h1>Create Task</h1>
 
+      <span hidden id="grab" class="dateToInsertIntoCalendar" th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
+      <!-- https://stackoverflow.com/questions/39860643/formatting-date-in-thymeleaf -->
 
       <form th:action="@{/tasks/create}" th:method="POST" th:object="${tasker}">
         <label for="title">Title</label>
-        <input th:field="*{title}" id="titleInput" required>
+        <input th:field="*{title}" id="titleInput" >
         <br>
         <br>
         <label for="description" id="desc">Description</label>
         <!-- <input th:field="*{description}"> -->
-        <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput" required></textarea>
+        <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput" ></textarea>
         <br>
         <br>
+        <label for="due">Due date:</label>
+        <input type="date" id="start" class="haterz" name="task-due" th:field="*{taskDueDate}"/>
+        <br>
+        <br>
+        <!-- <input type="text" value="${false}" th:field="*{isComplete}"> -->
+        <input type="radio" id="html" name="fav_language" value="false" th:field="*{isComplete}" hidden>
+
+        <br>
+        <br>
+        <span th:if="${errorCategory}" th:text="${errorCategory}">Error</span>
+
+
         <fieldset  id="cici">
           <legend>Categories:</legend>
 
           <div th:each="c : ${cat}">
             <label th:for="${c.name}">[[${c.name}]]</label>
-            <input type="checkbox" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker">
+            <input type="radio" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker">
             <!-- <span th:text="${c.getName()}"></span> -->
           </div>
 
           <!-- <span th:text="cat.getName()"></span> -->
         </fieldset>
-        <input type="submit" id="sobmit" class="subit" disabled>
+        <input type="submit" id="sobmit" disabled>
       </form>
               <!-- <a th:href="@{/tasks/addCategory}" id="blah">Add Category</a> -->
           <fieldset>
@@ -41,11 +55,11 @@
                   <form
                   th:action="@{/tasks/create}"
                   th:method="POST"
-                  th:object="${newCat}"
+                  th:object="${newCategory}"
                   >
 
                     <label for="name"></label>
-                    <input th:field="*{name}" id="catName" required/>
+                    <input th:field="*{name}" id="catName" />
                     <!-- <button type="submit">Sub Cat</button> -->
                      <input type="submit" value="Sobmyt" id="submitCategory">
                     <button type="button" id="cancelCreateCat">Cancel</button>
@@ -57,8 +71,6 @@
 
 
 
-<script src="../js/create.js"></script>
-
-
+    <script src="../js/create.js"></script>
     </body>
 </html>

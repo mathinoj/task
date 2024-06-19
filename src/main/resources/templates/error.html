@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head>
+        <th:block
+            th:replace="~{partials/partials :: head (title='Error!')}"
+        ></th:block>
+    </head>
+    <body>
+        <nav th:insert="~{partials/partials :: navbar}"></nav>
+
+        <span th:if="${error}" th:text="${error}"
+            ><a href="../tasks/create">Go Back</a></span
+        >
+        <span th:if="${errorCategory}" th:text="${errorCategory}"
+            ><a href="../tasks/create">Go Back</a></span
+        >
+        <span th:if="${errorCategoryExists}" th:text="${errorCategoryExists}">
+            <a th:href="#{|tasks/${taskId}|}">Edit Return</a></span
+        >
+
+        <span th:if="${searchBlank}" th:text="${searchBlank}"
+            ><a href="../tasks/index">Back to All Tasks</a></span
+        >
+        <span th:if="${nothingFound}" th:text="${nothingFound}"
+            ><a href="../tasks/index">Back to All Tasks</a></span
+        >
+
+        <br />
+        <!-- <a href="../tasks/create">Go Back</a> -->
+    </body>
+</html>

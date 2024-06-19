@@ -16,13 +16,18 @@
         <h1>Create Account</h1>
         <form th:action="@{/register}" th:method="POST" th:object="${user}">
             <label for="username">Username</label>
-            <input th:field="*{username}" id="username" />
+            <input th:field="*{username}" id="username" required />
             <br />
             <label for="email">Email</label>
-            <input th:field="*{email}" id="email" />
+            <input th:field="*{email}" id="email" required />
             <br />
             <label for="password">Password</label>
-            <input th:field="*{password}" id="password" type="password" />
+            <input
+                th:field="*{password}"
+                id="password"
+                type="password"
+                required
+            />
             <br />
             <input type="submit" value="Sign Me Up!" />
         </form>

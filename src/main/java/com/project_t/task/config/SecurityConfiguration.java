@@ -20,11 +20,10 @@ public class SecurityConfiguration {
             DispatcherType.ERROR)
         .permitAll()
         // http.authorizeHttpRequests((requests) -> requests
-        .requestMatchers("/tasks/delete", "/profile", "/tasks/create",
-            "/tasks/*/edit")
+        .requestMatchers("/tasks/create", "/tasks/*/edit", "/tasks/*/delete", "/profile", "/tasks/myTasks",
+            "/tasks/complete")
         .authenticated()
-        .requestMatchers("/", "/tasks", "/tasks/*", "/login", "/register", "/tasks/show",
-            "/tasks/{id}")
+        .requestMatchers("/", "/tasks", "/tasks/*", "/login", "/register", "/tasks/show", "/tasks/{id}")
         .permitAll()
         .requestMatchers("/js/*", "/css/*", "/img/*").permitAll())
         .formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/tasks"))
@@ -38,7 +37,7 @@ public class SecurityConfiguration {
   // }
 
   @Bean
-  public PasswordEncoder passwordEncoder() {
+  PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 }

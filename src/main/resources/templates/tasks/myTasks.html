@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head>
+        <th:block
+            th:replace="~{partials/partials :: head (title='Your Tasks')}"
+        ></th:block>
+    </head>
+    <body>
+        <nav th:insert="~{partials/partials :: navbar}"></nav>
+        <!-- <header th:insert="~{partials/partials :: header}"></header> -->
+        <h1>YOUR TASKS</h1>
+        <div>
+        <form action="/tasks/myTasks" method="GET">
+            <fieldset>
+                <legend>Sort By:</legend>
+                <div>
+                    <input
+                        type="radio"
+                        href="/tasks/myTasks"
+                    />
+                    <label for="allTasks">All Tasks</label>
+
+                    <input
+                        type="radio"
+                        id="isComplete"
+                        name="search"
+                        value="true"
+                    />
+                    <label for="completed">Completed</label>
+
+                    <input
+                        type="radio"
+                        id="isComplete"
+                        name="search"
+                        value="false"
+                    />
+                    <label for="incomplete">Incomplete</label>
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </fieldset>
+        </form>
+
+        <div th:each="listUserTasks : ${userSpecificTasks}">
+            <div th:if="${listUserTasks.user.id == userId}">
+                <h3 th:text="${listUserTasks.title}"></h3>
+                <p th:text="${listUserTasks.description}"></p>
+                <div th:each="findCategoryName : ${listUserTasks.categories}">
+                    <h4 th:text="${findCategoryName.name}"></h4>
+                </div>
+                <p>Posted By: [[${listUserTasks.user.username}]]</p>
+                <span
+                    class="getPublishDate"
+                    th:text="${listUserTasks.publishDate}"
+                    hidden
+                ></span>
+                <p>
+                    Posted on:
+                    <span class="publishNewDate"></span>
+                </p>
+
+                <span
+                    class="getOldTaskDate"
+                    th:text="${listUserTasks.taskDueDate}"
+                    hidden
+                ></span>
+                <p>Due by: <span class="showNewTaskFormatDate"></span></p>
+
+                <div th:if="${listUserTasks.isComplete == 'false'}">
+                    <span>Task not Finished.</span>
+                </div>
+                <div th:if="${listUserTasks.isComplete == 'true'}">
+                    <span>Task Completed!</span>
+                </div>
+
+                <br />
+                <a th:href="@{|/tasks/${listUserTasks.id}/edit|}">Edit</a>
+                <br />
+                <a th:href="@{|/tasks/${listUserTasks.id}/delete|}">Delete</a>
+                <hr />
+            </div>
+        </div>
+
+
+        <!-- <span th:text="${complete}"></span> -->
+
+        <div th:each="x : ${complete}">
+            <div th:if="${x.user.id == userId}">
+                <h3 th:text="${x.title}"></h3>
+                <p th:text="${x.description}"></p>
+                <div th:each="findCategoryName : ${x.categories}">
+                    <h4 th:text="${findCategoryName.name}"></h4>
+                </div>
+                <p>Posted By: [[${x.user.username}]]</p>
+                <span
+                class="getPublishDate"
+                th:text="${x.publishDate}"
+                hidden
+            ></span>
+            <p>
+                Posted on:
+                <span class="publishNewDate"></span>
+            </p>
+            <span
+                class="getOldTaskDate"
+                th:text="${x.taskDueDate}"
+                hidden
+            ></span>
+            <p>Due by: <span class="showNewTaskFormatDate"></span></p>
+
+            <div th:if="${x.isComplete == 'false'}">
+                <span>Task not Finished.</span>
+            </div>
+            <div th:if="${x.isComplete == 'true'}">
+                <span>Task Completed!</span>
+            </div>
+            <br />
+            <a th:href="@{|/tasks/${x.id}/edit|}">Edit</a>
+            <br />
+            <a th:href="@{|/tasks/${x.id}/delete|}">Delete</a>
+            <hr />
+            </div>
+        </div>
+
+
+
+        <script src="../js/formatDate.js"></script>
+        <script>
+            // let x = document.getElementById("inc").textContent;
+            // console.log("x: " + x);
+            // let y = document.getElementById("incomplete").name;
+            // console.log("y: " + y);
+            let x = document.getElementById("isComplete");
+            console.log("x: " + x.value);
+        </script>
+    </body>
+</html>

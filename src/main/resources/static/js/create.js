@@ -7,11 +7,22 @@ const grabDescriptionInput = document.getElementById("descriptionInput");
 
 removeHiddenAttribute.addEventListener('click', () => {
   if('click'){
+    let u = document.getElementById('start')
+    // console.log('uuu: ' +u);
     document.getElementById("removeHidden").hidden = false;
     sessionStorage.setItem('title', grabTitleInput.value);
     sessionStorage.setItem('description', grabDescriptionInput.value);
+    console.log("Set title inp: " +sessionStorage.setItem('title', grabTitleInput.value));
+    console.log("Set desc inp: " +sessionStorage.setItem('description', grabDescriptionInput.value));
   }
 });
+
+const x = document.getElementById('start');
+x.addEventListener('change', ()=>{
+  console.log(x.value)
+  sessionStorage.setItem('taskDueDate', x.value)
+  console.log("Set date: " +sessionStorage.setItem('taskDueDate', x.value));
+})
 
 const addHiddenAttribute = document.getElementById("cancelCreateCat");
 addHiddenAttribute.addEventListener('click', () =>{
@@ -28,6 +39,10 @@ function submitCategoryButtonListener () {
 if(submitCategoryButtonListener){
   grabTitleInput.value = sessionStorage.getItem('title');
   grabDescriptionInput.value = sessionStorage.getItem('description');
+  console.log("get title inp: " +sessionStorage.getItem('title'));
+  console.log("get desc inp: " +sessionStorage.getItem('description'));
+  console.log("get task date: " +sessionStorage.getItem('taskDueDate'));
+  x.value = sessionStorage.getItem('taskDueDate')
 };
 
 const newCategoryName = document.getElementById('catName');
@@ -38,13 +53,39 @@ if(submitCategoryButtonListener){
   })
 }
 
+
+const grabCheckboxInput = document.getElementsByName("cater")
+for(let singleCheckbox of grabCheckboxInput){
+  let boxName = singleCheckbox.id;
+  // console.log(singleCheckbox)
+ singleCheckbox.addEventListener('change', function(e) {
+  if(submitCategoryButtonListener){
+    if (this.checked) {
+      console.log(`Checkbox ${boxName} is checked..`);
+      document.getElementById('sobmit').disabled = false;
+    }
+    // https://stackoverflow.com/questions/14544104/checkbox-check-event-listener
+    // https://codepen.io/simonjvardy/pen/ZEpEgEj
+  }
+  });
+}
+
 const grabAllChildElements = document.getElementById('cici').children;
+// console.log(grabAllChildElements);
 for(let i = 1; i < grabAllChildElements.length; i++){
   let categoryName = grabAllChildElements[i].children[1].id;
+  // console.log(categoryName);
+
   newCategoryName.value = sessionStorage.getItem('newCategory');
+  console.log(newCategoryName.value);
+  // console.log(categoryName);
+
   if(newCategoryName.value == categoryName){
-    document.getElementById(categoryName).checked = true;
+    let b = document.getElementById(categoryName)
+    b.checked = true;
     document.getElementById('sobmit').disabled = false;
+    document.getElementById("html").setAttribute("checked","checked")
+
 
 
     console.log(document.getElementById(categoryName))
@@ -69,18 +110,11 @@ if(createTaskListener){
 }
 
 
-const grabCheckboxInput = document.getElementsByName("cater")
-for(let singleCheckbox of grabCheckboxInput){
-  let boxName = singleCheckbox.id;
-  console.log(singleCheckbox)
- singleCheckbox.addEventListener('change', function(e) {
-  if(submitCategoryButtonListener){
-    if (this.checked) {
-      console.log(`Checkbox ${boxName} is checked..`);
-      document.getElementById('sobmit').disabled = false;
-    }
-    // https://stackoverflow.com/questions/14544104/checkbox-check-event-listener
-    // https://codepen.io/simonjvardy/pen/ZEpEgEj
-  }
-  });
-}
+
+
+//This adds current date into calendar when user wants to Create a Task
+let getHiddenCurrentDate = document.querySelector('.dateToInsertIntoCalendar').textContent
+let setDateIntoCalendar = document.querySelector('input[type="date"]');
+setDateIntoCalendar.min = getHiddenCurrentDate
+// https://developer.mozilla.org/en-US/play
+
