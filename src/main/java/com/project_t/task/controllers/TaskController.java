@@ -58,8 +58,9 @@ public class TaskController {
   // }
 
   @GetMapping("/tasks")
-  public String getAllTasks(Model model, @PageableDefault(value = 2) Pageable pageable) {
+  public String getAllTasks(Model model, @PageableDefault(value = 100) Pageable pageable) {
     model.addAttribute("listAllTasks", taskDao.findAll(pageable));
+    // model.addAttribute("listAllTasks2", taskDao.findAll(pageable).isFirst());
     return "/tasks/index";
   }
 
@@ -98,10 +99,6 @@ public class TaskController {
     List<Task> searchTasks = taskDao.findByTitleIsContainingOrDescriptionIsContaining(title, description);
     Category categories = categoryDao.findCategoryByNameIsContaining(categoryName);
 
-    if (searchTasks.isEmpty()) {
-      model.addAttribute("nothingFound", "Your search turned up Nathan!");
-      return "error";
-    }
     if (categories == null) {
       model.addAttribute("results", searchTasks);
     } else {
@@ -110,7 +107,12 @@ public class TaskController {
       model.addAttribute("categoryName", categories.getName());
     }
 
-    return "/tasks/index";
+    if (searchTasks.isEmpty() && categories.equals(null)) {
+      model.addAttribute("nothingFound", "Your search turned up Nathan!");
+      return "error";
+    }
+
+    return "/tasks/searchResults";
   }
 
   @GetMapping("/tasks/{id}")
