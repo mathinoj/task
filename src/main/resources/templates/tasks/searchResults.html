@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head>
+        <th:block
+            th:replace="~{partials/partials :: head (title='Search Results')}"
+        ></th:block>
+    </head>
+    <body>
+        <nav th:insert="~{partials/partials :: navbar}"></nav>
+
+        <!-- This is when the user searches by TITLE or DESCRIPTION -->
+        <!-- <div th:if="${results}"> -->
+        <div th:each="task : ${results}">
+            <h2 th:text="${task.title}"></h2>
+            <p th:text="${task.description}"></p>
+            <div th:each="findCategoryName : ${task.categories}">
+                <h4 th:text="${findCategoryName.name}"></h4>
+            </div>
+        </div>
+        <!-- </div> -->
+
+        <!-- This is when the user searches by CATEGORY -->
+        <!-- <div th:if="${results2}"> -->
+        <div th:each="task : ${results2}">
+            <h2 th:text="${task.title}"></h2>
+            <p th:text="${task.description}"></p>
+            <h4 th:text="${categoryName}"></h4>
+        </div>
+        <!-- </div> -->
+    </body>
+</html>
