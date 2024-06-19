@@ -2,6 +2,8 @@ package com.project_t.task.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.project_t.task.models.Task;
@@ -23,5 +25,10 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
   List<Task> findCategoriesById(long id);
 
   List<Task> findByIsComplete(String isComplete);
+
+  // Object findAll(Pageable pageable);
+
+  Page<Task> findAll(Pageable pageable);
+
 
 }
