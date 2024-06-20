@@ -47,16 +47,16 @@ public class Image {
     this.name = name;
   }
 
-  public Image() {
-  }
-
-  // public Image(byte[] content, String name) {
-  //   this.content = content;
-  //   this.name = name;
+  // public Image() {
   // }
 
-  public String generateBase64Image()
-	{
-		return Base64.encodeBase64String(this.getContent());
-	}
+  // public Image(byte[] content, String name) {
+  // this.content = content;
+  // this.name = name;
+  // }
+
+  // public String generateBase64Image()
+  // {
+  // return Base64.encodeBase64String(this.getContent());
+  // }
 }
