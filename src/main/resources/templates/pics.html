@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head>
+        <th:block
+            th:replace="~{partials/partials :: head(title= 'Task Profile')}"
+        >
+        </th:block>
+        <link rel="stylesheet" th:href="@{/css/createTasks.css}" />
+    </head>
+    <body>
+        <nav th:replace="~{partials/partials :: navbar}"></nav>
+
+        <form action="/profilePic" method="POST" enctype="multipart/form-data">
+            <label for="file">Upload a Pic!</label>
+            <input id="image" name="image" type="file" />
+            <br />
+            <input type="submit" value="upload" />
+        </form>
+    </body>
+</html>
