@@ -14,9 +14,14 @@
     <body>
         <nav th:replace="~{partials/partials :: navbar}"></nav>
 
-        <form action="/profilePic" method="POST" enctype="multipart/form-data">
+        <form
+            th:action="@{/pics}"
+            th:method="POST"
+            enctype="multipart/form-data"
+            th:object="${picture}"
+        >
             <label for="file">Upload a Pic!</label>
-            <input id="image" name="image" type="file" />
+            <input id="image" name="file" type="file" />
             <br />
             <input type="submit" value="upload" />
         </form>
