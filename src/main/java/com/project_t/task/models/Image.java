@@ -15,13 +15,10 @@ import jakarta.persistence.Table;
 public class Image {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  long id;
+  private long id;
 
-  @Lob
-  byte[] content;
-
-  @Column(length = 500, nullable = false, unique = true)
-  String name;
+  @Column(length = 65, nullable = true)
+  private String image;
 
   public long getId() {
     return id;
@@ -31,32 +28,27 @@ public class Image {
     this.id = id;
   }
 
-  public byte[] getContent() {
-    return content;
+  public String getImage() {
+    return image;
   }
 
-  public void setContent(byte[] content) {
-    this.content = content;
+  public void setImage(String image) {
+    this.image = image;
   }
 
-  public String getName() {
-    return name;
+  public Image() {
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public Image(String image) {
+    this.image = image;
   }
 
-  // public Image() {
-  // }
+  public Image(long id, String image) {
+    this.id = id;
+    this.image = image;
+  }
 
-  // public Image(byte[] content, String name) {
-  // this.content = content;
-  // this.name = name;
-  // }
-
-  // public String generateBase64Image()
-  // {
+  // public String generateBase64Image() {
   // return Base64.encodeBase64String(this.getContent());
   // }
 }
