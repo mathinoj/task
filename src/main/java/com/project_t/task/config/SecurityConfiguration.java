@@ -23,7 +23,7 @@ public class SecurityConfiguration {
         .requestMatchers("/tasks/create", "/tasks/*/edit", "/tasks/*/delete", "/profile", "/tasks/myTasks",
             "/tasks/complete")
         .authenticated()
-        .requestMatchers("/", "/tasks", "/tasks/*", "/login", "/register", "/tasks/show", "/tasks/{id}")
+        .requestMatchers("/", "/tasks", "/tasks/*", "/login", "/register", "/tasks/show", "/tasks/{id}", "/pics")
         .permitAll()
         .requestMatchers("/js/*", "/css/*", "/img/*").permitAll())
         .formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/tasks"))

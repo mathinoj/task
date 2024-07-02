@@ -19,6 +19,9 @@
       <li class="nav-item" sec:authorize="isAuthenticated()">
         <a href="/tasks/create">Create Tasks</a>
       </li>
+      <li class="nav-item" sec:authorize="!isAuthenticated()">
+        <a href="/pics">Pic</a>
+      </li>
       <li class="nav-item" sec:authorize="isAuthenticated()">
         <a href="/tasks/myTasks">My Tasks</a>
       </li>
