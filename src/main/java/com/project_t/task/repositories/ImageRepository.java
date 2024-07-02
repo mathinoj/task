@@ -1,7 +1,11 @@
 package com.project_t.task.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import com.project_t.task.models.Image;
 
-public class ImageRepository extends JpaRepository<Image, Long> {
+@Repository
+public interface ImageRepository extends JpaRepository <Image, Long>{
 
 }
