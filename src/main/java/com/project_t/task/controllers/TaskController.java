@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.project_t.task.exception.ApiExceptionHandler;
-import com.project_t.task.exception.ApiRequestException;
 import com.project_t.task.models.Category;
 import com.project_t.task.models.Task;
 import com.project_t.task.models.User;
