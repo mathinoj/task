@@ -50,41 +50,41 @@
             <div th:if="${listUserTasks.user.id == userId}">
                 <div class="card m-2" style="width: 18rem">
                     <div class="card-body">
-                <h3 th:text="${listUserTasks.title}"></h3>
-                <p th:text="${listUserTasks.description}"></p>
-                <div th:each="findCategoryName : ${listUserTasks.categories}">
-                    <h4 th:text="${findCategoryName.name}"></h4>
-                </div>
-                <p>Posted By: [[${listUserTasks.user.username}]]</p>
-                <span
-                    class="getPublishDate"
-                    th:text="${listUserTasks.publishDate}"
-                    hidden
-                ></span>
-                <p>
-                    Posted on:
-                    <span class="publishNewDate"></span>
-                </p>
+                        <h3 th:text="${listUserTasks.title}"></h3>
+                        <p th:text="${listUserTasks.description}"></p>
+                        <div th:each="findCategoryName : ${listUserTasks.categories}">
+                            <h4 th:text="${findCategoryName.name}"></h4>
+                        </div>
+                        <p>Posted By: [[${listUserTasks.user.username}]]</p>
+                        <span
+                            class="getPublishDate"
+                            th:text="${listUserTasks.publishDate}"
+                            hidden
+                        ></span>
+                        <p>
+                            Posted on:
+                            <span class="publishNewDate"></span>
+                        </p>
 
-                <span
-                    class="getOldTaskDate"
-                    th:text="${listUserTasks.taskDueDate}"
-                    hidden
-                ></span>
-                <p>Due by: <span class="showNewTaskFormatDate"></span></p>
+                        <span
+                            class="getOldTaskDate"
+                            th:text="${listUserTasks.taskDueDate}"
+                            hidden
+                        ></span>
+                        <p>Due by: <span class="showNewTaskFormatDate"></span></p>
 
-                <div th:if="${listUserTasks.isComplete == 'false'}">
-                    <span>Task not Finished.</span>
-                </div>
-                <div th:if="${listUserTasks.isComplete == 'true'}">
-                    <span>Task Completed!</span>
-                </div>
+                        <div th:if="${listUserTasks.isComplete == 'false'}">
+                            <span>Task not Finished.</span>
+                        </div>
+                        <div th:if="${listUserTasks.isComplete == 'true'}">
+                            <span>Task Completed!</span>
+                        </div>
 
-                <br />
-                <a th:href="@{|/tasks/${listUserTasks.id}/edit|}">Edit</a>
-                <br />
-                <a th:href="@{|/tasks/${listUserTasks.id}/delete|}">Delete</a>
-                </div>
+                        <div class="card-body">
+                        <a class="card-link" th:href="@{|/tasks/${listUserTasks.id}/edit|}">Edit</a>
+                        <a class="card-link" th:href="@{|/tasks/${listUserTasks.id}/delete|}">Delete</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
