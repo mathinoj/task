@@ -48,41 +48,53 @@
 
         <div th:each="listUserTasks : ${userSpecificTasks}">
             <div th:if="${listUserTasks.user.id == userId}">
-                <h3 th:text="${listUserTasks.title}"></h3>
-                <p th:text="${listUserTasks.description}"></p>
-                <div th:each="findCategoryName : ${listUserTasks.categories}">
-                    <h4 th:text="${findCategoryName.name}"></h4>
-                </div>
-                <p>Posted By: [[${listUserTasks.user.username}]]</p>
-                <span
-                    class="getPublishDate"
-                    th:text="${listUserTasks.publishDate}"
-                    hidden
-                ></span>
-                <p>
-                    Posted on:
-                    <span class="publishNewDate"></span>
-                </p>
+                <div class="card m-2" style="width: 18rem">
+                    <div class="card-body">
+                        <h3 th:text="${listUserTasks.title}"></h3>
+                    </div>
+                    <div class="card-body text-bg-light">
+                        <p th:text="${listUserTasks.description}"></p>
+                    </div>
+                    <div class="card-body" th:each="findCategoryName : ${listUserTasks.categories}">
+                            <h4 th:text="${findCategoryName.name}"></h4>
+                    </div>
+                    <!-- </div> -->
 
-                <span
-                    class="getOldTaskDate"
-                    th:text="${listUserTasks.taskDueDate}"
-                    hidden
-                ></span>
-                <p>Due by: <span class="showNewTaskFormatDate"></span></p>
+                        <ul class="list-group list-group-flush">
 
-                <div th:if="${listUserTasks.isComplete == 'false'}">
-                    <span>Task not Finished.</span>
-                </div>
-                <div th:if="${listUserTasks.isComplete == 'true'}">
-                    <span>Task Completed!</span>
-                </div>
+                                <!-- <p class="list-group-item">Posted By: [[${listUserTasks.user.username}]]</p> -->
 
-                <br />
-                <a th:href="@{|/tasks/${listUserTasks.id}/edit|}">Edit</a>
-                <br />
-                <a th:href="@{|/tasks/${listUserTasks.id}/delete|}">Delete</a>
-                <hr />
+
+                                <span
+                                    class="getPublishDate"
+                                    th:text="${listUserTasks.publishDate}" hidden>
+                                </span>
+                                <p class="list-group-item">Posted on:<span class="publishNewDate"></span>
+                                </p>
+
+
+                                <span
+                                    class="getOldTaskDate"
+                                    th:text="${listUserTasks.taskDueDate}"
+                                    hidden
+                                    >
+                                </span>
+                                <p class="list-group-item">Due by: <span class="showNewTaskFormatDate"></span></p>
+
+                        <div class="list-group-item" th:if="${listUserTasks.isComplete == 'false'}">
+                            <h5>Task not Finished.</h5>
+                        </div>
+                        <div th:if="${listUserTasks.isComplete == 'true'}">
+                            <h5>Task Completed!</h6>
+                        </div>
+
+                        </ul>
+
+                        <div class="card-body">
+                            <a class="card-link" th:href="@{|/tasks/${listUserTasks.id}/edit|}">Edit</a>
+                            <a class="card-link" th:href="@{|/tasks/${listUserTasks.id}/delete|}">Delete</a>
+                        </div>
+                </div>
             </div>
         </div>
 
