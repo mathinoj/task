@@ -18,9 +18,9 @@
 
         <!-- This is when the user searches by TITLE or DESCRIPTION -->
         <div th:if="${results}">
-            <div class="card m-2" style="width: 18rem">
-                <div class="card-body mx-auto">
-                    <div th:each="task : ${results}">
+            <div th:each="task : ${results}">
+                <div class="card mx-auto mb-2" style="width: 18rem">
+                    <div class="card-body mx-auto">
                         <h2 class="card-title" th:text="${task.title}"></h2>
                         <p class="card-text" th:text="${task.description}"></p>
                         <div th:each="findCategoryName : ${task.categories}">
@@ -36,9 +36,9 @@
 
         <!-- This is when the user searches by CATEGORY -->
         <div th:if="${results2}">
-            <div class="card mx-auto" style="width: 18rem">
-                <div class="card-body mx-auto">
-                    <div th:each="task : ${results2}">
+            <div th:each="task : ${results2}">
+                <div class="card mx-auto mb-2" style="width: 18rem">
+                    <div class="card-body mx-auto">
                         <h2 class="card-title" th:text="${task.title}"></h2>
                         <p class="card-text" th:text="${task.description}"></p>
                         <h4
