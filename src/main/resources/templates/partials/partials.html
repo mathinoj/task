@@ -60,6 +60,102 @@
 
 
 
+<!-- PAGINATION -->
+  <div th:fragment="pagination" class="container text-center">
+    <nav class="text-center" aria-label="...">
+        <ul class="pagination">
+            <li
+                th:class="${listAllTasks.isFirst()}? 'page-item disabled' : ''"
+            >
+                <span
+                    class="page-link"
+                    th:if="${listAllTasks.isFirst()}"
+                    >First</span
+                >
+                <a
+                    th:if="${!listAllTasks.isFirst()}"
+                    th:href="'?page=0'"
+                    class="page-link"
+                >
+                    First
+                </a>
+            </li>
+            <li
+                th:class="${listAllTasks.hasPrevious()}? '' : 'page-item disabled'"
+            >
+                <span
+                    class="page-link"
+                    th:if="${!listAllTasks.hasPrevious()}"
+                    >Previous</span
+                >
+                <a
+                    class="page-link"
+                    th:if="${listAllTasks.hasPrevious()}"
+                    th:href="'?page=' + ${listAllTasks.getNumber() - 1}"
+                    title="Go to previous page"
+                    aria-label="Previous"
+                >
+                    Previous
+                </a>
+            </li>
+            <!-- Show a link to each page  -->
+            <li
+                class="page-item"
+                th:each="i : ${#numbers.sequence(1, listAllTasks.getTotalPages())}"
+            >
+                <span
+                    class="page-link"
+                    th:if="${(i - 1) == param.page}"
+                    th:text="${i}"
+                >
+                    1
+                </span>
+                <a
+                    class="page-link"
+                    th:if="${not ((i - 1) == param.listAllTasks)}"
+                    th:href="'?page=' + ${(i -1)}"
+                >
+                    <span th:text="${i}">1</span>
+                </a>
+            </li>
+            <li
+                th:class="${listAllTasks.hasNext()} ? '' : 'page-item disabled'"
+            >
+                <span
+                    class="page-link"
+                    th:if="${!listAllTasks.hasNext()}"
+                    >Next</span
+                >
+                <a
+                    class="page-link"
+                    th:if="${listAllTasks.hasNext()}"
+                    th:href="'?page=' + ${listAllTasks.getNumber() + 1}"
+                    title="Go to next page"
+                >
+                    Next
+                </a>
+            </li>
+            <li
+                th:class="${listAllTasks.isLast()}? 'page-item disabled' : ''"
+            >
+                <span class="page-link" th:if="${listAllTasks.isLast()}"
+                    >Last</span
+                >
+                <a
+                    class="page-link"
+                    th:if="${!listAllTasks.isLast()}"
+                    th:href="'?page=' + ${listAllTasks.getTotalPages() - 1}"
+                >
+                    Last
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- PAGINATION ^^^-->
+
+
+
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
   <div th:fragment="script">
         <script
