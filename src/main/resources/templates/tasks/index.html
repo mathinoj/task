@@ -37,11 +37,7 @@
                 <h4 th:text="${categoryName.getName}"></h4>
             </div>
         </div> -->
-        <!-- <div th:each="x : ${listAllTasks}">
-            <div th:if="${x.id == x.id}">
-                <p th:text="${x.id}"></p>
-            </div>
-        </div> -->
+
         <div th:each="listingAll : ${listAllTasks}">
             <div class="card m-2" style="width: 18rem">
                 <div class="card-body mx-auto">
