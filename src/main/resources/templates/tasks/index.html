@@ -37,53 +37,63 @@
                 <h4 th:text="${categoryName.getName}"></h4>
             </div>
         </div> -->
-
-        <div class="container">
-            <div th:each="listingAll : ${listAllTasks}">
-                <h2>
-                    <a
-                        th:text="${listingAll.title}"
-                        th:href="@{|/tasks/${listingAll.id}|}"
-                    ></a>
-                </h2>
-                <p th:text="${listingAll.description}"></p>
-                <!-- <span th:text="${listingAll.publishDate}"></span> -->
-                <div th:each="findCategoryName : ${listingAll.categories}">
-                    <h4 th:text="${findCategoryName.name}"></h4>
-                </div>
-
-                <!-- <span th:text="${listingAll.isComplete}"></span> -->
-
-                <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
-                <span
-                    class="getPublishDate"
-                    th:text="${listingAll.publishDate}"
-                    hidden
-                ></span>
-                <p>
-                    Posted on:
-                    <span class="publishNewDate"></span>
-                </p>
-
-                <span
-                    class="getOldTaskDate"
-                    th:text="${listingAll.taskDueDate}"
-                    hidden
-                ></span>
-                Due on:
-                <span class="showNewTaskFormatDate"></span>
-                <br />
-                <br />
-                <div th:if="${listingAll.isComplete == 'false'}">
-                    <span>Task Incomplete</span>
-                </div>
-                <div th:if="${listingAll.isComplete == 'true'}">
-                    <span>Task Complete</span>
-                </div>
-                <hr />
+        <!-- <div th:each="x : ${listAllTasks}">
+            <div th:if="${x.id == x.id}">
+                <p th:text="${x.id}"></p>
             </div>
+        </div> -->
+        <div th:each="listingAll : ${listAllTasks}">
+            <div class="card m-2" style="width: 18rem">
+                <div class="card-body mx-auto">
+                    <h2>
+                        <a
+                            th:text="${listingAll.title}"
+                            th:href="@{|/tasks/${listingAll.id}|}"
+                        ></a>
+                    </h2>
+                    <p th:text="${listingAll.description}"></p>
+                    <!-- <span th:text="${listingAll.publishDate}"></span> -->
+                    <div th:each="findCategoryName : ${listingAll.categories}">
+                        <h4 th:text="${findCategoryName.name}"></h4>
+                    </div>
 
-            <!-- Build the pagination component -->
+                    <!-- <span th:text="${listingAll.isComplete}"></span> -->
+
+                    <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
+                    <span
+                        class="getPublishDate"
+                        th:text="${listingAll.publishDate}"
+                        hidden
+                    ></span>
+                    <p>
+                        Posted on:
+                        <span class="publishNewDate"></span>
+                    </p>
+
+                    <span
+                        class="getOldTaskDate"
+                        th:text="${listingAll.taskDueDate}"
+                        hidden
+                    ></span>
+                    Due on:
+                    <span class="showNewTaskFormatDate"></span>
+                    <br />
+                    <br />
+                    <div th:if="${listingAll.isComplete == 'false'}">
+                        <span>Task Incomplete</span>
+                    </div>
+                    <div th:if="${listingAll.isComplete == 'true'}">
+                        <span>Task Complete</span>
+                    </div>
+                    <!-- <hr /> -->
+                </div>
+            </div>
+        </div>
+        <!-- </div>
+        </div> -->
+
+        <!-- Build the pagination component -->
+        <div class="container text-center">
             <nav class="text-center" aria-label="...">
                 <ul class="pagination">
                     <li
