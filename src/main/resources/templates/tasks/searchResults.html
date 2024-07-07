@@ -12,7 +12,9 @@
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
 
-        <h1>Searh Results</h1>
+        <div class="container text-center">
+            <h1>Searh Results</h1>
+        </div>
 
         <!-- This is when the user searches by TITLE or DESCRIPTION -->
         <div th:if="${results}">
@@ -34,7 +36,7 @@
 
         <!-- This is when the user searches by CATEGORY -->
         <div th:if="${results2}">
-            <div class="card m-2" style="width: 18rem">
+            <div class="card mx-auto" style="width: 18rem">
                 <div class="card-body mx-auto">
                     <div th:each="task : ${results2}">
                         <h2 class="card-title" th:text="${task.title}"></h2>
