@@ -48,6 +48,8 @@
 
         <div th:each="listUserTasks : ${userSpecificTasks}">
             <div th:if="${listUserTasks.user.id == userId}">
+                <div class="card m-2" style="width: 18rem">
+                    <div class="card-body">
                 <h3 th:text="${listUserTasks.title}"></h3>
                 <p th:text="${listUserTasks.description}"></p>
                 <div th:each="findCategoryName : ${listUserTasks.categories}">
@@ -82,7 +84,8 @@
                 <a th:href="@{|/tasks/${listUserTasks.id}/edit|}">Edit</a>
                 <br />
                 <a th:href="@{|/tasks/${listUserTasks.id}/delete|}">Delete</a>
-                <hr />
+                </div>
+                </div>
             </div>
         </div>
 
