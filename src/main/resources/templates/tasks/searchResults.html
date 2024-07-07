@@ -15,23 +15,37 @@
         <h1>Searh Results</h1>
 
         <!-- This is when the user searches by TITLE or DESCRIPTION -->
-        <!-- <div th:if="${results}"> -->
-        <div th:each="task : ${results}">
-            <h2 th:text="${task.title}"></h2>
-            <p th:text="${task.description}"></p>
-            <div th:each="findCategoryName : ${task.categories}">
-                <h4 th:text="${findCategoryName.name}"></h4>
+        <div th:if="${results}">
+            <div class="card m-2" style="width: 18rem">
+                <div class="card-body mx-auto">
+                    <div th:each="task : ${results}">
+                        <h2 class="card-title" th:text="${task.title}"></h2>
+                        <p class="card-text" th:text="${task.description}"></p>
+                        <div th:each="findCategoryName : ${task.categories}">
+                            <h4
+                                class="card-subtitle mb-2 text-body-secondary"
+                                th:text="${findCategoryName.name}"
+                            ></h4>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- </div> -->
 
         <!-- This is when the user searches by CATEGORY -->
-        <!-- <div th:if="${results2}"> -->
-        <div th:each="task : ${results2}">
-            <h2 th:text="${task.title}"></h2>
-            <p th:text="${task.description}"></p>
-            <h4 th:text="${categoryName}"></h4>
+        <div th:if="${results2}">
+            <div class="card m-2" style="width: 18rem">
+                <div class="card-body mx-auto">
+                    <div th:each="task : ${results2}">
+                        <h2 class="card-title" th:text="${task.title}"></h2>
+                        <p class="card-text" th:text="${task.description}"></p>
+                        <h4
+                            class="card-subtitle mb-2 text-body-secondary"
+                            th:text="${categoryName}"
+                        ></h4>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- </div> -->
     </body>
 </html>
