@@ -12,6 +12,8 @@
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
 
+        <h1>Searh Results</h1>
+
         <!-- This is when the user searches by TITLE or DESCRIPTION -->
         <!-- <div th:if="${results}"> -->
         <div th:each="task : ${results}">
