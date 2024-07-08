@@ -81,12 +81,12 @@
                                 </span>
                                 <p class="list-group-item">Due by: <span class="showNewTaskFormatDate"></span></p>
 
-                        <div class="list-group-item" th:if="${listUserTasks.isComplete == 'false'}">
-                            <h5>Task not Finished.</h5>
-                        </div>
-                        <div th:if="${listUserTasks.isComplete == 'true'}">
-                            <h5>Task Completed!</h6>
-                        </div>
+                                <div class="list-group-item" th:if="${listUserTasks.isComplete == 'false'}">
+                                    <h5>Task not Finished.</h5>
+                                </div>
+                                <div th:if="${listUserTasks.isComplete == 'true'}">
+                                    <h5>Task Completed!</h6>
+                                </div>
 
                         </ul>
 
