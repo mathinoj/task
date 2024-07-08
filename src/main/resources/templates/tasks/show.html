@@ -7,9 +7,9 @@
     </head>
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
-        <header th:insert="~{partials/partials :: header}"></header>
+        <!-- <header th:insert="~{partials/partials :: header}"></header> -->
 
-        <h2>Here is a Task:</h2>
+        <h2 class="header text-center">Here is a Task:</h2>
         <div class="card m-2" style="width: 18rem">
             <div class="card-body">
                 <h3 th:text="${task.title}"></h3>
@@ -64,5 +64,6 @@
         </div>
 
         <script src="../js/formatDate.js"></script>
+        <div th:insert="~{partials/partials :: script}"></div>
     </body>
 </html>
