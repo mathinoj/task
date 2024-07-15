@@ -7,7 +7,7 @@
   border-style: solid;
 } */
 
-body {
+#firstForm {
   text-align: center;
 }
 #createForm {
@@ -23,5 +23,14 @@ body {
 }
 
 #hiddenForm{
-  width: 25%;
+  width: auto;
 }
+
+#fSet{
+  text-align: center;
+}
+
+#newCategoryForm{
+  display: inline-block;
+}
+

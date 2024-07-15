@@ -19,103 +19,110 @@
         ></span>
         <!-- https://stackoverflow.com/questions/39860643/formatting-date-in-thymeleaf -->
 
-        <form
-            class="row g-3"
-            id="createForm"
-            th:action="@{/tasks/create}"
-            th:method="POST"
-            th:object="${tasker}"
-        >
-            <div class="input-group mb-3">
-                <!-- <label class="form-label" for="title">Title</label> -->
-                <span class="input-group-text" id="inputGroup-sizing-default"
-                    >Title</span
-                >
-                <!-- <input th:field="*{title}" class="form-control" id="titleInput" > -->
-                <input
-                    th:field="*{title}"
-                    id="titleInput"
-                    type="text"
-                    class="form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default"
-                />
-            </div>
-            <div class="input-group">
-                <!-- <label class="form-label" for="description" id="desc">Description</label> -->
-                <span class="input-group-text">Description</span>
-
-                <!-- <input th:field="*{description}"> -->
-                <textarea
-                    class="form-control"
-                    aria-label="Task Description"
-                    th:field="*{description}"
-                    id="descriptionInput"
-                ></textarea>
-            </div>
-            <div class="calendar grid row-gap-3 input-group">
-                <!-- <label for="due">Due date:</label> -->
-                <span class="input-group-text" id="inputGroup-sizing-default"
-                    >Due Date:</span
-                >
-
-                <!-- WORKING ON MAKING DUE DATE CALENDAR SHORTER -->
-                <input
-                    type="date"
-                    id="start"
-                    class="haterz col form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default"
-                    name="task-due"
-                    th:field="*{taskDueDate}"
-                />
-            </div>
-            <br />
-            <!-- <input type="text" value="${false}" th:field="*{isComplete}"> -->
-            <input
-                type="radio"
-                id="html"
-                name="fav_language"
-                value="false"
-                th:field="*{isComplete}"
-                hidden
-            />
-
-            <span th:if="${errorCategory}" th:text="${errorCategory}"
-                >Error</span
+        <div id="firstForm">
+            <form
+                class="row g-3"
+                id="createForm"
+                th:action="@{/tasks/create}"
+                th:method="POST"
+                th:object="${tasker}"
             >
-
-            <fieldset id="cici">
-                <legend>Categories:</legend>
-
-                <div th:each="c : ${cat}">
-                    <label th:for="${c.name}">[[${c.name}]]</label>
+                <div class="input-group mb-3">
+                    <!-- <label class="form-label" for="title">Title</label> -->
+                    <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >Title</span
+                    >
+                    <!-- <input th:field="*{title}" class="form-control" id="titleInput" > -->
                     <input
-                        type="radio"
-                        name="cater"
-                        th:id="${c.name}"
-                        th:value="${c.getName()}"
-                        class="checker"
+                        th:field="*{title}"
+                        id="titleInput"
+                        type="text"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
                     />
-                    <!-- <span th:text="${c.getName()}"></span> -->
                 </div>
+                <div class="input-group">
+                    <!-- <label class="form-label" for="description" id="desc">Description</label> -->
+                    <span class="input-group-text">Description</span>
 
-                <!-- <span th:text="cat.getName()"></span> -->
-            </fieldset>
-            <input type="submit" id="sobmit" disabled />
-        </form>
+                    <!-- <input th:field="*{description}"> -->
+                    <textarea
+                        class="form-control"
+                        aria-label="Task Description"
+                        th:field="*{description}"
+                        id="descriptionInput"
+                    ></textarea>
+                </div>
+                <div class="calendar grid row-gap-3 input-group">
+                    <!-- <label for="due">Due date:</label> -->
+                    <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >Due Date:</span
+                    >
+
+                    <!-- WORKING ON MAKING DUE DATE CALENDAR SHORTER -->
+                    <input
+                        type="date"
+                        id="start"
+                        class="haterz col form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
+                        name="task-due"
+                        th:field="*{taskDueDate}"
+                    />
+                </div>
+                <br />
+                <!-- <input type="text" value="${false}" th:field="*{isComplete}"> -->
+                <input
+                    type="radio"
+                    id="html"
+                    name="fav_language"
+                    value="false"
+                    th:field="*{isComplete}"
+                    hidden
+                />
+
+                <span th:if="${errorCategory}" th:text="${errorCategory}"
+                    >Error</span
+                >
+
+                <fieldset id="cici">
+                    <legend>Categories:</legend>
+
+                    <div th:each="c : ${cat}">
+                        <label th:for="${c.name}">[[${c.name}]]</label>
+                        <input
+                            type="radio"
+                            name="cater"
+                            th:id="${c.name}"
+                            th:value="${c.getName()}"
+                            class="checker"
+                        />
+                        <!-- <span th:text="${c.getName()}"></span> -->
+                    </div>
+
+                    <!-- <span th:text="cat.getName()"></span> -->
+                </fieldset>
+                <input type="submit" id="sobmit" disabled />
+            </form>
+        </div>
         <!-- <a th:href="@{/tasks/addCategory}" id="blah">Add Category</a> -->
-        <fieldset>
+        <fieldset id="fSet">
             <button
                 type="button"
                 class="btn btn-outline-secondary btn-light"
                 id="hiddenForm"
             >
-                Add Cat
+                Add Category
             </button>
             <div hidden id="removeHidden">
                 <h1>Add New Category</h1>
                 <form
+                    id="newCategoryForm"
                     class="row g-3"
                     th:action="@{/tasks/create}"
                     th:method="POST"
@@ -135,7 +142,7 @@
                         />
                     </div>
                     <!-- <button type="submit">Sub Cat</button> -->
-                    <div class="input-group">
+                    <div class="input-group" id="subCatBtn">
                         <input
                             type="submit"
                             value="Submit Category"
