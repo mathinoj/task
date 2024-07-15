@@ -6,6 +6,10 @@
 /* .createForm{
   border-style: solid;
 } */
+#createTaskTitle{
+  text-align: center;
+  margin-top: 10px;
+}
 
 #firstForm {
   text-align: center;
@@ -24,6 +28,8 @@
 
 #hiddenForm{
   width: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #fSet{
@@ -34,7 +40,7 @@
   display: inline-block;
 }
 
-.x{
+.addCategoryAndCancelBtns{
     /* border-style: solid; */
     display: flex;
     justify-content: space-evenly;
