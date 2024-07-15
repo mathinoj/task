@@ -34,3 +34,15 @@
   display: inline-block;
 }
 
+.x{
+    /* border-style: solid; */
+    display: flex;
+    justify-content: space-evenly;
+
+  }
+
+  /* #submitCategory{
+  } */
+
+  /* #cancelCreateCat{
+  } */
