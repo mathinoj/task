@@ -1,4 +1,27 @@
-form{
+/* form{
   display: flex;
   flex-direction: column;
+} */
+
+/* .createForm{
+  border-style: solid;
+} */
+
+body {
+  text-align: center;
+}
+#createForm {
+  display: inline-block;
+  /* border-style: solid; */
+  /* width: 75%; */
+
+}
+
+#sobmit{
+  /* border-style: solid; */
+  width: 25%;
+}
+
+#hiddenForm{
+  width: 25%;
 }

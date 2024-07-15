@@ -1,77 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <th:block th:replace="~{partials/partials :: head(title= 'Submit A Task')}">
-          <link rel="stylesheet" th:href="@{/css/createTasks.css}">
+        <th:block
+            th:replace="~{partials/partials :: head(title= 'Submit A Task')}"
+        >
         </th:block>
+        <link rel="stylesheet" th:href="@{/css/createTasks.css}" />
     </head>
     <body>
-      <nav th:insert="~{partials/partials :: navbar}" id="navBar"></nav>
-      <h1>Create Task</h1>
+        <nav th:insert="~{partials/partials :: navbar}" id="navBar"></nav>
+        <h1>Create Task</h1>
 
-      <span hidden id="grab" class="dateToInsertIntoCalendar" th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
-      <!-- https://stackoverflow.com/questions/39860643/formatting-date-in-thymeleaf -->
+        <span
+            hidden
+            id="grab"
+            class="dateToInsertIntoCalendar"
+            th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+        ></span>
+        <!-- https://stackoverflow.com/questions/39860643/formatting-date-in-thymeleaf -->
 
-      <form th:action="@{/tasks/create}" th:method="POST" th:object="${tasker}">
-        <label for="title">Title</label>
-        <input th:field="*{title}" id="titleInput" >
-        <br>
-        <br>
-        <label for="description" id="desc">Description</label>
-        <!-- <input th:field="*{description}"> -->
-        <textarea cols="30" rows="10" th:field="*{description}" id="descriptionInput" ></textarea>
-        <br>
-        <br>
-        <label for="due">Due date:</label>
-        <input type="date" id="start" class="haterz" name="task-due" th:field="*{taskDueDate}"/>
-        <br>
-        <br>
-        <!-- <input type="text" value="${false}" th:field="*{isComplete}"> -->
-        <input type="radio" id="html" name="fav_language" value="false" th:field="*{isComplete}" hidden>
+        <form
+            class="row g-3"
+            id="createForm"
+            th:action="@{/tasks/create}"
+            th:method="POST"
+            th:object="${tasker}"
+        >
+            <div class="input-group mb-3">
+                <!-- <label class="form-label" for="title">Title</label> -->
+                <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Title</span
+                >
+                <!-- <input th:field="*{title}" class="form-control" id="titleInput" > -->
+                <input
+                    th:field="*{title}"
+                    id="titleInput"
+                    type="text"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </div>
+            <div class="input-group">
+                <!-- <label class="form-label" for="description" id="desc">Description</label> -->
+                <span class="input-group-text">Description</span>
 
-        <br>
-        <br>
-        <span th:if="${errorCategory}" th:text="${errorCategory}">Error</span>
+                <!-- <input th:field="*{description}"> -->
+                <textarea
+                    class="form-control"
+                    aria-label="Task Description"
+                    th:field="*{description}"
+                    id="descriptionInput"
+                ></textarea>
+            </div>
+            <div class="calendar grid row-gap-3 input-group">
+                <!-- <label for="due">Due date:</label> -->
+                <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Due Date:</span
+                >
 
+                <!-- WORKING ON MAKING DUE DATE CALENDAR SHORTER -->
+                <input
+                    type="date"
+                    id="start"
+                    class="haterz col form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                    name="task-due"
+                    th:field="*{taskDueDate}"
+                />
+            </div>
+            <br />
+            <!-- <input type="text" value="${false}" th:field="*{isComplete}"> -->
+            <input
+                type="radio"
+                id="html"
+                name="fav_language"
+                value="false"
+                th:field="*{isComplete}"
+                hidden
+            />
 
-        <fieldset  id="cici">
-          <legend>Categories:</legend>
+            <span th:if="${errorCategory}" th:text="${errorCategory}"
+                >Error</span
+            >
 
-          <div th:each="c : ${cat}">
-            <label th:for="${c.name}">[[${c.name}]]</label>
-            <input type="radio" name="cater" th:id="${c.name}" th:value="${c.getName()}" class="checker">
-            <!-- <span th:text="${c.getName()}"></span> -->
-          </div>
+            <fieldset id="cici">
+                <legend>Categories:</legend>
 
-          <!-- <span th:text="cat.getName()"></span> -->
-        </fieldset>
-        <input type="submit" id="sobmit" disabled>
-      </form>
-              <!-- <a th:href="@{/tasks/addCategory}" id="blah">Add Category</a> -->
-          <fieldset>
-              <button type="button" id="hiddenForm">Add Cat</button>
-                <div hidden id="removeHidden">
-                  <h1>Add New Category</h1>
-                  <form
-                  th:action="@{/tasks/create}"
-                  th:method="POST"
-                  th:object="${newCategory}"
-                  >
-
-                    <label for="name"></label>
-                    <input th:field="*{name}" id="catName" />
-                    <!-- <button type="submit">Sub Cat</button> -->
-                     <input type="submit" value="Sobmyt" id="submitCategory">
-                    <button type="button" id="cancelCreateCat">Cancel</button>
-                  </form>
+                <div th:each="c : ${cat}">
+                    <label th:for="${c.name}">[[${c.name}]]</label>
+                    <input
+                        type="radio"
+                        name="cater"
+                        th:id="${c.name}"
+                        th:value="${c.getName()}"
+                        class="checker"
+                    />
+                    <!-- <span th:text="${c.getName()}"></span> -->
                 </div>
 
-          </fieldset>
-      <br>
+                <!-- <span th:text="cat.getName()"></span> -->
+            </fieldset>
+            <input type="submit" id="sobmit" disabled />
+        </form>
+        <!-- <a th:href="@{/tasks/addCategory}" id="blah">Add Category</a> -->
+        <fieldset>
+            <button
+                type="button"
+                class="btn btn-outline-secondary btn-light"
+                id="hiddenForm"
+            >
+                Add Cat
+            </button>
+            <div hidden id="removeHidden">
+                <h1>Add New Category</h1>
+                <form
+                    class="row g-3"
+                    th:action="@{/tasks/create}"
+                    th:method="POST"
+                    th:object="${newCategory}"
+                >
+                    <div class="input-group mb-3">
+                        <span
+                            class="input-group-text"
+                            id="inputGroup-sizing-default"
+                            >New Category</span
+                        >
+                        <label for="name"></label>
+                        <input
+                            th:field="*{name}"
+                            class="form-control"
+                            id="catName"
+                        />
+                    </div>
+                    <!-- <button type="submit">Sub Cat</button> -->
+                    <div class="input-group">
+                        <input
+                            type="submit"
+                            value="Submit Category"
+                            id="submitCategory"
+                        />
+                    </div>
+                    <div class="input-group">
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary btn-light"
+                            id="cancelCreateCat"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+        <br />
 
+        <div th:insert="~{partials/partials :: script}"></div>
 
-      <div th:insert="~{partials/partials :: script}"></div>
-
-    <script src="../js/create.js"></script>
+        <script src="../js/create.js"></script>
     </body>
 </html>
