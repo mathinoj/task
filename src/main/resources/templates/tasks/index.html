@@ -8,6 +8,7 @@
         <th:block
             th:replace="~{partials/partials :: head (title='Task Lister')}"
         ></th:block>
+        <link rel="stylesheet" th:href="@{/css/indexCards.css}" />
     </head>
     <body>
         <div th:insert="~{partials/partials :: navbar}"></div>
@@ -37,66 +38,70 @@
                 <h4 th:text="${categoryName.getName}"></h4>
             </div>
         </div> -->
+        <br />
+        <div th:insert="~{partials/partials :: pagination}"></div>
 
-        <div th:each="listingAll : ${listAllTasks}">
-            <div class="card m-2" style="width: 18rem">
-                <div class="card-body">
-                    <h2>
-                        <a
-                            th:text="${listingAll.title}"
-                            th:href="@{|/tasks/${listingAll.id}|}"
-                        ></a>
-                    </h2>
-                </div>
-                <div class="card-body text-bg-light">
-                    <p th:text="${listingAll.description}"></p>
-                </div>
-                <!-- <span th:text="${listingAll.publishDate}"></span> -->
-                <div
-                    class="card-body"
-                    th:each="findCategoryName : ${listingAll.categories}"
-                >
-                    <h4 th:text="${findCategoryName.name}"></h4>
-                </div>
-
-                <!-- <span th:text="${listingAll.isComplete}"></span> -->
-
-                <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
-                <ul class="list-group list-group-flush">
-                    <span
-                        class="getPublishDate"
-                        th:text="${listingAll.publishDate}"
-                        hidden
-                    ></span>
-                    <p class="list-group-item">
-                        Posted on:
-                        <span class="publishNewDate"></span>
-                    </p>
-
-                    <span
-                        class="getOldTaskDate"
-                        th:text="${listingAll.taskDueDate}"
-                        hidden
-                    ></span>
-                    <p class="list-group-item">
-                        Due by: <span class="showNewTaskFormatDate"></span>
-                    </p>
-
-                    <div
-                        class="list-group-item"
-                        th:if="${listingAll.isComplete == 'false'}"
-                    >
-                        <span>Task Incomplete</span>
+        <div id="b">
+            <div th:each="listingAll : ${listAllTasks}">
+                <div class="card m-2" style="width: 18rem" id="allCards">
+                    <div class="card-body">
+                        <h2>
+                            <a
+                                th:text="${listingAll.title}"
+                                th:href="@{|/tasks/${listingAll.id}|}"
+                            ></a>
+                        </h2>
                     </div>
-                    <div
-                        class="list-group-item"
-                        th:if="${listingAll.isComplete == 'true'}"
-                    >
-                        <span>Task Complete</span>
+                    <div class="card-body text-bg-light">
+                        <p th:text="${listingAll.description}"></p>
                     </div>
-                    <!-- <hr /> -->
-                </ul>
-                <!-- </div> -->
+                    <!-- <span th:text="${listingAll.publishDate}"></span> -->
+                    <div
+                        class="card-body"
+                        th:each="findCategoryName : ${listingAll.categories}"
+                    >
+                        <h4 th:text="${findCategoryName.name}"></h4>
+                    </div>
+
+                    <!-- <span th:text="${listingAll.isComplete}"></span> -->
+
+                    <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
+                    <ul class="list-group list-group-flush">
+                        <span
+                            class="getPublishDate"
+                            th:text="${listingAll.publishDate}"
+                            hidden
+                        ></span>
+                        <p class="list-group-item">
+                            Posted on:
+                            <span class="publishNewDate"></span>
+                        </p>
+
+                        <span
+                            class="getOldTaskDate"
+                            th:text="${listingAll.taskDueDate}"
+                            hidden
+                        ></span>
+                        <p class="list-group-item">
+                            Due by: <span class="showNewTaskFormatDate"></span>
+                        </p>
+
+                        <div
+                            class="list-group-item"
+                            th:if="${listingAll.isComplete == 'false'}"
+                        >
+                            <span>Task Incomplete</span>
+                        </div>
+                        <div
+                            class="list-group-item"
+                            th:if="${listingAll.isComplete == 'true'}"
+                        >
+                            <span>Task Complete</span>
+                        </div>
+                        <!-- <hr /> -->
+                    </ul>
+                    <!-- </div> -->
+                </div>
             </div>
         </div>
         <!-- </div>
