@@ -1,0 +1,41 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#yourTasksTitle{
+/* border: 2px solid red; */
+text-align: center;
+margin-top: 10px;
+}
+
+fieldset{
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+#legendSortBy{
+  /* border: 2px solid red; */
+  margin-left: 10px;
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+#containerMyTask{
+  /* border: 2px solid red; */
+  /* text-align: center; */
+}
+
+#myTaskCards{
+  /* border: 2px solid blue; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

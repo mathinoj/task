@@ -8,44 +8,66 @@
         <th:block
             th:replace="~{partials/partials :: head (title='Your Tasks')}"
         ></th:block>
+
+        <link rel="stylesheet" th:href="@{/css/myTask.css}" />
+
     </head>
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
         <!-- <header th:insert="~{partials/partials :: header}"></header> -->
-        <h1>YOUR TASKS</h1>
-        <div>
+        <div id="containerMyTask">
+        <h1 id="yourTasksTitle">YOUR TASKS</h1>
+
         <form action="/tasks/myTasks" method="GET">
-            <fieldset>
-                <legend>Sort By:</legend>
-                <div>
+            <fieldset class="row mb-3">
+                <legend id="legendSortBy" class="col-form col-sm-2 pt-0">Sort By:</legend>
+                <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
                     <input
+                        class="form-check-input"
                         type="radio"
                         href="/tasks/myTasks"
                     />
                     <label for="allTasks">All Tasks</label>
+                    </div>
+                    <div class="form-check form-check-inline">
 
                     <input
+                        class="form-check-input"
                         type="radio"
                         id="isComplete"
                         name="search"
                         value="true"
                     />
                     <label for="completed">Completed</label>
+                    </div>
+                    <div class="form-check form-check-inline">
 
                     <input
+                        class="form-check-input"
                         type="radio"
                         id="isComplete"
                         name="search"
                         value="false"
                     />
                     <label for="incomplete">Incomplete</label>
-                </div>
-                <div>
-                    <button type="submit">Submit</button>
+                    </div>
+
+                    <!-- <div>
+                        <button type="submit">Submit</button>
+                    </div> -->
+
+                    <button
+                    type="submit"
+                    class="btn btn-outline-secondary btn-light"
+                >
+                    Submit
+                </button>
                 </div>
             </fieldset>
         </form>
 
+        <div id="myTaskCards">
         <div th:each="listUserTasks : ${userSpecificTasks}">
             <div th:if="${listUserTasks.user.id == userId}">
                 <div class="card m-2" style="width: 18rem">
@@ -138,7 +160,8 @@
             <hr />
             </div>
         </div>
-
+        </div>
+</div>
 
         <div th:insert="~{partials/partials :: script}"></div>
 
