@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+header{
+  /* border: 2px solid red; */
+  text-align: center;
+  margin-top: 10px;
+ }
+
 #allCards{
   /* border: 2px solid red; */
   /* display: flex; */
@@ -16,11 +22,16 @@
   flex-wrap: wrap;
 }
 
-/* body{
-  border: 2px solid orange;
-} */
-
 #searchForm{
   /* border: 2px solid red; */
   /* display: inline; */
+  margin-left: 10px;
+}
+
+#paginate{
+  /* border: 2px solid red; */
+  display: flex;
+  /* align-items: center; */
+  /* align-content: center; */
+  justify-content: center;
 }
