@@ -8,47 +8,70 @@
         <th:block
             th:replace="~{partials/partials :: head (title='Task Editor')}"
         ></th:block>
+        <link rel="stylesheet" th:href="@{/css/createTasks.css}" />
     </head>
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
 
         <h2 th:if="${task == null}">No ticky, No tasky!</h2>
-        <div th:if="${task != null}">
+        <div id="firstForm" th:if="${task != null}">
             <form
                 th:action="@{|/tasks/${task.id}/edit|}"
                 th:method="POST"
                 th:object="${task}"
+                class="row g-3"
+                id="createForm"
             >
-                <label for="title">Title</label>
-                <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    th:value="${task.title}"
-                    required
-                />
-                <br />
-                <label for="description">Title</label>
-                <textarea
-                    cols="30"
-                    rows="10"
-                    name="description"
-                    id="description"
-                    th:text="${task.description}"
-                >
-                </textarea>
-                <br />
-                <br />
+                <div class="input-group mb-3">
+                    <!-- <label for="title">Title</label> -->
+                    <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >Title</span
+                    >
+                    <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        th:value="${task.title}"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
+                        required
+                    />
+                </div>
+                
+                <div class="input-group">
+                    <!-- <label for="description">Description</label> -->
+                    <span class="input-group-text">Description</span>
+                    <textarea
+                        class="form-control"
+                        aria-label="Task Description"
+                        name="description"
+                        id="descriptionInput"
+                        th:text="${task.description}"
+                    >
+                    </textarea>
+                </div>
 
-                <label for="due">Due date:</label>
-                <input
-                    type="date"
-                    id="start"
-                    name="taskDueDate"
-                    th:value="${task.taskDueDate}"
-                />
-                <br />
-                <br />
+                <div class="calendar grid row-gap-3 input-group">
+                    <span
+                        for="due"
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >Due date:</span
+                    >
+                    <input
+                        type="date"
+                        id="start"
+                        class="haterz col form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
+                        name="taskDueDate"
+                        th:value="${task.taskDueDate}"
+                    />
+                </div>
+
                 <!-- <span th:text="${task.isComplete}"></span> -->
                 <input
                     id="completeBox"
@@ -71,10 +94,10 @@
                     hidden
                 />
                 <!-- Hi: <span th:text="${task.publishDate}"></span> -->
-                <br />
+
                 <div th:each="x : ${task}">
                     <div th:each="b : ${x.categories}">
-                        <fieldset>
+                        <fieldset id="cici">
                             <legend>Categories:</legend>
                             <div th:each="c : ${cat}">
                                 <label th:for="${c.name}">[[${c.name}]]</label>
@@ -84,6 +107,7 @@
                                         name="cater"
                                         th:id="${c.name}"
                                         th:value="${c.getName()}"
+                                        class="checker"
                                         checked
                                     />
                                 </div>
@@ -103,9 +127,11 @@
                 </div>
 
                 <input type="hidden" name="userId" th:value="${task.user.id}" />
-                <button id="editButt">Edit</button>
+                <input type="submit" value="Edit" id="editButt" />
             </form>
         </div>
+
+        <div th:insert="~{partials/partials :: script}"></div>
 
         <script src="/js/isCompleted.js"></script>
     </body>

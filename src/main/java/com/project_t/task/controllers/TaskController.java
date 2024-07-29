@@ -56,7 +56,7 @@ public class TaskController {
   // }
 
   @GetMapping("/tasks")
-  public String getAllTasks(Model model, @PageableDefault(value = 100) Pageable pageable) {
+  public String getAllTasks(Model model, @PageableDefault(value = 4) Pageable pageable) {
     model.addAttribute("listAllTasks", taskDao.findAll(pageable));
     // model.addAttribute("listAllTasks2", taskDao.findAll(pageable).isFirst());
     return "/tasks/index";

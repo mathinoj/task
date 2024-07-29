@@ -12,13 +12,9 @@
         <link rel="stylesheet" th:href="@{/css/createTasks.css}" />
     </head>
     <body>
+        <nav th:insert="~{partials/partials :: navbar}"></nav>
+
         <h1>Log In</h1>
-        <a href="/tasks">All Tasks</a>
-        <br />
-        <br />
-        <a href="/register">Register</a>
-        <br />
-        <br />
 
         <div th:if="${param.error}">
             <p>Invalid Username or P-Word</p>
@@ -30,12 +26,54 @@
         </div>
 
         <form th:action="@{/login}" th:method="POST">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" />
+            <div class="row g-3 align-items-center">
+                <!-- <div class="col-auto">
+                    <label for="username">Username</label>
+                </div> -->
+                <div class="col-auto">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="username"
+                        name="username"
+                        placeholder="Username"
+                        aria-label="Username"
+                    />
+                </div>
+            </div>
+            <!-- <label for="username">Username</label>
+            <input type="text" id="username" name="username" /> -->
             <br />
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" />
-            <input type="submit" value="Log In" />
+
+            <div class="row g-3 align-items-center">
+                <!-- <div class="col-auto">
+                    <label for="password" class="col-form-label"
+                        >Password</label
+                    >
+                </div> -->
+                <div class="col-auto">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control"
+                        aria-describedby="passwordHelpInline"
+                        placeholder="Password"
+                    />
+                </div>
+                <div class="col-auto">
+                    <span id="passwordHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
+            <br />
+            <!-- <label for="password">Password</label>
+            <input type="password" id="password" name="password" /> -->
+            <input class="btn btn-secondary" type="submit" value="Log In" />
+            <!-- <input class="btn btn-primary" type="submit" value="Submit"> -->
         </form>
+
+        <div th:insert="~{partials/partials :: script}"></div>
     </body>
 </html>
