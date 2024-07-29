@@ -14,65 +14,67 @@
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
 
-        <h1>Log In</h1>
+        <div id="loginContainer">
+            <h1>Log In</h1>
 
-        <div th:if="${param.error}">
-            <p>Invalid Username or P-Word</p>
-        </div>
-        <div th:if="${param.logout}">
-            <p>You been Logged Out!</p>
-            <!-- Only works if you remove this from secConfig -->
-            <!-- .logout(logout -> logout.logoutSuccessUrl("/login")); -->
-        </div>
+            <div th:if="${param.error}">
+                <p>Invalid Username or P-Word</p>
+            </div>
+            <div th:if="${param.logout}">
+                <p>You been Logged Out!</p>
+                <!-- Only works if you remove this from secConfig -->
+                <!-- .logout(logout -> logout.logoutSuccessUrl("/login")); -->
+            </div>
 
-        <form th:action="@{/login}" th:method="POST">
-            <div class="row g-3 align-items-center">
-                <!-- <div class="col-auto">
+            <form th:action="@{/login}" th:method="POST">
+                <div class="row g-3 align-items-center">
+                    <!-- <div class="col-auto">
                     <label for="username">Username</label>
                 </div> -->
-                <div class="col-auto">
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="username"
-                        name="username"
-                        placeholder="Username"
-                        aria-label="Username"
-                    />
+                    <div class="col-auto">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="username"
+                            name="username"
+                            placeholder="Username"
+                            aria-label="Username"
+                        />
+                    </div>
                 </div>
-            </div>
-            <!-- <label for="username">Username</label>
+                <!-- <label for="username">Username</label>
             <input type="text" id="username" name="username" /> -->
-            <br />
+                <br />
 
-            <div class="row g-3 align-items-center">
-                <!-- <div class="col-auto">
+                <div class="row g-3 align-items-center">
+                    <!-- <div class="col-auto">
                     <label for="password" class="col-form-label"
                         >Password</label
                     >
                 </div> -->
-                <div class="col-auto">
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="form-control"
-                        aria-describedby="passwordHelpInline"
-                        placeholder="Password"
-                    />
-                </div>
-                <div class="col-auto">
+                    <div class="col-auto">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            aria-describedby="passwordHelpInline"
+                            placeholder="Password"
+                        />
+                    </div>
+                    <!-- <div class="col-auto">
                     <span id="passwordHelpInline" class="form-text">
                         Must be 8-20 characters long.
                     </span>
+                </div> -->
                 </div>
-            </div>
-            <br />
-            <!-- <label for="password">Password</label>
+                <br />
+                <!-- <label for="password">Password</label>
             <input type="password" id="password" name="password" /> -->
-            <input class="btn btn-secondary" type="submit" value="Log In" />
-            <!-- <input class="btn btn-primary" type="submit" value="Submit"> -->
-        </form>
+                <input class="btn btn-primary" type="submit" value="Log In" />
+                <!-- <input class="btn btn-primary" type="submit" value="Submit"> -->
+            </form>
+        </div>
 
         <div th:insert="~{partials/partials :: script}"></div>
     </body>

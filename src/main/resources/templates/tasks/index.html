@@ -14,11 +14,28 @@
         <div th:insert="~{partials/partials :: navbar}"></div>
         <header th:insert="~{partials/partials :: header}"></header>
 
-        <form action="/tasks/search" method="GET">
-            <label for="search">Find Task</label>
-            <input type="text" name="search" id="search" />
-            <button>Search</button>
+        <form role="search" action="/tasks/search" method="GET" id="searchForm">
+            <!-- <label for="search">Find Task</label> -->
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <input
+                        class="form-control me-2"
+                        type="search"
+                        name="search"
+                        id="search"
+                        placeholder="Search Task"
+                        aria-label="Search Task"
+                    />
+                </div>
+
+                <div class="col-sm-2">
+                    <button class="btn btn-outline-success" type="submit">
+                        Search
+                    </button>
+                </div>
+            </div>
         </form>
+
         <!-- This is when the user searches by TITLE or DESCRIPTION -->
         <!-- <div th:if="${results}">
             <div th:each="task : ${results}">
