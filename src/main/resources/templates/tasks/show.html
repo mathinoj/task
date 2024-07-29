@@ -4,63 +4,72 @@
         <th:block
             th:replace="~{partials/partials :: head(title= 'See 1 Task')}"
         ></th:block>
+
+        <link rel="stylesheet" th:href="@{/css/showOneTask.css}" />
     </head>
     <body>
         <nav th:insert="~{partials/partials :: navbar}"></nav>
         <!-- <header th:insert="~{partials/partials :: header}"></header> -->
 
-        <h2 class="header text-center">Here is a Task:</h2>
-        <div class="card m-2" style="width: 18rem">
-            <div class="card-body">
-                <h3 th:text="${task.title}"></h3>
-            </div>
-            <div class="card-body text-bg-light">
-                <p th:text="${task.description}"></p>
-            </div>
-            <div
-                class="card-body"
-                th:each="findCategoryName : ${task.categories}"
-            >
-                <h4 th:text="${findCategoryName.name}"></h4>
-            </div>
-            <ul class="list-group list-group-flush">
-                <p class="list-group-item">
-                    Posted By: [[${task.user.username}]]
-                </p>
-                <!-- <p>Posted on: <span th:text="${task.publishDate}"></span></p> -->
+        <h2 class="header text-center">Task Selected:</h2>
 
-                <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
-                <span
-                    class="getPublishDate"
-                    th:text="${task.publishDate}"
-                    hidden
-                ></span>
-
-                <p class="list-group-item">
-                    Posted on:
-                    <span class="publishNewDate"></span>
-                </p>
-
-                <span
-                    class="getOldTaskDate"
-                    th:text="${task.taskDueDate}"
-                    hidden
-                ></span>
-                <p class="list-group-item">
-                    Due by: <span class="showNewTaskFormatDate"></span>
-                </p>
-            </ul>
-            <span th:if="${task.user.id == userId}">
+        <div id="oneCardContainer">
+            <div class="card m-2" style="width: 18rem">
                 <div class="card-body">
-                    <a class="card-link" th:href="@{|/tasks/${task.id}/edit|}"
-                        >Edit</a
-                    >
-
-                    <a class="card-link" th:href="@{|/tasks/${task.id}/delete|}"
-                        >Delete</a
-                    >
+                    <h3 th:text="${task.title}"></h3>
                 </div>
-            </span>
+                <div class="card-body text-bg-light">
+                    <p th:text="${task.description}"></p>
+                </div>
+                <div
+                    class="card-body"
+                    th:each="findCategoryName : ${task.categories}"
+                >
+                    <h4 th:text="${findCategoryName.name}"></h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <p class="list-group-item">
+                        Posted By: [[${task.user.username}]]
+                    </p>
+                    <!-- <p>Posted on: <span th:text="${task.publishDate}"></span></p> -->
+
+                    <!-- THIS GETS PUBLISH DATE SO WE CAN CONVERT -->
+                    <span
+                        class="getPublishDate"
+                        th:text="${task.publishDate}"
+                        hidden
+                    ></span>
+
+                    <p class="list-group-item">
+                        Posted on:
+                        <span class="publishNewDate"></span>
+                    </p>
+
+                    <span
+                        class="getOldTaskDate"
+                        th:text="${task.taskDueDate}"
+                        hidden
+                    ></span>
+                    <p class="list-group-item">
+                        Due by: <span class="showNewTaskFormatDate"></span>
+                    </p>
+                </ul>
+                <span th:if="${task.user.id == userId}">
+                    <div class="card-body">
+                        <a
+                            class="card-link"
+                            th:href="@{|/tasks/${task.id}/edit|}"
+                            >Edit</a
+                        >
+
+                        <a
+                            class="card-link"
+                            th:href="@{|/tasks/${task.id}/delete|}"
+                            >Delete</a
+                        >
+                    </div>
+                </span>
+            </div>
         </div>
 
         <script src="../js/formatDate.js"></script>
